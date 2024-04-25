@@ -1,0 +1,12 @@
+# Backend build artifacts
+backend/bin/
+backend/obj/
+
+# VSCode debugger configuration
+.vscode/
+
+# Node modules
+frontend/node_modules/
+
+# Hidden file created by macOS
+.DS_Store
