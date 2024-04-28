@@ -1,13 +1,28 @@
-import { useState } from 'react'
+//import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
-function App() {
+import MyTrends from './MyTrends'; // import Trends component
+import MyProgram from './MyProgram';
+
+
+export default function App() {
   return (
-    <>
-      <div>
+      <Router>
+      <NavBar />
+        <Routes>
 
-      </div>
-    </>
+          <Route 
+            path = '/MyTrends'
+            element = {<MyTrends />}
+          />
+
+          <Route 
+            path = '/MyProgram'
+            element = {<MyProgram />}
+          />
+        </Routes>
+      </Router>
+    
   )
 }
-
-export default App

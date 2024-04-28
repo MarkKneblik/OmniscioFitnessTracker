@@ -2,6 +2,9 @@
 backend/bin/
 backend/obj/
 
+# Frontend build artifacts
+frontend/dist/
+
 # VSCode debugger configuration
 .vscode/
 
