@@ -11,15 +11,26 @@ public class MyProgramController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpPost]
-    [Route("UploadAttachment")]
-    public async Task<IActionResult> UploadAttachment(IFormFile file, string caption)
+    [HttpGet]
+    [Route("GetNumOfDays")]
+    public async Task<IActionResult> GetNumOfDays()
     {
         
 
 
-        return Ok("File uploaded successfully.");
+        return Ok();
     }
+
+    [HttpGet]
+    [Route("GetNumOfExercises")]
+    public async Task<IActionResult> GetNumOfExercises()
+    {
+        
+
+
+        return Ok();
+    }
+
 
 
 }

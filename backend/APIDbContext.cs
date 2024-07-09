@@ -6,4 +6,6 @@ public class APIDbContext : DbContext
     {
 
     }
+
+    public DbSet<User> Users {get; set;}
 }

@@ -6,6 +6,7 @@ import axios from 'axios';
 import config from "../../config.json";
 
 export default function MyProgram() {
+
     const [numOfDays, setNumOfDays] = useState(0); // this state will hold the number of days in the exercise program 
     const [numOfExercises, setNumOfExercises] = useState(0); // this state will hold the number of exercises contained in a specific day
 
@@ -30,7 +31,7 @@ export default function MyProgram() {
     useEffect(() => {
         const getNumOfExercises = async () => {      // get the number of days from the backend for this specific user
             try {
-              await axios.get(`${config.apiUrl}/MyProgram/getNumOfExercises`, {
+              await axios.get(`${config.apiUrl}/MyProgram/GetNumOfExercises`, {
                 headers: {
                   "Content-Type": "application/json",
                 },
