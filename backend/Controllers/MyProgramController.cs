@@ -1,14 +1,12 @@
-using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc;
-
 
 [ApiController]
 [Route("[controller]")]
-public class AttachmentsController : ControllerBase
+public class MyProgramController : ControllerBase
 {
     private readonly APIDbContext _dbContext; 
 
-    public AttachmentsController(APIDbContext dbContext)
+    public MyProgramController(APIDbContext dbContext)
     {
         _dbContext = dbContext;
     }

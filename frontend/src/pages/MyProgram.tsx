@@ -1,11 +1,51 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion'
 import '../styles/myprogram.css' //import navbar styling
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Font Awesome component
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons'; // Import the barbell (dumbbell) icon
+import axios from 'axios';
+import config from "../../config.json";
 
 export default function MyProgram() {
+    const [numOfDays, setNumOfDays] = useState(0); // this state will hold the number of days in the exercise program 
+    const [numOfExercises, setNumOfExercises] = useState(0); // this state will hold the number of exercises contained in a specific day
+
+    useEffect(() => {
+        const getNumOfDays = async () => {      // get the number of days from the backend for this specific user
+            try {
+              await axios.get(`${config.apiUrl}/MyProgram/GetNumOfDays`, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            } 
+            
+            catch (error: any) {
+              console.error("Error fetching data:", error.message);
+            }
+          };
+          getNumOfDays();
+
+    }, []); 
+
+    useEffect(() => {
+        const getNumOfExercises = async () => {      // get the number of days from the backend for this specific user
+            try {
+              await axios.get(`${config.apiUrl}/MyProgram/getNumOfExercises`, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            } 
+            
+            catch (error: any) {
+              console.error("Error fetching data:", error.message);
+            }
+          };
+          getNumOfExercises();
+
+    }, []); 
+
+
 
 
     return (

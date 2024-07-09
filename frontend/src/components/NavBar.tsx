@@ -8,13 +8,13 @@ export default function NavBar() {
   return (
     <nav className='navbar'>
       <ul className="nav-list">
-        <li className='navbar-item'>
+        <li>
           <Link to="/MyProgram"> My Program <FontAwesomeIcon icon={faDumbbell} /> </Link>
         </li>
-        <li className='navbar-item'>
+        <li>
           <Link to="/MyMeasurements">My Measurements</Link>
         </li>
-        <li className='navbar-item'>
+        <li>
           <Link to="/Trends">My Trends</Link>
         </li>
       </ul>

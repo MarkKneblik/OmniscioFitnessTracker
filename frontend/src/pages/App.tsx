@@ -1,8 +1,7 @@
 //import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-
-import MyTrends from './MyTrends'; // import Trends component
+import MyTrends from './MyTrends';
 import MyProgram from './MyProgram';
 
 
