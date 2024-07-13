@@ -5,22 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-public class AccountsController : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly IConfiguration _config;
-
-    public AccountsController(IConfiguration config)
+    private readonly APIDbContext _dbContext;
+    public UserController(APIDbContext dbContext)
     {
-        _config = config;
+        _dbContext = dbContext;
     }
 
-    [Route("signin-google")]
-    public async Task<IActionResult> LoginWithGoogleAsync(string returnUrl = "/")
-    {
-        var frontend_url = _config.GetValue<string>("frontend_url");
 
-        var properties = new AuthenticationProperties { RedirectUri = frontend_url };
 
-        return Redirect(frontend_url);
-    }
 }

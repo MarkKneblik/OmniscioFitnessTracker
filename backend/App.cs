@@ -49,6 +49,26 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("openid");
     options.Scope.Add("profile");
     options.Scope.Add("email");
+
+    options.Events = new OpenIdConnectEvents
+    {   
+        // If authentication fails
+        OnAuthenticationFailed = context =>
+        {
+            // Store the exception in HttpContext.Items
+            context.HttpContext.Items["OnAuthenticationFailed"] = context.Exception;
+            context.HandleResponse();
+            return Task.CompletedTask;
+        },
+
+        // If authentication succeds
+        OnTokenValidated = context =>
+        {
+            // Store the exception in HttpContext.Items
+            context.HttpContext.Items["OnTokenValidated"] = context.Principal;
+            return Task.CompletedTask;
+        }
+    };
 });
 
 
