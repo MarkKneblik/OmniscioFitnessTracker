@@ -14,11 +14,11 @@
     font-size: 4rem;
     text-align: center;
     display: inline-block;
-    background-color: antiquewhite;
+    background: radial-gradient(circle, transparent 0%, antiquewhite 100%);
     border-radius: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
 }
 
 .attribution {
