@@ -1,21 +1,49 @@
 import { useEffect, useState } from 'react';
-import '../styles/myprogram.css' //import navbar styling
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Font Awesome component
-import axios from 'axios';
 import config from "../../config.json";
+import "../styles/login.css"
+import gymImage from '../../public/gym.png'
 
-export default function Home() {
+export default function Login() {
 
-    return (
-       <div>
-      <header>
-        <h1>My Simple React Home Page</h1>
-      </header>
-      <main>
-        <p>Welcome to my simple React home page! This is a basic example of a React project.</p>
-        <img src="https://via.placeholder.com/300" alt="Placeholder" />
-      </main>
+  useEffect(() => {
+    // Load Google Identity Services script
+    const script = document.createElement('script');
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+        // Clean up script if component is unmounted
+        document.body.removeChild(script);
+    };
+  }, []); // Run upon mounting of component
+
+
+  return (
+  <div  className='background'style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <h1 className='header'> Omniscio Fitness Tracker </h1>
+
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    
+    <div id="g_id_onload"
+        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+        data-login_uri="https://your.domain/your_login_endpoint"
+        data-auto_prompt="false">
     </div>
 
-    );
+    <div className='g_id_signin'
+        data-size="large"
+        data-theme="filled_blue"
+        data-text="sign_in_with"
+        data-shape="pill"
+        data-width="200"
+        data-logo_alignment="left">
+    </div>
+
+    <div>
+      <h2 className='attribution'> Designed by Freepik </h2>
+    </div>
+
+  </ div>
+  );
 }
