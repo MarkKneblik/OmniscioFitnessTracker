@@ -41,10 +41,10 @@ builder.Services.AddAuthentication(options =>
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
     options.Authority = "https://accounts.google.com/";
-    options.ClientId = "YOUR_GOOGLE_CLIENT_ID";
-    options.ClientSecret = "YOUR_GOOGLE_CLIENT_SECRET";
+    options.ClientId = builder.Configuration["Authentication:OIDC:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:OIDC:ClientSecret"];
     options.ResponseType = OpenIdConnectResponseType.Code;
-    options.CallbackPath = "/Accounts/signin-google";
+    options.CallbackPath = "http://localhost:5173/MyProgram";
     options.SaveTokens = true;
     options.Scope.Add("openid");
     options.Scope.Add("profile");
@@ -92,6 +92,7 @@ app.UseCors(options => {
 
 
 app.UseAuthentication();
+app.UseMiddleware<AuthenticationMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import config from "../../config.json";
+import axios from 'axios';
 import "../styles/login.css"
 import gymImage from '../../public/gym.png'
 
@@ -26,8 +27,7 @@ export default function Login() {
     <script src="https://accounts.google.com/gsi/client" async></script>
     
     <div id="g_id_onload"
-        data-client_id="YOUR_GOOGLE_CLIENT_ID"
-        data-login_uri="https://your.domain/your_login_endpoint"
+        data-client_id={config.clientID}
         data-auto_prompt="false">
     </div>
 
