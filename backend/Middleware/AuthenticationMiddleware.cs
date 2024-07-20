@@ -4,18 +4,21 @@ using Microsoft.EntityFrameworkCore;
 public class AuthenticationMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly APIDbContext _dbContext;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public AuthenticationMiddleware(RequestDelegate next, APIDbContext dbContext)
+    public AuthenticationMiddleware(RequestDelegate next, IServiceScopeFactory serviceScopeFactory)
     {
         _next = next;
-        _dbContext = dbContext;
+        _serviceScopeFactory = serviceScopeFactory;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
        context.Response.OnStarting(async () =>
         {
+            var scope = _serviceScopeFactory.CreateScope();
+            var _dbContext = scope.ServiceProvider.GetRequiredService<APIDbContext>();
+
             // Check if the "OnAuthenticationFailed" entry exists in the Items dictionary
             if (context.Items.ContainsKey("OnAuthenticationFailed"))
             {
