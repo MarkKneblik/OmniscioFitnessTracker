@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import config from "../../config.json";
-import axios from 'axios';
 import "../styles/login.css"
-import gymImage from '../../public/gym.png'
 
 export default function Login() {
 
@@ -33,6 +31,7 @@ export default function Login() {
 
     <div className='g_id_signin'
         data-size="large"
+        data-login_uri = "https://localhost:5256/MyProgram"
         data-theme="filled_blue"
         data-text="sign_in_with"
         data-shape="pill"
