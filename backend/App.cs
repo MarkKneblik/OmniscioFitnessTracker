@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientId = builder.Configuration["Authentication:OIDC:ClientId"];
     options.ClientSecret = builder.Configuration["Authentication:OIDC:ClientSecret"];
     options.ResponseType = OpenIdConnectResponseType.Code;
-    options.CallbackPath = "http://localhost:5173/MyProgram";
+    options.CallbackPath = "http://localhost:5256/signin-oidc";
     options.SaveTokens = true;
     options.Scope.Add("openid");
     options.Scope.Add("profile");
@@ -83,6 +83,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
 app.UseCors(options => {
     options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
