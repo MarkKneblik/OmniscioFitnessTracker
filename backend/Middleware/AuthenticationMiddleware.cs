@@ -14,41 +14,39 @@ public class AuthenticationMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-       context.Response.OnStarting(async () =>
+        // Handle the request before calling the next middleware
+        var scope = _serviceScopeFactory.CreateScope();
+        var _dbContext = scope.ServiceProvider.GetRequiredService<APIDbContext>();
+
+        // Check if the request context contains authentication-related items
+        if (context.Items.ContainsKey("OnAuthenticationFailed"))
         {
-            var scope = _serviceScopeFactory.CreateScope();
-            var _dbContext = scope.ServiceProvider.GetRequiredService<APIDbContext>();
-
-            // Check if the "OnAuthenticationFailed" entry exists in the Items dictionary
-            if (context.Items.ContainsKey("OnAuthenticationFailed"))
+            var exception = context.Items["OnAuthenticationFailed"] as Exception;
+            if (exception != null)
             {
-                // Retrieve the exception
-                var exception = context.Items["OnAuthenticationFailed"] as Exception;
-
-                
                 // Log the exception message
+                // Use ILogger instead of Console.WriteLine in production
                 Console.WriteLine($"Authentication failed: {exception.Message}");
 
-                // Redirect to login page
+                // Redirect to error page
                 context.Response.Redirect("/Home/Error?message=" + Uri.EscapeDataString(exception.Message));
-                
-
-                await Task.CompletedTask;
+                return; // Exit early to avoid further processing
             }
-            else if (context.Items.ContainsKey("OnTokenValidated"))
+        }
+        else if (context.Items.ContainsKey("OnTokenValidated"))
+        {
+            var principal = context.Items["OnTokenValidated"] as ClaimsPrincipal;
+
+            if (principal != null)
             {
-                var principal = context.Items["OnTokenValidated"] as ClaimsPrincipal;
+                var email = principal.FindFirst(ClaimTypes.Email)?.Value;
+                var name = principal.FindFirst(ClaimTypes.Name)?.Value;
 
-                // If there is a claims principal
-                if (principal != null)
+                if (email != null && name != null)
                 {
-                    var email = principal.FindFirst(ClaimTypes.Email).Value;
-                    var name = principal.FindFirst(ClaimTypes.Name).Value; 
-
                     // Query DB to check if there is a user associated with this email
                     var user = await _dbContext.Users.FirstOrDefaultAsync(user => user.Email == email);
 
-                    // If this user doesn't exist
                     if (user == null)
                     {
                         var newUser = new UserModel
@@ -59,18 +57,12 @@ public class AuthenticationMiddleware
 
                         await _dbContext.Users.AddAsync(newUser);
                         await _dbContext.SaveChangesAsync();
-                    }            
+                    }
                 }
-
-                await Task.CompletedTask;
             }
-        });
+        }
 
         // Call the next middleware in the pipeline
         await _next(context);
     }
-
-
-
-
 }
