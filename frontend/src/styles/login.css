@@ -1,5 +1,5 @@
 .background {
-    background-image: url('../../public/cartoon-machines-gym.jpg');
+    background-image: url('/cartoon-machines-gym.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;

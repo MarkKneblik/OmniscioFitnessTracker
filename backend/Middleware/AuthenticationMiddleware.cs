@@ -6,10 +6,13 @@ public class AuthenticationMiddleware
     private readonly RequestDelegate _next;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public AuthenticationMiddleware(RequestDelegate next, IServiceScopeFactory serviceScopeFactory)
+     private readonly IConfiguration _configuration;
+
+    public AuthenticationMiddleware(RequestDelegate next, IServiceScopeFactory serviceScopeFactory, IConfiguration configuration)
     {
         _next = next;
         _serviceScopeFactory = serviceScopeFactory;
+        _configuration = configuration;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -29,7 +32,7 @@ public class AuthenticationMiddleware
                 Console.WriteLine($"Authentication failed: {exception.Message}");
 
                 // Redirect to error page
-                context.Response.Redirect("/Home/Error?message=" + Uri.EscapeDataString(exception.Message));
+                context.Response.Redirect(_configuration["frontend_url"]);
                 return; // Exit early to avoid further processing
             }
         }

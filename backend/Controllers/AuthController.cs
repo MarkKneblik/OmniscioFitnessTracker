@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class AuthController : ControllerBase
 {
-    [HttpGet]
+    [HttpPost]
     [AllowAnonymous]
+    [Route("Auth")]
     public IActionResult Auth()
     {
-        return Ok();
+        return Ok("This is a test");
     }
 }

@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientId = builder.Configuration["Authentication:OIDC:ClientId"];
     options.ClientSecret = builder.Configuration["Authentication:OIDC:ClientSecret"];
     options.ResponseType = OpenIdConnectResponseType.Code;
-    options.CallbackPath = "http://localhost:5256/signin-oidc";
+    options.CallbackPath = "/signin-oidc";
     options.SaveTokens = true;
     options.Scope.Add("openid");
     options.Scope.Add("profile");
@@ -53,20 +53,28 @@ builder.Services.AddAuthentication(options =>
     options.Events = new OpenIdConnectEvents
     {   
         // If authentication fails
-        OnAuthenticationFailed = context =>
+        OnAuthenticationFailed = async context =>
         {
             // Store the exception in HttpContext.Items
             context.HttpContext.Items["OnAuthenticationFailed"] = context.Exception;
             context.HandleResponse();
-            return Task.CompletedTask;
+            context.Response.Redirect(configuration["frontend_url"]);
+            await Task.CompletedTask;
         },
 
+        OnAuthorizationCodeReceived = async context =>
+    {
+        var num = 1;
+
+        await Task.CompletedTask;
+    },
+
         // If authentication succeds
-        OnTokenValidated = context =>
+        OnTokenValidated = async context =>
         {
             // Store the exception in HttpContext.Items
             context.HttpContext.Items["OnTokenValidated"] = context.Principal;
-            return Task.CompletedTask;
+            await Task.CompletedTask;
         }
     };
 });
@@ -82,8 +90,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
-app.UseRouting();
+//app.UseHttpsRedirection();
+// app.UseRouting();
 
 app.UseCors(options => {
     options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
@@ -93,7 +101,7 @@ app.UseCors(options => {
 
 
 app.UseAuthentication();
-app.UseMiddleware<AuthenticationMiddleware>();
+//app.UseMiddleware<AuthenticationMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
