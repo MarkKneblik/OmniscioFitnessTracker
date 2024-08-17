@@ -6,15 +6,11 @@ import axios from 'axios';
 
 export default function Login() {
 
-
-
-  const login = useGoogleLogin({
-    onSuccess: async codeResponse => 
-    {console.log(codeResponse)
-
+  const login = async () => 
+  {
       try 
       {
-        await axios.post(`${config.apiUrl}/Auth/Auth`, codeResponse, {
+        await axios.get(`${config.apiUrl}/Accounts/Login`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -22,16 +18,9 @@ export default function Login() {
       } 
       catch (error: any) 
       {
-        console.error("Error posting data:", error.message);
+        console.error("Error upon GET request:", error.message);
       }
-    }
-    
-    ,
-    onError: () => {
-      console.log('Login Failed')},
-    flow: 'auth-code',
-    redirect_uri: `${config.apiUrl}/Auth/Auth`
-  });
+    };
 
   return (
   <div  className='background'style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>

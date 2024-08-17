@@ -1,18 +1,25 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authentication;
 
-public class UserController : ControllerBase
+[ApiController]
+[Route("[controller]")]
+public class AccountsController : ControllerBase
 {
     private readonly APIDbContext _dbContext;
-    public UserController(APIDbContext dbContext)
+
+    public AccountsController(APIDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
 
-
+    [HttpGet]
+    [AllowAnonymous]
+    [Route("Login")]
+    public IActionResult Login()
+    {
+        return Challenge(new AuthenticationProperties { RedirectUri = "/signin-oidc" }, OpenIdConnectDefaults.AuthenticationScheme);
+    }
 }
