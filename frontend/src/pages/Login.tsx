@@ -6,21 +6,9 @@ import axios from 'axios';
 
 export default function Login() {
 
-  const login = async () => 
-  {
-      try 
-      {
-        await axios.get(`${config.apiUrl}/Accounts/Login`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-      } 
-      catch (error: any) 
-      {
-        console.error("Error upon GET request:", error.message);
-      }
-    };
+  const login =  () => {
+    window.location.href = `${config.apiUrl}/Accounts/Login`;
+};
 
   return (
   <div  className='background'style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
