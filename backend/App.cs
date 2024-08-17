@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("https://localhost:5257");
+
 
 // Add services to the container.
 
