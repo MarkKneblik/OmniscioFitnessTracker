@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("https://localhost:5257");
 
@@ -37,7 +36,6 @@ builder.Services.AddAuthentication(options =>
 {
     options.Cookie.Name = "OmniscioFitnessTrackerCookie";
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
-    options.LoginPath = "/Account/Login";
 })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
@@ -63,17 +61,10 @@ builder.Services.AddAuthentication(options =>
             await Task.CompletedTask;
         },
 
-        OnAuthorizationCodeReceived = async context =>
-    {
-        var num = 1;
-
-        await Task.CompletedTask;
-    },
-
         // If authentication succeds
         OnTokenValidated = async context =>
         {
-            // Store the exception in HttpContext.Items
+            // Store Claims Principal in HttpContext.Items 
             context.HttpContext.Items["OnTokenValidated"] = context.Principal;
             await Task.CompletedTask;
         }
@@ -91,15 +82,9 @@ if (app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
-
-
 app.UseCors(options => {
     options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
 });
-
-
-
 
 app.UseAuthentication();
 //app.UseMiddleware<AuthenticationMiddleware>();
