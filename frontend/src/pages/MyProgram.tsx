@@ -4,6 +4,7 @@ import '../styles/myprogram.css' //import navbar styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Font Awesome component
 import axios from 'axios';
 import config from "../../config.json";
+import NavBar from '../components/NavBar';
 
 export default function MyProgram() {
 
@@ -50,13 +51,18 @@ export default function MyProgram() {
 
 
     return (
-        <motion.h1 className='header'
-        initial={{ opacity: 0, x: '-10w' }}
-        animate={{ opacity: 1, x: '0vw'}}
-        transition={{ duration: 1, ease: 'linear' }}
-        >
-        Customize Your Program
-        </motion.h1>
+      <div>
+      <NavBar></NavBar>
+
+      <motion.h1 className='myprogram-header'
+      initial={{ opacity: 0, x: '-10w' }}
+      animate={{ opacity: 1, x: '0vw'}}
+      transition={{ duration: 1, ease: 'linear' }}
+      >
+      Customize Your Program
+      </motion.h1>
+      
+      </div>
 
     );
 }

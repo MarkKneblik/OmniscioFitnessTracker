@@ -12,7 +12,7 @@ export default function Login() {
 
   return (
   <div  className='background'style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <h1 className='header'> Omniscio Fitness Tracker </h1>
+    <h1 className='login-header'> Omniscio Fitness Tracker </h1>
 
     <button 
                 onClick={login} 

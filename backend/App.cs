@@ -57,7 +57,7 @@ builder.Services.AddAuthentication(options =>
             // Store the exception in HttpContext.Items
             context.HttpContext.Items["OnAuthenticationFailed"] = context.Exception;
             context.HandleResponse();
-            context.Response.Redirect(configuration["frontend_url"]);
+            context.Response.Redirect($"{frontendURL}/Login");
             await Task.CompletedTask;
         },
 
