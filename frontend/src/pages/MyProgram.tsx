@@ -4,8 +4,7 @@ import '../styles/myprogram.css' //import navbar styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Font Awesome component
 import axios from 'axios';
 import config from "../../config.json";
-import Dropdown from '../components/Dropdown'; 
-import '../styles/dropdown.css'
+import Dropdown from '../components/Drawer'; 
 
 export default function MyProgram() {
 
