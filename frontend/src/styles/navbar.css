@@ -16,8 +16,8 @@
   /* style for list items */
   .nav-list li {
     flex: 1; /* each item takes up equal space */
-    text-align: center; 
-    padding: 10%;
+    text-align: left; 
+    padding: 6%;
     white-space: nowrap;
   }
   
@@ -30,7 +30,7 @@
     border-radius: 4px; /* rounded corners */
     font-family: Inter;
     font-weight: bold;
-    font-size: large;
+    font-size: x-large;
   }
   
   /* hover effect for the Link components */
