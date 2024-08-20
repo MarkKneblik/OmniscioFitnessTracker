@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion'
 import '../styles/myprogram.css' //import navbar styling
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Font Awesome component
 import axios from 'axios';
 import config from "../../config.json";
-import Dropdown from '../components/Drawer'; 
+import Menu from '../components/Menu'; 
 
 export default function MyProgram() {
 
@@ -52,7 +51,7 @@ export default function MyProgram() {
 
     return (
       <div>
-      <Dropdown></Dropdown>
+      <Menu></Menu>
 
       {/* <motion.h1 className='myprogram-header'
       initial={{ opacity: 0, x: '-10w' }}

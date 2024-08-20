@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import Cheeseburger from './CheeseBurger';
 import NavBar from '../pages/NavBar';
 import '../styles/navbar.css';
 
-const Dropdown: React.FC = () => {
+const Menu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // Track whether the Drawer is open or closed
   const [drawerWidth, setDrawerWidth] = useState('21%'); // Used to dynamically size the width of the Drawer
 
@@ -13,9 +13,10 @@ const Dropdown: React.FC = () => {
     setIsOpen(prevState => !prevState);
   };
 
-  const handleMeasure = (width: number) => { // Callback function passed to NavBar to calculate the max width of all of the Links
-    setDrawerWidth(width + 20 + 'px'); // Add some padding to the width
-  };
+  // Memoize the callback to avoid recreating it on every render
+  const handleMeasureWidth = useCallback((width: number) => {
+    setDrawerWidth(width + 30 + 'px');  // Add some padding to the width
+  }, []); // No dependencies ensures this function reference is stable
 
   return (
     <div>
@@ -43,12 +44,12 @@ const Dropdown: React.FC = () => {
           zIndex: 999         // Z-index is smaller than that of the Cheeseburger icon so the Drawer does not cover up the Cheeseburger icon
         }}
       >
-        <div className='drawer-content'>
-          <NavBar onMeasure={handleMeasure} /> {/* Pass the callback to NavBar */}
-        </div>
+
+          <NavBar onMeasureWidth={handleMeasureWidth} /> {/* Pass the callback to NavBar */}
+
       </Drawer>
     </div>
   );
 };
 
-export default Dropdown;
+export default Menu;

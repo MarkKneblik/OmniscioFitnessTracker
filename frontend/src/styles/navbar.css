@@ -1,9 +1,10 @@
+ /* Formatting for the entire navbar */
 .navbar {
     background-color: #ffffff;
     padding-top: 20%;
   }
   
-  /* style for the list of links */
+  /* Formatting for the list of links */
   .nav-list {
     list-style: none;
     flex-direction: column;
@@ -12,7 +13,7 @@
     margin: 0; 
   }
   
-  /* style for list items */
+  /* Formatting for list items */
   .nav-list li {
     flex: 1; /* each item takes up equal space */
     text-align: left; 
@@ -20,7 +21,7 @@
     white-space: nowrap;
   }
   
-  /* style for Link components */
+  /* Style for Link components */
   .nav-list a {
     text-decoration: none; 
     color: rgb(206, 108, 44);; 
@@ -32,7 +33,7 @@
     font-size: x-large;
   }
   
-  /* hover effect for the Link components */
+  /* Hover effect for the Link components */
   .nav-list a:hover {
     background-color: #d4d4d4e3; 
   }

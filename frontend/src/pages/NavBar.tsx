@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 interface NavBarProps {
-  onMeasure: (width: number) => void; // Callback function prop to pass max width of links up to parent component
+  onMeasureWidth: (width: number) => void; // Callback function prop to pass max width of links up to parent component
 }
 
-const NavBar: React.FC<NavBarProps> = ({ onMeasure }) => {
+const NavBar: React.FC<NavBarProps> = ({ onMeasureWidth }) => {
 
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]); // An empty array of Link refs. This will be used to find the 
                                                              // max width of all the Links, allowing the Drawer parent component
@@ -21,8 +21,8 @@ const NavBar: React.FC<NavBarProps> = ({ onMeasure }) => {
                                                                              // and get the width of these Links
 
     const maxWidth = Math.max(...widths); // Use spread operator to pass each width into Math.max(), obtaining the maxWidth
-    onMeasure(maxWidth); // Pass the max width up to the parent
-  }, [onMeasure]);
+    onMeasureWidth(maxWidth); // Pass the max width up to the parent via callback
+  }, [onMeasureWidth]);   // Only call UseEffect when component mounts
   
 
   return (
@@ -30,7 +30,7 @@ const NavBar: React.FC<NavBarProps> = ({ onMeasure }) => {
     <nav className='navbar'>
       <ul className="nav-list">
         <li>
-          <Link ref={linkRef => linkRefs.current[0] = linkRef} to="/MyProgram">
+          <Link ref={linkRef => linkRefs.current[0] = linkRef} to="/MyProgram"> {/* Assign reference to this Link to linkRefs array*/}
             My Program <FontAwesomeIcon icon={faDumbbell} />
           </Link>
         </li>
