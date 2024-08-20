@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
 import config from "../../config.json";
 import "../styles/login.css"
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
 
 export default function Login() {
 
