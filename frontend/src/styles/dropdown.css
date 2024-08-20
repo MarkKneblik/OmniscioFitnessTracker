@@ -1,4 +1,4 @@
-.menu-item {
+.dropdown-item {
     text-decoration: none; 
     color: rgb(206, 108, 44);; 
     padding: 10px; 
@@ -9,6 +9,9 @@
     font-size: x-large;
   }
 
-  .bm-overlay {
-    background: rgba(250, 248, 248, 0.788); 
+  .dropdown-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   
   }

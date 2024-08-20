@@ -1,0 +1,39 @@
+/* style for the main navbar container */
+.navbar {
+    background-color: #ffffff;
+    padding-top: 20%;
+  }
+  
+  /* style for the list of links */
+  .nav-list {
+    list-style: none;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0; 
+    margin: 0; 
+  }
+  
+  /* style for list items */
+  .nav-list li {
+    flex: 1; /* each item takes up equal space */
+    text-align: center; 
+    padding: 10%;
+    white-space: nowrap;
+  }
+  
+  /* style for Link components */
+  .nav-list a {
+    text-decoration: none; 
+    color: rgb(206, 108, 44);; 
+    padding: 10px; 
+    transition: background-color 0.3s; 
+    border-radius: 4px; /* rounded corners */
+    font-family: Inter;
+    font-weight: bold;
+    font-size: large;
+  }
+  
+  /* hover effect for the Link components */
+  .nav-list a:hover {
+    background-color: #d4d4d4e3; 
+  }
