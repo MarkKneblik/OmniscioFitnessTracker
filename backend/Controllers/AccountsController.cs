@@ -34,7 +34,7 @@ public class AccountsController : ControllerBase
     [Route("Logout")]
      public IActionResult Logout()
     {
-        HttpContext.Response.Cookies.Delete("access_token");
+        HttpContext.Response.Cookies.Delete("accessToken");
         // Sign out the user using cookie authentication scheme
         return SignOut(
             new AuthenticationProperties { RedirectUri = $"{frontendURL}/" },

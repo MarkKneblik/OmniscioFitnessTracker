@@ -30,7 +30,7 @@ public class MyProgramController : ControllerBase
         
 
 
-        return Ok();
+        return Ok("Successfully accessed authorized resource");
     }
 
 

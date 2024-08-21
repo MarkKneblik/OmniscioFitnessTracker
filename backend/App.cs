@@ -88,16 +88,16 @@ builder.Services.AddAuthentication(options =>
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // Create a claims principal
+            // Create a claims principal to represent the authenticated user
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-            // Sign in with the Cookie authentication scheme to persist the authentication
+            // Sign in with cookie authentication scheme to persist the authentication and create a cookie-based session
             await context.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-            // Save access token for API calls
             var accessToken = context.SecurityToken.RawData;
 
-            context.HttpContext.Response.Cookies.Append("access_token", accessToken, new CookieOptions
+            // Save access token for API calls
+            context.HttpContext.Response.Cookies.Append("accessToken", accessToken, new CookieOptions
             {
                 Path ="/",
                 HttpOnly = true,
@@ -106,18 +106,6 @@ builder.Services.AddAuthentication(options =>
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             });
 
-            await Task.CompletedTask;
-        },
-
-        // Handle sign-out redirection
-        OnRedirectToIdentityProviderForSignOut = async context =>
-        {
-            // Since Google doesn't support `end_session_endpoint`, handle this manually
-
-            // Clear local cookies
-            context.Properties.RedirectUri = frontendURL; 
-            context.Response.Redirect($"{frontendURL}/"); // Redirect to homepage
-            context.HandleResponse(); // Suppress the default logic
             await Task.CompletedTask;
         },
     };
@@ -135,7 +123,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(options => {
-    options.WithOrigins(frontendURL).AllowAnyHeader().AllowAnyMethod();
+    options.WithOrigins(frontendURL).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
 });
 
 app.UseHttpsRedirection();

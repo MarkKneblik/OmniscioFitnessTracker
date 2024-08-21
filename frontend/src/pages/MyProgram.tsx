@@ -58,6 +58,7 @@ export default function MyProgram() {
               headers: {
                   "Content-Type": "application/json",
               },
+              withCredentials: true
           });
       } catch (error: any) {
           console.error("Error fetching data:", error.message);
