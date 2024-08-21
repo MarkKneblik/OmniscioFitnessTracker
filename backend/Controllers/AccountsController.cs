@@ -34,10 +34,10 @@ public class AccountsController : ControllerBase
     [Route("Logout")]
      public IActionResult Logout()
     {
-        // Sign out the user and specify the authentication schemes (OIDC and cookies)
+        HttpContext.Response.Cookies.Delete("access_token");
+        // Sign out the user using cookie authentication scheme
         return SignOut(
             new AuthenticationProperties { RedirectUri = $"{frontendURL}/" },
-            OpenIdConnectDefaults.AuthenticationScheme,
             CookieAuthenticationDefaults.AuthenticationScheme
         );
     }
