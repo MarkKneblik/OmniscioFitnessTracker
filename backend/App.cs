@@ -94,7 +94,7 @@ builder.Services.AddAuthentication(options =>
             // Sign in with the Cookie authentication scheme to persist the authentication
             await context.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-            // Optionally, you can still manually save the access token if needed (e.g., for API calls)
+            // Save access token for API calls
             var accessToken = context.SecurityToken.RawData;
 
             context.HttpContext.Response.Cookies.Append("access_token", accessToken, new CookieOptions
@@ -141,12 +141,13 @@ app.UseCors(options => {
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseMiddleware<AuthenticationMiddleware>();
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
 
-app.UseAuthentication();  
+app.UseAuthentication(); 
+app.UseMiddleware<AuthenticationMiddleware>(); 
 app.UseAuthorization();  
 
 app.MapControllers();

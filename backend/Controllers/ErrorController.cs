@@ -13,7 +13,7 @@ public class ErrorController : ControllerBase
     public ErrorController(IConfiguration configuration)
     {
         _configuration = configuration;
-        frontendURL = configuration["frontend_url"];
+        frontendURL = _configuration["frontend_url"];
     }
 
     [HttpGet]

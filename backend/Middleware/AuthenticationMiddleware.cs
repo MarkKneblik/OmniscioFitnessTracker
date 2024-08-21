@@ -17,7 +17,7 @@ public class AuthenticationMiddleware
             // Handle unauthenticated requests to endpoints in /MyProgram
             context.Response.StatusCode = 401; // Unauthorized
             await context.Response.WriteAsync("Unauthorized access.");
-            context.Response.Redirect("/Error");
+            context.Response.Redirect("/Error/Error");
             return;       
         }
 
