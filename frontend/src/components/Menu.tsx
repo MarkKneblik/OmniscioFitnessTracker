@@ -15,7 +15,7 @@ const Menu: React.FC = () => {
 
   // Memoize the callback to avoid recreating it on every render
   const handleMeasureWidth = useCallback((width: number) => {
-    setDrawerWidth(width + 30 + 'px');  // Add some padding to the width
+    setDrawerWidth(width + 40 + 'px');  // Add some padding to the width
   }, []); // No dependencies ensures this function reference is stable
 
   return (

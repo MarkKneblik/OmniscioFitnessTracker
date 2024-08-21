@@ -40,8 +40,13 @@ const NavBar: React.FC<NavBarProps> = ({ onMeasureWidth }) => {
           </Link>
         </li>
         <li>
-          <Link ref={linkRef => linkRefs.current[2] = linkRef} to="/Trends">
+          <Link ref={linkRef => linkRefs.current[2] = linkRef} to="/MyTrends">
             My Trends
+          </Link>
+        </li>
+        <li>
+          <Link ref={linkRef => linkRefs.current[3] = linkRef} to="/MyAccount">
+            My Account
           </Link>
         </li>
       </ul>

@@ -2,16 +2,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 [ApiController]
 [Route("[controller]")]
 public class AccountsController : ControllerBase
 {
     private readonly APIDbContext _dbContext;
+    private readonly IConfiguration _configuration;
 
-    public AccountsController(APIDbContext dbContext)
+    private string frontendURL;
+
+    public AccountsController(APIDbContext dbContext, IConfiguration configuration)
     {
         _dbContext = dbContext;
+        _configuration = configuration;
+        frontendURL = configuration["frontend_url"];
     }
 
 
@@ -20,22 +26,19 @@ public class AccountsController : ControllerBase
     [Route("Login")]
     public IActionResult Login()
     {
-        return Challenge(new AuthenticationProperties { RedirectUri = "https://localhost:5173/MyProgram" }, OpenIdConnectDefaults.AuthenticationScheme);
+        return Challenge(new AuthenticationProperties { RedirectUri = $"{frontendURL}/MyProgram" }, OpenIdConnectDefaults.AuthenticationScheme);
     }
 
     [HttpGet]
-    [AllowAnonymous]
-    [Route("ClearCookies")]
-    public IActionResult ClearCookies()
+    [Authorize]
+    [Route("Logout")]
+     public IActionResult Logout()
     {
-        // Iterate through all the cookies in the request
-        foreach (var cookie in Request.Cookies.Keys)
-        {
-            // Set the cookie to expire in the past
-            Response.Cookies.Delete(cookie);
-        }
-
-        // Optionally, you can return a response indicating that the cookies were cleared
-        return Ok(new { message = "All cookies have been cleared." });
+        // Sign out the user and specify the authentication schemes (OIDC and cookies)
+        return SignOut(
+            new AuthenticationProperties { RedirectUri = $"{frontendURL}/" },
+            OpenIdConnectDefaults.AuthenticationScheme,
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
     }
 }

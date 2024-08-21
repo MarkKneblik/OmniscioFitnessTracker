@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +23,7 @@ builder.Services.AddDbContext<APIDbContext>(options => options.UseSqlServer(buil
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
-var frontendURL = configuration.GetValue<string>("frontend_url");
+var frontendURL = configuration["frontend_url"];
 
 
 // Add HttpContextAccessor
@@ -36,6 +39,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.Cookie.Name = "OmniscioFitnessTrackerCookie";
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    options.LoginPath = "/Accounts/Login";
 })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
@@ -44,6 +48,8 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = builder.Configuration["Authentication:OIDC:ClientSecret"];
     options.ResponseType = OpenIdConnectResponseType.Code;
     options.CallbackPath = "/signin-oidc";
+    options.SignedOutCallbackPath = "/signout-oidc";
+    options.SignedOutRedirectUri = $"{frontendURL}/Login";
     options.SaveTokens = true;
     options.Scope.Add("openid");
     options.Scope.Add("profile");
@@ -66,8 +72,54 @@ builder.Services.AddAuthentication(options =>
         {
             // Store Claims Principal in HttpContext.Items 
             context.HttpContext.Items["OnTokenValidated"] = context.Principal;
+
+            // Extract user information from the token that is already validated by OpenID Connect
+            var userIdentifier = context.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = context.Principal.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = context.Principal.FindFirst(ClaimTypes.Email)?.Value;
+
+            // Create list of claims
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, userIdentifier ?? string.Empty),
+                new Claim(ClaimTypes.Name, userName ?? string.Empty),
+                new Claim(ClaimTypes.Email, userEmail ?? string.Empty)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Create a claims principal
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+            // Sign in with the Cookie authentication scheme to persist the authentication
+            await context.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+
+            // Optionally, you can still manually save the access token if needed (e.g., for API calls)
+            var accessToken = context.SecurityToken.RawData;
+
+            context.HttpContext.Response.Cookies.Append("access_token", accessToken, new CookieOptions
+            {
+                Path ="/",
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTimeOffset.UtcNow.AddDays(30)
+            });
+
             await Task.CompletedTask;
-        }
+        },
+
+        // Handle sign-out redirection
+        OnRedirectToIdentityProviderForSignOut = async context =>
+        {
+            // Since Google doesn't support `end_session_endpoint`, handle this manually
+
+            // Clear local cookies
+            context.Properties.RedirectUri = frontendURL; 
+            context.Response.Redirect($"{frontendURL}/"); // Redirect to homepage
+            context.HandleResponse(); // Suppress the default logic
+            await Task.CompletedTask;
+        },
     };
 });
 
@@ -83,12 +135,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(options => {
-    options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    options.WithOrigins(frontendURL).AllowAnyHeader().AllowAnyMethod();
 });
 
-app.UseAuthentication();
-//app.UseMiddleware<AuthenticationMiddleware>();
-app.UseAuthorization();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseMiddleware<AuthenticationMiddleware>();
+app.UseHttpsRedirection();
+app.UseRouting();
+
+
+app.UseAuthentication();  
+app.UseAuthorization();  
 
 app.MapControllers();
 

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyTrends from './MyTrends';
 import MyProgram from './MyProgram';
 import Login from './Login';
+import MyAccount from './MyAccount';
 
 export default function App() {
 
@@ -23,6 +24,12 @@ export default function App() {
               path = '/MyProgram'
               element = {<MyProgram />}
             />
+
+            <Route 
+              path = '/MyAccount'
+              element = {<MyAccount />}
+            />
+
 
           </Routes>
         </Router>

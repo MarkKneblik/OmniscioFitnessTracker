@@ -11,7 +11,7 @@ export default function Login() {
   <div  className='background'style={{ display: 'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <h1 className='login-header'> Omniscio Fitness Tracker </h1>
 
-    <button 
+      <button 
                 onClick={login} 
                 style={{
                     backgroundColor: '#4285F4', 
@@ -23,7 +23,7 @@ export default function Login() {
                 }}
             >
                 Sign in with Google 🚀
-            </button>
+      </button>
 
     <div>
       <h2 className='attribution'> Designed by Freepik </h2>
