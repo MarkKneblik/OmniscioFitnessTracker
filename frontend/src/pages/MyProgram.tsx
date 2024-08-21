@@ -7,93 +7,60 @@ import Menu from '../components/Menu';
 
 export default function MyProgram() {
 
-    // const [numOfDays, setNumOfDays] = useState(0); // this state will hold the number of days in the exercise program 
-    // const [numOfExercises, setNumOfExercises] = useState(0); // this state will hold the number of exercises contained in a specific day
+    const [numOfDays, setNumOfDays] = useState(0); // this state will hold the number of days in the exercise program 
+    const [numOfExercises, setNumOfExercises] = useState(0); // this state will hold the number of exercises contained in a specific day
 
-    // useEffect(() => {
-    //     const getNumOfDays = async () => {      // get the number of days from the backend for this specific user
-    //         try {
-    //           await axios.get(`${config.apiUrl}/MyProgram/GetNumOfDays`, {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    //           });
-    //         } 
-            
-    //         catch (error: any) {
-    //           console.error("Error fetching data:", error.message);
-    //         }
-    //       };
-    //       getNumOfDays();
-
-    // }, []); 
-
-    // useEffect(() => {
-    //     const getNumOfExercises = async () => {      // get the number of days from the backend for this specific user
-    //         try {
-    //           await axios.get(`${config.apiUrl}/MyProgram/GetNumOfExercises`, {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    //           });
-    //         } 
-            
-    //         catch (error: any) {
-    //           console.error("Error fetching data:", error.message);
-    //         }
-    //       };
-    //       getNumOfExercises();
-
-    // }, []); 
-
-
-
-
-
-
-    const handleGetNumOfExercises = async () => {
-      console.log("Button clicked");
-      try {
-          const response = await axios.get(`${config.apiUrl}/MyProgram/GetNumOfExercises`, {
-              headers: {
+    useEffect(() => {
+        const getNumOfDays = async () => {      // get the number of days from the backend for this specific user
+            try {
+              await axios.get(`${config.apiUrl}/MyProgram/GetNumOfDays`, {
+                headers: {
                   "Content-Type": "application/json",
-              },
-              withCredentials: true
-          });
-      } catch (error: any) {
-          console.error("Error fetching data:", error.message);
-      }
-  };
+                },
+              });
+            } 
+            
+            catch (error: any) {
+              console.error("Error fetching data:", error.message);
+            }
+          };
+          getNumOfDays();
 
-  const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-};
+    }, []); 
 
-const buttonStyle = {
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer',
-};
+    useEffect(() => {
+        const getNumOfExercises = async () => {      // get the number of days from the backend for this specific user
+            try {
+              await axios.get(`${config.apiUrl}/MyProgram/GetNumOfExercises`, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            } 
+            
+            catch (error: any) {
+              console.error("Error fetching data:", error.message);
+            }
+          };
+          getNumOfExercises();
 
+    }, []); 
 
 
     return (
-      <div style={containerStyle}>
-      <Menu></Menu>
-      <button style={buttonStyle} onClick={handleGetNumOfExercises}> get num of days</button>
+        <div>
+        <Menu></Menu>
+        
 
-      {/* <motion.h1 className='myprogram-header'
-      initial={{ opacity: 0, x: '-10w' }}
-      animate={{ opacity: 1, x: '0vw'}}
-      transition={{ duration: 1, ease: 'linear' }}
-      >
-      Customize Your Program
-      </motion.h1> */}
-      
-      </div>
+        {/* <motion.h1 className='myprogram-header'
+        initial={{ opacity: 0, x: '-10w' }}
+        animate={{ opacity: 1, x: '0vw'}}
+        transition={{ duration: 1, ease: 'linear' }}
+        >
+        Customize Your Program
+        </motion.h1> */}
+        
+        </div>
 
     );
 }
