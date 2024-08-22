@@ -29,16 +29,15 @@ public class AccountsController : ControllerBase
         return Challenge(new AuthenticationProperties { RedirectUri = $"{frontendURL}/MyProgram" }, OpenIdConnectDefaults.AuthenticationScheme);
     }
 
-    [HttpGet]
+    [HttpPost]
     [Authorize]
     [Route("Logout")]
-     public IActionResult Logout()
+     public async Task<IActionResult> Logout()
     {
         HttpContext.Response.Cookies.Delete("accessToken");
         // Sign out the user using cookie authentication scheme
-        return SignOut(
-            new AuthenticationProperties { RedirectUri = $"{frontendURL}/" },
-            CookieAuthenticationDefaults.AuthenticationScheme
-        );
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return Redirect($"{frontendURL}/");
     }
 }

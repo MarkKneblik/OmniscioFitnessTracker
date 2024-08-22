@@ -41,7 +41,8 @@ const Menu: React.FC = () => {
         direction='left'
         style={{
           width: drawerWidth,
-          zIndex: 999         // Z-index is smaller than that of the Cheeseburger icon so the Drawer does not cover up the Cheeseburger icon
+          zIndex: 999,         // Z-index is smaller than that of the Cheeseburger icon so the Drawer does not cover up the Cheeseburger icon
+          backgroundColor: '#EBE2D4'
         }}
       >
 

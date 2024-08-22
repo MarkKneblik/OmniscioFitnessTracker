@@ -1,0 +1,13 @@
+html, body {
+    height: 100%; /* Ensure body takes up the full height of the viewport */
+    margin: 0;    /* Remove default margin */
+    padding: 0;   /* Remove default padding */
+    background-color: #EBE2D4; 
+  }
+  
+  #root {
+    height: 100%; /* Ensure React app covers the entire viewport */
+    display: flex;
+    flex-direction: column;
+  }
+  
