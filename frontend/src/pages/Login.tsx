@@ -14,12 +14,14 @@ export default function Login() {
       <button 
                 onClick={login} 
                 style={{
-                    backgroundColor: '#4285F4', 
-                    color: 'white', 
+                    backgroundColor: '#CC9E8E', 
+                    color: '#251C1C', 
                     padding: '10px 20px', 
                     borderRadius: '4px', 
                     border: 'none', 
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    fontFamily: 'Inter',
+                    fontSize: '16px'
                 }}
             >
                 Sign in with Google 🚀

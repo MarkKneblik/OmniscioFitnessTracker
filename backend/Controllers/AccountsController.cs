@@ -34,9 +34,9 @@ public class AccountsController : ControllerBase
     [Route("Logout")]
      public async Task<IActionResult> Logout()
     {
-        HttpContext.Response.Cookies.Delete("accessToken");
-        // Sign out the user using cookie authentication scheme
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        HttpContext.Response.Cookies.Delete("accessToken"); // Delete access token
+        
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); // Sign out the user using cookie authentication scheme
 
         return Content("Logout successful.", "text/plain");
     }
