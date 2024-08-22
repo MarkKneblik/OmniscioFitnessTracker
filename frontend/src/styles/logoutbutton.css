@@ -1,12 +1,25 @@
-.logout-button{
+.logout-button {
     background-color: #CC9E8E; 
     border: none;
-    color: white;
+    color: #332727;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     border-radius: 4px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth effect */
+}
+
+.logout-button:hover {
+    background-color: #B87B6D; /* Change background color on hover */
+    transform: scale(1.05); /* Slightly scale up the button */
+}
+
+.logout-button-icon {
+    margin-right: 8px;
+    color: #332727;
+    font-size: 16px;
 }
