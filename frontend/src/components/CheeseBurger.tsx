@@ -17,7 +17,7 @@ interface ComponentProps {
 const Cheeseburger = ({
     isToggled = false,
     onClick,
-    color = 'darkslategrey',
+    color = '#332727',
     width = 100,
     height = 100,
     rounded = true,

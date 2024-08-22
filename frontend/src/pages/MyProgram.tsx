@@ -6,6 +6,8 @@ import config from "../../config.json";
 import Menu from '../components/Menu'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 
 export default function MyProgram() {
 
@@ -49,9 +51,9 @@ export default function MyProgram() {
     // }, []); 
 
     // Define animation variants for the parent container and children
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 }
+    const headerVariant = {
+        hidden: { opacity: 0, fontSize: '20px' },
+        visible: { opacity: 1, fontSize: '35px'}
     };
 
     const itemVariants = {
@@ -62,34 +64,33 @@ export default function MyProgram() {
 
 
     return (
-        <motion.div
-        initial="hidden"
-        animate="visible"
-        transition={{
-            duration: 1,
-            ease: 'easeInOut'
-        }}
-    >
-        <motion.h1
-            className='header'
-            initial={{ fontSize: '20px'}} // Initial font size
-            animate={{ fontSize: '35px' }} // Animate font size
-            transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
-        >
-            <FontAwesomeIcon icon={faDumbbell} /> My Program
-        </motion.h1>
 
-        <motion.div
-            variants={itemVariants} // Apply variants to the Menu component
-            initial="hidden" 
-            animate="visible" 
-            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
-        >
-            <Menu />
-        </motion.div>
+    <SimpleBar style={{ height: '100vh', width: '100%' }}>
+        <div>
+   
+            <motion.h1
+                className='header'
+                variants={headerVariant}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
+            >
+                <FontAwesomeIcon icon={faDumbbell} /> My Program
+            </motion.h1>
 
+            <motion.div
+                variants={itemVariants} // Apply variants to the Menu component
+                initial="hidden" 
+                animate="visible" 
+                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+            >
+                <Menu />
+            </motion.div>
 
-    </motion.div>
+        </div>
+
+        
+    </SimpleBar>
 
     );
 }

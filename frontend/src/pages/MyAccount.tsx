@@ -1,7 +1,6 @@
 import React from 'react';
 import SimpleBar from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css'; // Import SimpleBar's CSS
-
+import 'simplebar-react/dist/simplebar.min.css';
 import Menu from '../components/Menu'; 
 import LogoutButton from "../components/LogoutButton";
 import '../styles/myaccount.css';
@@ -10,9 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 // Define animation variants for the parent container and children
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
+const headerVariant = {
+  hidden: { opacity: 0, fontSize: '20px' },
+  visible: { opacity: 1, fontSize: '35px'}
 };
 
 const itemVariants = {
@@ -21,7 +20,7 @@ const itemVariants = {
 };
 
 export default function MyAccount() {
-  
+
   return (
 
     <SimpleBar style={{ height: '100vh', width: '100%' }}>
@@ -30,8 +29,9 @@ export default function MyAccount() {
 
         <motion.h1
           className='header'
-          initial={{ fontSize: '20px'}} // Initial font size
-          animate={{ fontSize: '35px' }} // Animate font size
+          variants={headerVariant}
+          initial="hidden"
+          animate="visible" 
           transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
         >
           <FontAwesomeIcon icon={faUser} /> My Account
