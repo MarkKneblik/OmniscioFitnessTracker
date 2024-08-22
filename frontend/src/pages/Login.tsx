@@ -15,7 +15,7 @@ export default function Login() {
                 onClick={login} 
                 style={{
                     backgroundColor: '#CC9E8E', 
-                    color: '#251C1C', 
+                    color: '#332727', 
                     padding: '10px 20px', 
                     borderRadius: '4px', 
                     border: 'none', 
