@@ -20,18 +20,9 @@ const itemVariants = {
 export default function MyAccount() {
 
   return (
-    <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        transition={{
-            duration: 1,
-            ease: 'easeInOut',
-            staggerChildren: 1
-        }}
-    >
+    <div>
         <motion.h1
-            className='myprogram-header'
+            className='header'
             initial={{ fontSize: '20px'}} // Initial font size
             animate={{ fontSize: '35px' }} // Animate font size
             transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
@@ -45,7 +36,7 @@ export default function MyAccount() {
             animate="visible" 
             transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
         >
-            <Menu />
+            <Menu></Menu>
         </motion.div>
 
         <motion.div
@@ -57,8 +48,8 @@ export default function MyAccount() {
         >
             <LogoutButton></LogoutButton>
         </motion.div>
-
-    </motion.div>
+        </div>
+    
   );
 
 }

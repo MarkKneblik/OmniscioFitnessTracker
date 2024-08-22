@@ -1,0 +1,8 @@
+.header {
+  font-family: Inter;
+  color: #332727;
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+}
+

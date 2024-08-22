@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, animate } from 'framer-motion'
-import '../styles/myprogram.css' //import navbar styling
+import '../styles/header.css' //import navbar styling
 import axios from 'axios';
 import config from "../../config.json";
 import Menu from '../components/Menu'; 
@@ -48,24 +48,48 @@ export default function MyProgram() {
 
     // }, []); 
 
+    // Define animation variants for the parent container and children
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 }, // Start from below and hidden
+        visible: { opacity: 1, y: 0 } // End at original position
+    };
+
+
 
     return (
-        <div>
-            <motion.h1
-                className='myprogram-header'
-                initial={{ fontSize: '20px'}} // Set initial size
-                animate={{ fontSize: '35px' }} // Animate only font size
-                transition={{ delay: 0.3, duration: 1, ease: 'easeInOut' }} // Specify duration and easing
-            >
-                <FontAwesomeIcon icon={faDumbbell} /> My Program
-            </motion.h1>
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        transition={{
+            duration: 1,
+            ease: 'easeInOut'
+        }}
+    >
+        <motion.h1
+            className='header'
+            initial={{ fontSize: '20px'}} // Initial font size
+            animate={{ fontSize: '35px' }} // Animate font size
+            transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
+        >
+            <FontAwesomeIcon icon={faDumbbell} /> My Program
+        </motion.h1>
 
-            <Menu></Menu>
-        
+        <motion.div
+            variants={itemVariants} // Apply variants to the Menu component
+            initial="hidden" 
+            animate="visible" 
+            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+        >
+            <Menu />
+        </motion.div>
 
-            
-        
-        </div>
+
+    </motion.div>
 
     );
 }

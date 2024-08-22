@@ -11,6 +11,7 @@
     font-family: 'Inter', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth effect */
+    margin-top: 100px;
 }
 
 .logout-button:hover {
