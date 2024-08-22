@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faRuler } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 interface NavBarProps {
   onMeasureWidth: (width: number) => void; // Callback function prop to pass max width of links up to parent component
@@ -31,22 +34,22 @@ const NavBar: React.FC<NavBarProps> = ({ onMeasureWidth }) => {
       <ul className="nav-list">
         <li>
           <Link ref={linkRef => linkRefs.current[0] = linkRef} to="/MyProgram"> {/* Assign reference to this Link to linkRefs array*/}
-            My Program <FontAwesomeIcon icon={faDumbbell} />
+            <FontAwesomeIcon icon={faDumbbell} />   My Program 
           </Link>
         </li>
         <li>
           <Link ref={linkRef => linkRefs.current[1] = linkRef} to="/MyMeasurements">
-            My Measurements
+            <FontAwesomeIcon icon={faRuler} />   My Measurements 
           </Link>
         </li>
         <li>
           <Link ref={linkRef => linkRefs.current[2] = linkRef} to="/MyTrends">
-            My Trends
+            <FontAwesomeIcon icon={faChartLine} />   My Trends 
           </Link>
         </li>
         <li>
           <Link ref={linkRef => linkRefs.current[3] = linkRef} to="/MyAccount">
-            My Account
+            <FontAwesomeIcon icon={faUser} /> My Account
           </Link>
         </li>
       </ul>

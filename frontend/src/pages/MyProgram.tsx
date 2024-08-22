@@ -4,6 +4,8 @@ import '../styles/myprogram.css' //import navbar styling
 import axios from 'axios';
 import config from "../../config.json";
 import Menu from '../components/Menu'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 export default function MyProgram() {
 
@@ -49,18 +51,19 @@ export default function MyProgram() {
 
     return (
         <div>
-            
-            <Menu></Menu>
-        
-
             <motion.h1
                 className='myprogram-header'
                 initial={{ fontSize: '20px'}} // Set initial size
                 animate={{ fontSize: '35px' }} // Animate only font size
                 transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} // Specify duration and easing
             >
-                Customize Your Program
+                <FontAwesomeIcon icon={faDumbbell} /> My Program
             </motion.h1>
+
+            <Menu></Menu>
+        
+
+            
         
         </div>
 
