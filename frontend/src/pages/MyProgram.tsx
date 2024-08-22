@@ -55,7 +55,7 @@ export default function MyProgram() {
                 className='myprogram-header'
                 initial={{ fontSize: '20px'}} // Set initial size
                 animate={{ fontSize: '35px' }} // Animate only font size
-                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} // Specify duration and easing
+                transition={{ delay: 0.3, duration: 1, ease: 'easeInOut' }} // Specify duration and easing
             >
                 <FontAwesomeIcon icon={faDumbbell} /> My Program
             </motion.h1>

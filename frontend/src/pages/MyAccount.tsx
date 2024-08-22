@@ -2,25 +2,63 @@ import config from "../../config.json";
 import Menu from '../components/Menu'; 
 import LogoutButton from "../components/LogoutButton";
 import '../styles/myaccount.css';
+import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+// Define animation variants for the parent container and children
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 }, // Start from below and hidden
+    visible: { opacity: 1, y: 0 } // End at original position
+};
 
 export default function MyAccount() {
 
+  return (
+    <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        transition={{
+            duration: 1,
+            ease: 'easeInOut',
+            staggerChildren: 1
+        }}
+    >
+        <motion.h1
+            className='myprogram-header'
+            initial={{ fontSize: '20px'}} // Initial font size
+            animate={{ fontSize: '35px' }} // Animate font size
+            transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
+        >
+            <FontAwesomeIcon icon={faUser} /> My Account
+        </motion.h1>
 
-    return (
+        <motion.div
+            variants={itemVariants} // Apply variants to the Menu component
+            initial="hidden" 
+            animate="visible" 
+            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+        >
+            <Menu />
+        </motion.div>
 
-        <div>
-          
-          <Menu></Menu>
-
-          <div className="actions-pane">
-
+        <motion.div
+            className="actions-pane"
+            variants={itemVariants} // Apply variants to the LogoutButton component
+            initial="hidden"
+            animate="visible" 
+            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+        >
             <LogoutButton></LogoutButton>
+        </motion.div>
 
-          </div>
-          
-        
-        </div>
+    </motion.div>
+  );
 
-    );
-  }
-  
+}
