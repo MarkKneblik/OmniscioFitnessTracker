@@ -7,7 +7,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function LogoutButton() {
 
-  const handleClick = async () => {
+  const handleLogout = async () => {
     try {
         const response = await axios.post(`${config.apiURL}/Accounts/Logout`, null, {
             headers: {
@@ -30,7 +30,7 @@ export default function LogoutButton() {
 
   return (
     <div>
-      <button onClick={handleClick} className='logout-button'> 
+      <button onClick={handleLogout} className='logout-button'> 
         <FontAwesomeIcon icon={faSignOutAlt} className='logout-button-icon' ></FontAwesomeIcon>
          Logout 
       </button>

@@ -1,5 +1,7 @@
 .myprogram-header {
-    font-family: Inter;
-    color: rgb(206, 108, 44);
-    font-size:xx-large;
-  }
+  font-family: Inter;
+  color: #332727;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

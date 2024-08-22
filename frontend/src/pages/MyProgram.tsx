@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion'
+import { motion, animate } from 'framer-motion'
 import '../styles/myprogram.css' //import navbar styling
 import axios from 'axios';
 import config from "../../config.json";
@@ -49,16 +49,18 @@ export default function MyProgram() {
 
     return (
         <div>
-        <Menu></Menu>
+            
+            <Menu></Menu>
         
 
-        {/* <motion.h1 className='myprogram-header'
-        initial={{ opacity: 0, x: '-10w' }}
-        animate={{ opacity: 1, x: '0vw'}}
-        transition={{ duration: 1, ease: 'linear' }}
-        >
-        Customize Your Program
-        </motion.h1> */}
+            <motion.h1
+                className='myprogram-header'
+                initial={{ fontSize: '20px'}} // Set initial size
+                animate={{ fontSize: '35px' }} // Animate only font size
+                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} // Specify duration and easing
+            >
+                Customize Your Program
+            </motion.h1>
         
         </div>
 

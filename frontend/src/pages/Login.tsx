@@ -3,9 +3,10 @@ import config from "../../config.json";
 import "../styles/login.css";
 
 export default function Login() {
-  const [isHovered, setIsHovered] = useState(false);
 
-  const login = () => {
+  const [isHovered, setIsHovered] = useState(false); // Track whether login button is being hovered
+
+  const handleLogin = () => {
     window.location.href = `${config.apiURL}/Accounts/Login`;
   };
 
@@ -27,7 +28,7 @@ export default function Login() {
       <h1 className='login-header'>Omniscio Fitness Tracker</h1>
 
       <button
-        onClick={login}
+        onClick={handleLogin}
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)} 
         style={buttonStyle}
