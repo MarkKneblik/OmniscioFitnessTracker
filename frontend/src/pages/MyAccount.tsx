@@ -1,4 +1,7 @@
-import config from "../../config.json";
+import React from 'react';
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css'; // Import SimpleBar's CSS
+
 import Menu from '../components/Menu'; 
 import LogoutButton from "../components/LogoutButton";
 import '../styles/myaccount.css';
@@ -18,38 +21,41 @@ const itemVariants = {
 };
 
 export default function MyAccount() {
-
   return (
-    <div>
+    <SimpleBar style={{ height: '100vh', width: '100%' }}>
+
+      <div>
+        
         <motion.h1
-            className='header'
-            initial={{ fontSize: '20px'}} // Initial font size
-            animate={{ fontSize: '35px' }} // Animate font size
-            transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
+          className='header'
+          initial={{ fontSize: '20px'}} // Initial font size
+          animate={{ fontSize: '35px' }} // Animate font size
+          transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
         >
-            <FontAwesomeIcon icon={faUser} /> My Account
+          <FontAwesomeIcon icon={faUser} /> My Account
         </motion.h1>
 
         <motion.div
-            variants={itemVariants} // Apply variants to the Menu component
-            initial="hidden" 
-            animate="visible" 
-            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+          variants={itemVariants} // Apply variants to the Menu component
+          initial="hidden" 
+          animate="visible" 
+          transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
         >
-            <Menu></Menu>
+          <Menu />
         </motion.div>
 
         <motion.div
-            className="actions-pane"
-            variants={itemVariants} // Apply variants to the LogoutButton component
-            initial="hidden"
-            animate="visible" 
-            transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+          className="actions-pane"
+          variants={itemVariants} // Apply variants to the LogoutButton component
+          initial="hidden"
+          animate="visible" 
+          transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
         >
-            <LogoutButton></LogoutButton>
+          <LogoutButton />
         </motion.div>
-        </div>
-    
-  );
+        
+      </div>
 
+    </SimpleBar>
+  );
 }
