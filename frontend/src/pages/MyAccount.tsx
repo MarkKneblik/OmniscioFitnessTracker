@@ -1,5 +1,5 @@
 import config from "../../config.json";
-
+import Menu from '../components/Menu'; 
 export default function MyAccount() {
 
     const logout =  () => {
@@ -7,11 +7,13 @@ export default function MyAccount() {
     };
 
     return (
-      <div>
-        
-        <button onClick={logout}> Sign out </button>
 
-      </div>
+        <div>
+
+          <Menu></Menu>
+        
+        </div>
+
     );
   }
   
