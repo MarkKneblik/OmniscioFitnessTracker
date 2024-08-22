@@ -21,11 +21,13 @@ const itemVariants = {
 };
 
 export default function MyAccount() {
+  
   return (
+
     <SimpleBar style={{ height: '100vh', width: '100%' }}>
 
       <div>
-        
+
         <motion.h1
           className='header'
           initial={{ fontSize: '20px'}} // Initial font size
