@@ -1,4 +1,5 @@
 {
-"apiUrl": "https://localhost:5257",
-"clientID": "961911351730-md58rsv2no06515ld3ngcif1nhtbamup.apps.googleusercontent.com"
+"apiURL": "https://localhost:5257",
+"clientID": "961911351730-md58rsv2no06515ld3ngcif1nhtbamup.apps.googleusercontent.com",
+"frontendURL": "https://localhost:5173"
 }

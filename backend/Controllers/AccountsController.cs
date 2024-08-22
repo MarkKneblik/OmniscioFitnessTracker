@@ -38,6 +38,6 @@ public class AccountsController : ControllerBase
         // Sign out the user using cookie authentication scheme
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-        return Redirect($"{frontendURL}/");
+        return Content("Logout successful.", "text/plain");
     }
 }

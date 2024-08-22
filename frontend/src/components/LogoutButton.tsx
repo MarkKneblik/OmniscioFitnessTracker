@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
   const handleClick = async () => {
     try {
-        const response = await axios.post(`${config.apiUrl}/Accounts/Logout`, null, {
+        const response = await axios.post(`${config.apiURL}/Accounts/Logout`, null, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -15,7 +15,8 @@ export default function LogoutButton() {
         });
 
         if (response.status === 200) {
-            console.log('Logged out successfully');
+          console.log("Response: ", response)
+          window.location.href = `${config.frontendURL}/` // If response is OK, redirect to Login page
         }
     }
     catch(error:any)

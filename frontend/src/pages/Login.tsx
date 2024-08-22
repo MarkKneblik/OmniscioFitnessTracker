@@ -4,7 +4,7 @@ import "../styles/login.css"
 export default function Login() {
 
   const login =  () => {
-    window.location.href = `${config.apiUrl}/Accounts/Login`;
+    window.location.href = `${config.apiURL}/Accounts/Login`;
 };
 
   return (
