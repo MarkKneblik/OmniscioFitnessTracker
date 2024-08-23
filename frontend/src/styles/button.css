@@ -1,6 +1,6 @@
 .button {
     background-color: #CC9E8E; 
-    border: none;
+    border: 3px solid #AFB9B5; 
     color: #332727;
     padding: 15px 32px;
     text-align: center;
@@ -10,12 +10,13 @@
     border-radius: 4px;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth effect */
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Add border-color transition */
     margin-top: 100px;
 }
 
 .button:hover {
     background-color: #B87B6D; /* Change background color on hover */
+    border-color: #8A9C96; /* Slightly darker border color on hover */
     transform: scale(1.05); /* Slightly scale up the button */
 }
 

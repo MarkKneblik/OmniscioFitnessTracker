@@ -2,6 +2,7 @@ import { useState } from 'react';
 import config from "../../config.json";
 import "../styles/login.css";
 
+
 export default function Login() {
 
   const [isHovered, setIsHovered] = useState(false); // Track whether login button is being hovered
@@ -11,16 +12,16 @@ export default function Login() {
   };
 
   const buttonStyle = {
-    backgroundColor: isHovered ? '#B87B6D' : '#CC9E8E', // Darker color on hover
-    color: '#332727',
-    padding: '10px 20px',
+    backgroundColor: isHovered ? '#B87B6D' : '#CC9E8E', // Change background color on hover
+    color: '#332727', 
+    padding: '10px 20px', 
     borderRadius: '4px',
-    border: 'none',
-    cursor: 'pointer',
-    fontFamily: 'Inter',
-    fontSize: '16px',
-    transform: isHovered ? 'scale(1.05)' : 'scale(1)', // Scale up on hover
-    transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth transition
+    border: `3px solid ${isHovered ? '#9AA6A2' : '#AFB9B5'}`, 
+    cursor: 'pointer', 
+    fontFamily: 'Inter, sans-serif', 
+    fontSize: '16px', 
+    transform: isHovered ? 'scale(1.05)' : 'scale(1)', // Slightly scale up on hover
+    transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth transition on hover
   };
 
   return (

@@ -72,6 +72,7 @@ const customStyles: StylesConfig<any, false> = {
     singleValue: (provided) => ({
         ...provided,
         fontFamily: 'Inter', // Apply Inter font to single value text
+        color: '#332727'
     }),
 };
 
