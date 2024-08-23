@@ -1,4 +1,4 @@
-.logout-button {
+.button {
     background-color: #CC9E8E; 
     border: none;
     color: #332727;
@@ -14,12 +14,12 @@
     margin-top: 100px;
 }
 
-.logout-button:hover {
+.button:hover {
     background-color: #B87B6D; /* Change background color on hover */
     transform: scale(1.05); /* Slightly scale up the button */
 }
 
-.logout-button-icon {
+.button-icon {
     margin-right: 8px;
     color: #332727;
     font-size: 16px;

@@ -1,0 +1,20 @@
+/* dayheader.css */
+.day-header {
+  font-family: Inter;
+  color: #332727;
+  font-size: x-large;
+  text-align: center;
+  margin: 20px 0; /* Add margin for spacing */
+}
+
+.day-ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center align text inside the list items */
+}
+
+.day-li {
+  margin-bottom: 10px; /* Space between list items */
+  display: block;
+}

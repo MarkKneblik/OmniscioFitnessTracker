@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
+import '../styles/button.css';
+import Day from '../components/Day';
+import '../styles/day.css';
 
 export default function MyProgram() {
 
@@ -49,8 +52,20 @@ export default function MyProgram() {
     //       getNumOfExercises();
 
     // }, []); 
+    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({
+        Monday: false,
+        Tuesday: false,
+        Wednesday: false,
+        Thursday: false,
+        Friday: false,
+        Saturday: false,
+        Sunday: false,
+      });
 
-    // Define animation variants for the parent container and children
+
+
+
+    // Define variants for Framer Motion
     const headerVariant = {
         hidden: { opacity: 0, fontSize: '20px' },
         visible: { opacity: 1, fontSize: '35px'}
@@ -60,6 +75,33 @@ export default function MyProgram() {
         hidden: { opacity: 0, y: 20 }, // Start from below and hidden
         visible: { opacity: 1, y: 0 } // End at original position
     };
+
+
+    const [newDay, setNewDay] = useState<string>(''); // State for the new day input
+
+    // Handle form submission
+    const handleAddDay = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Check if the input is a valid day and if it does not already exist
+    if (newDay && !daysOfProgram[newDay]) {
+      setDaysOfProgram(prevDays => ({
+        ...prevDays,
+        [newDay]: true
+      }));
+      setNewDay(''); // Clear the input field
+    } else if (newDay && daysOfProgram[newDay]) {
+      alert(`${newDay} is already added to the program.`);
+    }
+  };
+
+
+    const handleDeleteDay = () =>{
+
+
+
+    }
+
 
 
 
@@ -86,6 +128,38 @@ export default function MyProgram() {
             >
                 <Menu />
             </motion.div>
+
+            <motion.div
+                className="actions-pane"
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
+                >
+                {/* Form to add a new day */}
+                <form onSubmit={handleAddDay}>
+                    <input
+                    type="text"
+                    value={newDay}
+                    onChange={(e) => setNewDay(e.target.value)}
+                    placeholder="Enter day of the week"
+                    required
+                    />
+                    <button type="submit" className='button'>Add Day</button>
+                </form>
+            </motion.div>
+
+            {/* Conditionally render list of days of the week */ }
+            <ul className='day-ul'>
+                <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
+                <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
+                <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
+                <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
+                <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
+                <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
+                <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
+            </ul>
+
 
         </div>
 

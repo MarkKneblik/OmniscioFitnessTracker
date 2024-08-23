@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from "../../config.json";
-import '../styles/logoutbutton.css';
+import '../styles/button.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,7 +30,7 @@ export default function LogoutButton() {
 
   return (
     <div>
-      <button onClick={handleLogout} className='logout-button'> 
+      <button onClick={handleLogout} className='button'> 
         <FontAwesomeIcon icon={faSignOutAlt} className='logout-button-icon' ></FontAwesomeIcon>
          Logout 
       </button>
