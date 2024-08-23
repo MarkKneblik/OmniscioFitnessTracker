@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, animate } from 'framer-motion'
 import '../styles/header.css' //import navbar styling
 import axios from 'axios';
@@ -11,6 +11,9 @@ import 'simplebar-react/dist/simplebar.min.css';
 import '../styles/button.css';
 import Day from '../components/Day';
 import '../styles/day.css';
+import Select from 'react-select'
+
+
 
 export default function MyProgram() {
 
@@ -62,7 +65,16 @@ export default function MyProgram() {
         Sunday: false,
       });
 
-
+    
+      const options = [
+        { value: 'Monday', label: 'Monday' },
+        { value: 'Tuesday', label: 'Tuesday' },
+        { value: 'Wednesday', label: 'Wednesday' },
+        { value: 'Thursday', label: 'Thursday' },
+        { value: 'Friday', label: 'Friday' },
+        { value: 'Saturday', label: 'Saturday' },
+        { value: 'Sunday', label: 'Sunday' }
+    ];
 
 
     // Define variants for Framer Motion
@@ -129,36 +141,52 @@ export default function MyProgram() {
                 <Menu />
             </motion.div>
 
+
+
+            
+
             <motion.div
                 className="actions-pane"
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
-                >
-                {/* Form to add a new day */}
-                <form onSubmit={handleAddDay}>
-                    <input
-                    type="text"
-                    value={newDay}
-                    onChange={(e) => setNewDay(e.target.value)}
-                    placeholder="Enter day of the week"
-                    required
-                    />
-                    <button type="submit" className='button'>Add Day</button>
-                </form>
+            >
+                {/* Conditionally render list of days of the week */ }
+                <ul className='day-ul'>
+                    <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
+                    <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
+                </ul>
+                
+                
+
             </motion.div>
 
-            {/* Conditionally render list of days of the week */ }
-            <ul className='day-ul'>
-                <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
-                <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
-                <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
-                <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
-                <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
-                <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
-                <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
-            </ul>
+            <motion.div
+                style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '50px' }}
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
+            >
+
+                <Select options={options} />
+                <button
+                    type="submit"
+                    className='button'
+                    style={{
+                        marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
+                    }}
+                >
+                        Add Day
+                </button>
+
+            </motion.div>
 
 
         </div>
