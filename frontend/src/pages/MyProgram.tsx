@@ -14,10 +14,6 @@ import Day from '../components/Day';
 import '../styles/day.css';
 import Select, { StylesConfig } from 'react-select'
 
-const handleAddDay = () => {
-
-};
-
 
 const handleDeleteDay = () =>{
 
@@ -37,25 +33,41 @@ const options = [
 
 // 
 const customStyles: StylesConfig<any, false> = {
-    container: (provided) => ({
+    container: (provided, state) => ({
         ...provided,       // Default styles
-        width: '200px'    
+        width: '200px',
+        borderColor: state.isFocused ? '#AFB9B5' : '#EBE2D4',
     }),
-    control: (provided) => ({
+    control: (provided, state) => ({
         ...provided,       // Default styles
-        width: '200px'    
+        width: '200px',
+        borderColor: state.isFocused ? '#AFB9B5' : '#EBE2D4',
+        fontFamily: 'Inter',
+        '&:hover': {
+            borderColor: '#AFB9B5', // Change border color on hover
+        },
+        // Remove default focus outline and ensure consistent border color
+        '&:focus': {
+            borderColor: '#AFB9B5', // Same color as hover
+            boxShadow: 'none', // Remove default blue shadow
+        }
     }),
     menu: (provided) => ({
         ...provided,       // Default styles
         width: '200px'    
     }),
-    option: (provided) => ({
+    option: (provided, state) => ({
         ...provided,
         fontFamily: 'Inter', // Apply Inter font to all options
+        backgroundColor: state.isFocused ? '#AFB9B5' : 'white', // Change background color on hover
+        color: '#332727',
+        cursor: 'pointer', // Change cursor to pointer on hover
+        textAlign: 'center'
     }),
     placeholder: (provided) => ({
         ...provided,
         fontFamily: 'Inter', // Apply Inter font to placeholder text
+        textAlign: 'center'
     }),
     singleValue: (provided) => ({
         ...provided,
@@ -91,8 +103,22 @@ export default function MyProgram() {
     // Handle change in selected option
     const handleChange = (selected: any) => {
         setSelectedOption(selected);
-        console.log('Selected option:', selected);
     };
+
+    const handleAddDay = () => {
+        // Check if selectedOption is not null or undefined
+        if (selectedOption && selectedOption.label) {
+          const dayName = selectedOption.label; // Get the name of the selected day
+      
+          setDaysOfProgram(prevDaysOfProgram => ({
+            ...prevDaysOfProgram,
+            [dayName]: true // Set the corresponding day to true
+          }));
+        } 
+        else {
+          console.log('No valid day selected');
+        }
+      };
 
 
 
@@ -155,7 +181,13 @@ export default function MyProgram() {
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
 
-                    <Select options={options} styles={customStyles} onChange={handleChange} />
+                    <Select options={options} 
+                        styles={customStyles} 
+                        onChange={handleChange} 
+                        value={selectedOption} 
+                        placeholder='Select a day' 
+                        isSearchable={false}
+                    />
 
                     <button
                         type="submit"
@@ -163,6 +195,7 @@ export default function MyProgram() {
                         style={{
                             marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
                         }}
+                        onClick={handleAddDay}
                     >
                             <FontAwesomeIcon icon={faCalendar} /> Add Day
 
