@@ -6,56 +6,79 @@ import config from "../../config.json";
 import Menu from '../components/Menu'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import '../styles/button.css';
 import Day from '../components/Day';
 import '../styles/day.css';
-import Select from 'react-select'
+import Select, { StylesConfig } from 'react-select'
 
+const handleAddDay = () => {
+
+};
+
+
+const handleDeleteDay = () =>{
+
+
+
+}
+
+const options = [
+    { value: '1', label: 'Monday' },
+    { value: '2', label: 'Tuesday' },
+    { value: '3', label: 'Wednesday' },
+    { value: '4', label: 'Thursday' },
+    { value: '5', label: 'Friday' },
+    { value: '6', label: 'Saturday' },
+    { value: '7', label: 'Sunday' }
+];
+
+// 
+const customStyles: StylesConfig<any, false> = {
+    container: (provided) => ({
+        ...provided,       // Default styles
+        width: '200px'    
+    }),
+    control: (provided) => ({
+        ...provided,       // Default styles
+        width: '200px'    
+    }),
+    menu: (provided) => ({
+        ...provided,       // Default styles
+        width: '200px'    
+    }),
+    option: (provided) => ({
+        ...provided,
+        fontFamily: 'Inter', // Apply Inter font to all options
+    }),
+    placeholder: (provided) => ({
+        ...provided,
+        fontFamily: 'Inter', // Apply Inter font to placeholder text
+    }),
+    singleValue: (provided) => ({
+        ...provided,
+        fontFamily: 'Inter', // Apply Inter font to single value text
+    }),
+};
+
+// Define variants for Framer Motion
+const headerVariant = {
+    hidden: { opacity: 0, fontSize: '20px' },
+    visible: { opacity: 1, fontSize: '35px'}
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 }, // Start from below and hidden
+    visible: { opacity: 1, y: 0 } // End at original position
+};
 
 
 export default function MyProgram() {
 
-    // const [numOfDays, setNumOfDays] = useState(0); // this state will hold the number of days in the exercise program 
-    // const [numOfExercises, setNumOfExercises] = useState(0); // this state will hold the number of exercises contained in a specific day
-
-    // useEffect(() => {
-    //     const getNumOfDays = async () => {      // get the number of days from the backend for this specific user
-    //         try {
-    //           await axios.get(`${config.apiUrl}/MyProgram/GetNumOfDays`, {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    //           });
-    //         } 
-            
-    //         catch (error: any) {
-    //           console.error("Error fetching data:", error.message);
-    //         }
-    //       };
-    //       getNumOfDays();
-
-    // }, []); 
-
-    // useEffect(() => {
-    //     const getNumOfExercises = async () => {      // get the number of days from the backend for this specific user
-    //         try {
-    //           await axios.get(`${config.apiUrl}/MyProgram/GetNumOfExercises`, {
-    //             headers: {
-    //               "Content-Type": "application/json",
-    //             },
-    //           });
-    //         } 
-            
-    //         catch (error: any) {
-    //           console.error("Error fetching data:", error.message);
-    //         }
-    //       };
-    //       getNumOfExercises();
-
-    // }, []); 
-    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({
+    const [selectedOption, setSelectedOption] = useState<any>(null); // State for the selected day
+    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({ // State for array of bools corresponding to days of the week
         Monday: false,
         Tuesday: false,
         Wednesday: false,
@@ -65,134 +88,91 @@ export default function MyProgram() {
         Sunday: false,
       });
 
-    
-      const options = [
-        { value: 'Monday', label: 'Monday' },
-        { value: 'Tuesday', label: 'Tuesday' },
-        { value: 'Wednesday', label: 'Wednesday' },
-        { value: 'Thursday', label: 'Thursday' },
-        { value: 'Friday', label: 'Friday' },
-        { value: 'Saturday', label: 'Saturday' },
-        { value: 'Sunday', label: 'Sunday' }
-    ];
-
-
-    // Define variants for Framer Motion
-    const headerVariant = {
-        hidden: { opacity: 0, fontSize: '20px' },
-        visible: { opacity: 1, fontSize: '35px'}
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 }, // Start from below and hidden
-        visible: { opacity: 1, y: 0 } // End at original position
+    // Handle change in selected option
+    const handleChange = (selected: any) => {
+        setSelectedOption(selected);
+        console.log('Selected option:', selected);
     };
 
 
-    const [newDay, setNewDay] = useState<string>(''); // State for the new day input
-
-    // Handle form submission
-    const handleAddDay = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent the default form submission
-
-    // Check if the input is a valid day and if it does not already exist
-    if (newDay && !daysOfProgram[newDay]) {
-      setDaysOfProgram(prevDays => ({
-        ...prevDays,
-        [newDay]: true
-      }));
-      setNewDay(''); // Clear the input field
-    } else if (newDay && daysOfProgram[newDay]) {
-      alert(`${newDay} is already added to the program.`);
-    }
-  };
-
-
-    const handleDeleteDay = () =>{
-
-
-
-    }
 
 
 
 
     return (
 
-    <SimpleBar style={{ height: '100vh', width: '100%' }}>
-        <div>
-   
-            <motion.h1
-                className='header'
-                variants={headerVariant}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
-            >
-                <FontAwesomeIcon icon={faDumbbell} /> My Program
-            </motion.h1>
+        <SimpleBar style={{ height: '100vh', width: '100%' }}>
 
-            <motion.div
-                variants={itemVariants} // Apply variants to the Menu component
-                initial="hidden" 
-                animate="visible" 
-                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
-            >
-                <Menu />
-            </motion.div>
-
-
-
-            
-
-            <motion.div
-                className="actions-pane"
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
-            >
-                {/* Conditionally render list of days of the week */ }
-                <ul className='day-ul'>
-                    <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
-                    <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
-                </ul>
-                
-                
-
-            </motion.div>
-
-            <motion.div
-                style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '50px' }}
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
-            >
-
-                <Select options={options} />
-                <button
-                    type="submit"
-                    className='button'
-                    style={{
-                        marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
-                    }}
+            <div>
+    
+                <motion.h1
+                    className='header'
+                    variants={headerVariant}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
                 >
-                        Add Day
-                </button>
+                    <FontAwesomeIcon icon={faDumbbell} /> My Program
 
-            </motion.div>
+                </motion.h1>
 
+                <motion.div
+                    variants={itemVariants} // Apply variants to the Menu component
+                    initial="hidden" 
+                    animate="visible" 
+                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+                >
+                    <Menu></Menu>
 
-        </div>
+                </motion.div>
 
-        
-    </SimpleBar>
+                <motion.div
+                    className="actions-pane"
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
+                >
+
+                    {/* Conditionally render list of days of the week */ }
+                    <ul className='day-ul'>
+                        <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
+                    </ul>
+                    
+                </motion.div>
+
+                <motion.div
+                    style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '50px' }}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
+                >
+
+                    <Select options={options} styles={customStyles} onChange={handleChange} />
+
+                    <button
+                        type="submit"
+                        className='button'
+                        style={{
+                            marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
+                        }}
+                    >
+                            <FontAwesomeIcon icon={faCalendar} /> Add Day
+
+                    </button>
+
+                </motion.div>
+
+            </div>
+
+        </SimpleBar>
 
     );
 }
