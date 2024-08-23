@@ -7,7 +7,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 10px;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Add border-color transition */

@@ -39,18 +39,16 @@ const customStyles: StylesConfig<any, false> = {
         borderColor: state.isFocused ? '#AFB9B5' : '#EBE2D4',
     }),
     control: (provided, state) => ({
-        ...provided,       // Default styles
+        ...provided,
         width: '200px',
-        borderColor: state.isFocused ? '#AFB9B5' : '#EBE2D4',
+        borderColor: '#AFB9B5',
         fontFamily: 'Inter',
+        borderRadius: '10px', 
+        borderWidth: '3px',
+        boxShadow: 'none', // Remove default blue shadow
         '&:hover': {
-            borderColor: '#AFB9B5', // Change border color on hover
+            borderColor: '#8A9C96', // Change border color on hover
         },
-        // Remove default focus outline and ensure consistent border color
-        '&:focus': {
-            borderColor: '#AFB9B5', // Same color as hover
-            boxShadow: 'none', // Remove default blue shadow
-        }
     }),
     menu: (provided) => ({
         ...provided,       // Default styles

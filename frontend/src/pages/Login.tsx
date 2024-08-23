@@ -15,7 +15,7 @@ export default function Login() {
     backgroundColor: isHovered ? '#B87B6D' : '#CC9E8E', // Change background color on hover
     color: '#332727', 
     padding: '10px 20px', 
-    borderRadius: '4px',
+    borderRadius: '10px',
     border: `3px solid ${isHovered ? '#9AA6A2' : '#AFB9B5'}`, 
     cursor: 'pointer', 
     fontFamily: 'Inter, sans-serif', 
