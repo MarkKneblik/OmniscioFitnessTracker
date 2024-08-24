@@ -45,6 +45,7 @@ const customStyles: StylesConfig<any, false> = {
         fontFamily: 'Inter',
         borderRadius: '10px', 
         borderWidth: '3px',
+        textAlign: 'center',
         boxShadow: 'none', // Remove default blue shadow
         '&:hover': {
             borderColor: '#8A9C96', // Change border color on hover
@@ -138,7 +139,6 @@ export default function MyProgram() {
                     transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
                 >
                     <FontAwesomeIcon icon={faDumbbell} /> My Program
-
                 </motion.h1>
 
                 <motion.div
@@ -148,17 +148,14 @@ export default function MyProgram() {
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
                 >
                     <Menu></Menu>
-
                 </motion.div>
 
-                <motion.div
-                    className="actions-pane"
+                <motion.div style={{display: 'flex'}}
                     variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
-
                     {/* Conditionally render list of days of the week */ }
                     <ul className='day-ul'>
                         <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
@@ -169,17 +166,15 @@ export default function MyProgram() {
                         <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
                         <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
                     </ul>
-                    
                 </motion.div>
 
                 <motion.div
-                    style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '50px' }}
+                    style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '30px', marginTop: '100px' }}
                     variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
-
                     <Select options={options} 
                         styles={customStyles} 
                         onChange={handleChange} 
@@ -187,7 +182,6 @@ export default function MyProgram() {
                         placeholder='Select a day' 
                         isSearchable={false}
                     />
-
                     <button
                         type="submit"
                         className='button'
@@ -199,7 +193,6 @@ export default function MyProgram() {
                             <FontAwesomeIcon icon={faCalendar} /> Add Day
 
                     </button>
-
                 </motion.div>
 
             </div>
