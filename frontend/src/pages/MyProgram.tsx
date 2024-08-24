@@ -109,11 +109,11 @@ export default function MyProgram() {
     const handleAddDay = () => {
         // Check if selectedOption is not null or undefined
         if (selectedOption && selectedOption.label) {
-            const dayName = selectedOption.label; // Get the name of the selected day
+            const dayOfWeek = selectedOption.label; // Get the name of the selected day
         
             setDaysOfProgram(prevDaysOfProgram => ({
             ...prevDaysOfProgram,
-            [dayName]: true // Set the corresponding day to true
+            [dayOfWeek]: true // Set the corresponding day to true
             }));
         } 
         else {
@@ -121,11 +121,11 @@ export default function MyProgram() {
         }
     };
 
-    const handleDeleteDay = (dayName:string) => {
+    const handleDeleteDay = (dayOfWeek: string) => {
         setDaysOfProgram(prevDaysOfProgram => ({
-            ...prevDaysOfProgram,
-            [dayName]: false // Set the corresponding day to false
-            }));
+          ...prevDaysOfProgram,
+          [dayOfWeek]: false
+        }));
     };
 
 
@@ -188,17 +188,14 @@ export default function MyProgram() {
                     {/* Conditionally render list of days of the week */}
                     <ul className='day-ul'>
                         {daysOfWeek.map(day => (
-                            <li className='day-li' key={day}>
-                                {daysOfProgram[day] && <Day dayOfWeek={day} />}
-                                {daysOfProgram[day] && (
-                                    <button
-                                        className='button-base delete-day-button'
-                                        onClick={() => handleDeleteDay(day)}
-                                    >
-                                        <FontAwesomeIcon icon={faTrash} /> Delete Day
-                                    </button>
-                                )}
-                            </li>
+                        <li className='day-li' key={day}>
+                            {daysOfProgram[day] && (
+                            <Day
+                                dayOfWeek={day}
+                                onDeleteDay={handleDeleteDay}
+                            />
+                            )}
+                        </li>
                         ))}
                     </ul>
                 </motion.div>

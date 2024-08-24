@@ -1,6 +1,7 @@
-// External Libraries
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import '../styles/day.css';
@@ -12,16 +13,28 @@ interface Exercise {
 
 interface DayProps {
   dayOfWeek: string;
+  onDeleteDay: (dayOfWeek: string) => void; // Callback to notify parent of state change
 }
 
-const Day: React.FC<DayProps> = ({ dayOfWeek }) => {
+const Day: React.FC<DayProps> = ({ dayOfWeek, onDeleteDay }) => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleAddExercise = () => {
     const newExercise = { name: `Exercise ${exercises.length + 1}` };
     setExercises([...exercises, newExercise]);
   };
 
+  const handleDeleteDay = () => {
+    setIsVisible(false);
+
+    // Delay removal of the day to let the exit animation complete
+    setTimeout(() => {
+      onDeleteDay(dayOfWeek);
+    }, 500); // Adjust timeout to match the exit animation duration
+  };
+
+  // Variants for Framer Motion
   const bounceVariants = {
     hidden: { x: '100vw', opacity: 0 },
     visible: {
@@ -34,45 +47,30 @@ const Day: React.FC<DayProps> = ({ dayOfWeek }) => {
         mass: 3
       }
     },
-    exit: { x: '100vw', opacity: 0 }
+    exit: { x: '-100vw', opacity: 0, transition: { duration: 0.5 } }
   };
 
   return (
-    <div>
-      <AnimatePresence>
-        <motion.h2
-          className="day-header"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          className="day-container"
           variants={bounceVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          transition={{ delay: 0.3, duration: 0.8, ease: 'easeInOut' }}
         >
-          {dayOfWeek}
-        </motion.h2>
-      </AnimatePresence>
+          <motion.h2 className="day-header">{dayOfWeek}</motion.h2>
 
-      <ul className="day-ul">
-        {exercises.map((exercise, index) => (
-          <li key={index} className="day-li">
-            {exercise.name}
-          </li>
-        ))}
-      </ul>
-
-      <AnimatePresence>
-        <motion.button
-          onClick={handleAddExercise}
-          variants={bounceVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          transition={{ delay: 0.3, duration: 0.8, ease: 'easeInOut' }}
-        >
-          Add Exercise
-        </motion.button>
-      </AnimatePresence>
-    </div>
+          <motion.button
+            className="button-base delete-day-button"
+            onClick={handleDeleteDay}
+          >
+            <FontAwesomeIcon icon={faTrash} /> Delete Day
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
