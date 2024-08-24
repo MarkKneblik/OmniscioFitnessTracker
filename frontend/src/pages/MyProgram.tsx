@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { motion, animate } from 'framer-motion'
-import '../styles/header.css' //import navbar styling
-import axios from 'axios';
-import config from "../../config.json";
-import Menu from '../components/Menu'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell, faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
+// External Libraries
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Select, { StylesConfig } from 'react-select';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-import '../styles/button.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import config from "../../config.json";
+
+// Internal Imports
+import Menu from '../components/Menu'; 
 import Day from '../components/Day';
+import Header from '../components/Header';
+
+// Styles
+import '../styles/header.css';
+import '../styles/button.css';
 import '../styles/day.css';
-import Select, { StylesConfig } from 'react-select'
 
 
-const handleDeleteDay = () =>{
-
-
-
-}
-
+// react-select dropdown options
 const options = [
     { value: '1', label: 'Monday' },
     { value: '2', label: 'Tuesday' },
@@ -74,12 +75,6 @@ const customStyles: StylesConfig<any, false> = {
     }),
 };
 
-// Define variants for Framer Motion
-const headerVariant = {
-    hidden: { opacity: 0, fontSize: '20px' },
-    visible: { opacity: 1, fontSize: '35px'}
-};
-
 const itemVariants = {
     hidden: { opacity: 0, y: 20 }, // Start from below and hidden
     visible: { opacity: 1, y: 0 } // End at original position
@@ -99,7 +94,8 @@ export default function MyProgram() {
         Sunday: false,
       });
 
-      const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    // For use when mapping list items to days of the week below
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     // Handle change in selected option
     const handleChange = (selected: any) => {
@@ -133,22 +129,9 @@ export default function MyProgram() {
 
         <SimpleBar style={{ height: '100vh', width: '100%' }}>
 
-
             <div>
 
-
-                <div className='header-wrapper'>
-                    <motion.h1
-                        className='header'
-                        variants={headerVariant}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
-                    >
-                        <FontAwesomeIcon icon={faDumbbell} /> My Program
-                    </motion.h1>
-                </div>
-
+                <Header title='My Program' icon='dumbbell'></Header>
 
                 <motion.div
                     variants={itemVariants} // Apply variants to the Menu component
@@ -213,7 +196,6 @@ export default function MyProgram() {
 
                 
             </div>
-
 
         </SimpleBar>
     );

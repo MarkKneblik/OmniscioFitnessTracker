@@ -1,18 +1,16 @@
-import React from 'react';
+// External Libraries
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-import Menu from '../components/Menu'; 
-import LogoutButton from "../components/LogoutButton";
-import '../styles/myaccount.css';
 import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-// Define animation variants for the parent container and children
-const headerVariant = {
-  hidden: { opacity: 0, fontSize: '20px' },
-  visible: { opacity: 1, fontSize: '35px'}
-};
+// Internal Imports
+import Menu from '../components/Menu';
+import LogoutButton from "../components/LogoutButton";
+import Header from '../components/Header';
+
+// Styles
+import '../styles/myaccount.css';
+
 
 const itemVariants = {
     hidden: { opacity: 0, y: 20 }, // Start from below and hidden
@@ -27,15 +25,7 @@ export default function MyAccount() {
 
       <div>
 
-        <motion.h1
-          className='header'
-          variants={headerVariant}
-          initial="hidden"
-          animate="visible" 
-          transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
-        >
-          <FontAwesomeIcon icon={faUser} /> My Account
-        </motion.h1>
+        <Header title='My Account' icon='user'></Header>
 
         <motion.div
           variants={itemVariants} // Apply variants to the Menu component
