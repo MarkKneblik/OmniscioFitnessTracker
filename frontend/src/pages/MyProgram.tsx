@@ -129,17 +129,22 @@ export default function MyProgram() {
 
         <SimpleBar style={{ height: '100vh', width: '100%' }}>
 
+
             <div>
-    
-                <motion.h1
-                    className='header'
-                    variants={headerVariant}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
-                >
-                    <FontAwesomeIcon icon={faDumbbell} /> My Program
-                </motion.h1>
+
+
+                <div className='header-wrapper'>
+                    <motion.h1
+                        className='header'
+                        variants={headerVariant}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
+                    >
+                        <FontAwesomeIcon icon={faDumbbell} /> My Program
+                    </motion.h1>
+                </div>
+
 
                 <motion.div
                     variants={itemVariants} // Apply variants to the Menu component
@@ -150,23 +155,6 @@ export default function MyProgram() {
                     <Menu></Menu>
                 </motion.div>
 
-                <motion.div style={{display: 'flex'}}
-                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
-                >
-                    {/* Conditionally render list of days of the week */ }
-                    <ul className='day-ul'>
-                        <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
-                    </ul>
-                </motion.div>
 
                 <motion.div
                     style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '30px', marginTop: '100px' }}
@@ -195,9 +183,29 @@ export default function MyProgram() {
                     </button>
                 </motion.div>
 
+
+                <motion.div style={{display: 'flex', alignItems: 'center', justifyContent:'center'}}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
+                >
+                    {/* Conditionally render list of days of the week */ }
+                    <ul className='day-ul'>
+                        <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
+                        <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
+                    </ul>
+                </motion.div>
+
+                
             </div>
 
-        </SimpleBar>
 
+        </SimpleBar>
     );
 }
