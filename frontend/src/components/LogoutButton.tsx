@@ -30,7 +30,7 @@ export default function LogoutButton() {
 
   return (
     <div>
-      <button onClick={handleLogout} className='button'> 
+      <button onClick={handleLogout} className='button-base default-button'> 
         <FontAwesomeIcon icon={faSignOutAlt} className='logout-button-icon' ></FontAwesomeIcon>
          Logout 
       </button>

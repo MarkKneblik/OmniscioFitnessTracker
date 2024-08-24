@@ -5,8 +5,7 @@ import axios from 'axios';
 import config from "../../config.json";
 import Menu from '../components/Menu'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell, faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import '../styles/button.css';
@@ -100,6 +99,8 @@ export default function MyProgram() {
         Sunday: false,
       });
 
+      const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
     // Handle change in selected option
     const handleChange = (selected: any) => {
         setSelectedOption(selected);
@@ -108,21 +109,24 @@ export default function MyProgram() {
     const handleAddDay = () => {
         // Check if selectedOption is not null or undefined
         if (selectedOption && selectedOption.label) {
-          const dayName = selectedOption.label; // Get the name of the selected day
-      
-          setDaysOfProgram(prevDaysOfProgram => ({
+            const dayName = selectedOption.label; // Get the name of the selected day
+        
+            setDaysOfProgram(prevDaysOfProgram => ({
             ...prevDaysOfProgram,
             [dayName]: true // Set the corresponding day to true
-          }));
+            }));
         } 
         else {
-          console.log('No valid day selected');
+            console.log('No valid day selected');
         }
-      };
+    };
 
-
-
-
+    const handleDeleteDay = (dayName:string) => {
+        setDaysOfProgram(prevDaysOfProgram => ({
+            ...prevDaysOfProgram,
+            [dayName]: false // Set the corresponding day to false
+            }));
+    };
 
 
     return (
@@ -172,14 +176,13 @@ export default function MyProgram() {
                     />
                     <button
                         type="submit"
-                        className='button'
+                        className='button-base default-button'
                         style={{
                             marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
                         }}
                         onClick={handleAddDay}
                     >
                             <FontAwesomeIcon icon={faCalendar} /> Add Day
-
                     </button>
                 </motion.div>
 
@@ -192,13 +195,19 @@ export default function MyProgram() {
                 >
                     {/* Conditionally render list of days of the week */ }
                     <ul className='day-ul'>
-                        <li className='day-li'> {daysOfProgram.Monday && <Day dayOfWeek="Monday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Tuesday && <Day dayOfWeek="Tuesday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Wednesday && <Day dayOfWeek="Wednesday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Thursday && <Day dayOfWeek="Thursday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Friday && <Day dayOfWeek="Friday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Saturday && <Day dayOfWeek="Saturday" />} </li>
-                        <li className='day-li'> {daysOfProgram.Sunday && <Day dayOfWeek="Sunday" />} </li>
+                        {daysOfWeek.map((day) => (
+                            <li className='day-li'>
+                                {daysOfProgram[day] && <Day dayOfWeek={day} />}
+                                {daysOfProgram[day] && (
+                                    <button
+                                        className='button-base delete-day-button'
+                                        onClick={() => handleDeleteDay(day)}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} /> Delete Day
+                                    </button>
+                                )}
+                            </li>
+                        ))}
                     </ul>
                 </motion.div>
 
