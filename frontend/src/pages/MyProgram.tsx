@@ -31,7 +31,7 @@ const options = [
     { value: '7', label: 'Sunday' }
 ];
 
-// 
+//  Custom styles for react-select
 const customStyles: StylesConfig<any, false> = {
     container: (provided, state) => ({
         ...provided,       // Default styles
