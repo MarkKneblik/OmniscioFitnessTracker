@@ -1,5 +1,10 @@
+// External Libraries
 import { useState } from 'react';
+
+// Configuration
 import config from "../../config.json";
+
+// Styles
 import "../styles/login.css";
 
 
@@ -25,8 +30,13 @@ export default function Login() {
   };
 
   return (
-    <div className='background' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      
+    <div className='background' 
+      style={{ display: 'flex', 
+      flexDirection: 'column', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '100vh' }}
+    >
       <h1 className='login-header'>Omniscio Fitness Tracker</h1>
 
       <button
@@ -41,7 +51,6 @@ export default function Login() {
       <div>
         <h2 className='attribution'>Designed by Freepik</h2>
       </div>
-
     </div>
   );
 }

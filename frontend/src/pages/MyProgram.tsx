@@ -7,12 +7,14 @@ import 'simplebar-react/dist/simplebar.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import config from "../../config.json";
 
 // Internal Imports
 import Menu from '../components/Menu'; 
 import Day from '../components/Day';
 import Header from '../components/Header';
+
+// Configuration
+import config from "../../config.json";
 
 // Styles
 import '../styles/header.css';
@@ -35,12 +37,12 @@ const options = [
 const customStyles: StylesConfig<any, false> = {
     container: (provided, state) => ({
         ...provided,       // Default styles
-        width: '200px',
+        width: '160px',
         borderColor: state.isFocused ? '#AFB9B5' : '#EBE2D4',
     }),
-    control: (provided, state) => ({
+    control: (provided) => ({
         ...provided,
-        width: '200px',
+        width: '160px',
         borderColor: '#AFB9B5',
         fontFamily: 'Inter',
         borderRadius: '10px', 
@@ -52,8 +54,8 @@ const customStyles: StylesConfig<any, false> = {
         },
     }),
     menu: (provided) => ({
-        ...provided,       // Default styles
-        width: '200px'    
+        ...provided,
+        width: '160px'    
     }),
     option: (provided, state) => ({
         ...provided,
@@ -65,12 +67,12 @@ const customStyles: StylesConfig<any, false> = {
     }),
     placeholder: (provided) => ({
         ...provided,
-        fontFamily: 'Inter', // Apply Inter font to placeholder text
+        fontFamily: 'Inter', 
         textAlign: 'center'
     }),
     singleValue: (provided) => ({
         ...provided,
-        fontFamily: 'Inter', // Apply Inter font to single value text
+        fontFamily: 'Inter', 
         color: '#332727'
     }),
 };
@@ -79,6 +81,8 @@ const itemVariants = {
     hidden: { opacity: 0, y: 20 }, // Start from below and hidden
     visible: { opacity: 1, y: 0 } // End at original position
 };
+
+
 
 
 export default function MyProgram() {
@@ -126,60 +130,65 @@ export default function MyProgram() {
 
 
     return (
-
         <SimpleBar style={{ height: '100vh', width: '100%' }}>
-
             <div>
-
-                <Header title='My Program' icon='dumbbell'></Header>
+                <Header title='My Program' icon='dumbbell' />
 
                 <motion.div
                     variants={itemVariants} // Apply variants to the Menu component
-                    initial="hidden" 
-                    animate="visible" 
-                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }} 
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
-                    <Menu></Menu>
+                    <Menu />
                 </motion.div>
 
-
                 <motion.div
-                    style={{ display: 'flex',  alignItems: 'center', justifyContent:'center', gap: '30px', marginTop: '100px' }}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '30px',
+                        marginTop: '100px'
+                    }}
                     variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
-                    <Select options={options} 
-                        styles={customStyles} 
-                        onChange={handleChange} 
-                        value={selectedOption} 
-                        placeholder='Select a day' 
+                    <Select
+                        options={options}
+                        styles={customStyles}
+                        onChange={handleChange}
+                        value={selectedOption}
+                        placeholder='Select a day'
                         isSearchable={false}
                     />
                     <button
                         type="submit"
                         className='button-base default-button'
-                        style={{
-                            marginTop: '0px', // Adjust the vertical position of the button to match that of Select component
-                        }}
+                        style={{ marginTop: '0px' }} // Adjust the vertical position of the button to match that of Select component
                         onClick={handleAddDay}
                     >
-                            <FontAwesomeIcon icon={faCalendar} /> Add Day
+                        <FontAwesomeIcon icon={faCalendar} /> Add Day
                     </button>
                 </motion.div>
 
-
-                <motion.div style={{display: 'flex', alignItems: 'center', justifyContent:'center'}}
+                <motion.div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
                     variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
                 >
-                    {/* Conditionally render list of days of the week */ }
+                    {/* Conditionally render list of days of the week */}
                     <ul className='day-ul'>
-                        {daysOfWeek.map((day) => (
-                            <li className='day-li'>
+                        {daysOfWeek.map(day => (
+                            <li className='day-li' key={day}>
                                 {daysOfProgram[day] && <Day dayOfWeek={day} />}
                                 {daysOfProgram[day] && (
                                     <button
@@ -193,10 +202,7 @@ export default function MyProgram() {
                         ))}
                     </ul>
                 </motion.div>
-
-                
             </div>
-
         </SimpleBar>
     );
 }
