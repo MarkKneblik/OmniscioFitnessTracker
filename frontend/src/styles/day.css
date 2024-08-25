@@ -1,13 +1,18 @@
-.day-container{
+.day-container {
   display: flex;
-  align-items: flex-start; /* Align items to the left */
-  margin-left: 20px;
+  flex-direction: column; /* Stack elements vertically */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #EBE2D4;
 }
 
-.day-header {
+.header-and-button {
+  display: flex;
+  align-items: flex-start; /* Align items vertically in the center */
+  margin-bottom: 10px; /* Space between the header and the Add Exercise button */
   font-family: Inter;
   color: #332727;
-  font-size: x-large;
   text-align: center;
   margin-left: 10px;
 }
@@ -17,4 +22,14 @@
   padding: 0; 
   margin: 0; 
 }
+
+.day-header {
+  margin-left: 10px; /* Space between the delete button and the header */
+}
+
+
+.add-exercise-button {
+  margin-bottom: 10px; /* Space between the Add Exercise button and the list of exercises */
+}
+
 
