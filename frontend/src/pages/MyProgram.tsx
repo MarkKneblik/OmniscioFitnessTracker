@@ -169,29 +169,25 @@ export default function MyProgram() {
                     style={{
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        overflowY: 'auto',
+                        maxHeight: 'calc(100vh - 200px)'
                     }}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    transition={layoutTransition}
                 >
                     <AnimatePresence>
-                        <motion.ul
-                            className='day-ul'
-                            layout
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            transition={layoutTransition}
-                        >
-                            {daysOfWeek.map(day => (
-                                daysOfProgram[day] && (
-                                    <AnimatePresence>
+                        {daysOfWeek.map(day => (
+                            daysOfProgram[day] && (
+                                <motion.ul
+                                    className='day-ul'
+                                    layout
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    transition={layoutTransition}
+                                    key={day}
+                                >
                                     <motion.li
                                         className='day-li'
-                                        key={day}
                                         layout
                                         variants={itemVariants}
                                         initial="hidden"
@@ -204,10 +200,9 @@ export default function MyProgram() {
                                             onDeleteDay={handleDeleteDay}
                                         />
                                     </motion.li>
-                                    </AnimatePresence>
-                                )
-                            ))}
-                        </motion.ul>
+                                </motion.ul>
+                            )
+                        ))}
                     </AnimatePresence>
                 </motion.div>
             </div>
