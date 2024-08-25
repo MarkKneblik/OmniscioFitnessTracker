@@ -178,11 +178,7 @@ export default function MyProgram() {
                 </motion.div>
 
                 <motion.div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
+                    className='day-container'
                 >
                     <AnimatePresence>
                         {daysOfWeek.map(day => (
