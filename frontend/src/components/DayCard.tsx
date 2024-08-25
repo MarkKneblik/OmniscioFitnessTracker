@@ -29,15 +29,17 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   };
 
   return ( 
-        <div className="day-container">
-          <h2 className="day-header">{dayOfWeek}</h2>
+        <div className="list-of-days-container">
+          <div className='day-container'>
+            <button
+              className="button-base delete-day-button"
+              onClick={handleDeleteDay}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
 
-          <button
-            className="button-base delete-day-button"
-            onClick={handleDeleteDay}
-          >
-            <FontAwesomeIcon icon={faTrash} /> Delete Day
-          </button>
+            <h2 className="day-header">{dayOfWeek}</h2>
+          </div>
         </div>
   );
 };

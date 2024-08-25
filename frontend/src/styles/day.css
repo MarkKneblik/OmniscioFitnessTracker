@@ -1,9 +1,7 @@
-.day-container {
+.day-container{
   display: flex;
-  flex-direction: column;
   align-items: flex-start; /* Align items to the left */
-  justify-content: flex-start; /* Align items to the start vertically */
-  width: auto;
+  margin-left: 20px;
 }
 
 .day-header {
@@ -11,13 +9,12 @@
   color: #332727;
   font-size: x-large;
   text-align: center;
-  margin: 20px 0; /* Add margin for spacing */
+  margin-left: 10px;
 }
 
 .day-ul {
   list-style-type: none; /* Remove bullet points */
   padding: 0; 
   margin: 0; 
-  text-align: left; /* Align text within list items to the left */
 }
 

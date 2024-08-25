@@ -1,5 +1,4 @@
-// External Libraries
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select, { StylesConfig } from 'react-select';
 import SimpleBar from 'simplebar-react';
@@ -7,12 +6,10 @@ import 'simplebar-react/dist/simplebar.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-// Internal Imports
 import Menu from '../components/Menu'; 
 import DayCard from '../components/DayCard';
 import Header from '../components/Header';
 
-// Styles
 import '../styles/header.css';
 import '../styles/button.css';
 import '../styles/day.css';
@@ -80,9 +77,9 @@ const listItemVariants = {
 };
 
 const menuAndDaySelectionVariants = {
-    hidden: { opacity: 0, y: 20 }, // Start from below and hidden
-    visible: { opacity: 1, y: 0 }, // End at original position
-    exit: { opacity: 0, y: 20 } // Start from below and hidden
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 }
 };
 
 // Define the Framer Motion layout transition for the DayCard list items
@@ -95,7 +92,7 @@ const menuAndDaySelectionTransition = {
 
 export default function MyProgram() {
     const [selectedOption, setSelectedOption] = useState<any>(null);
-    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({ // State to track whether days of week exist in this program
+    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({
         Monday: false,
         Tuesday: false,
         Wednesday: false,
@@ -107,7 +104,7 @@ export default function MyProgram() {
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-    const handleChange = (selected: any) => {   // Handle change in selected option of dropdown
+    const handleChange = (selected: any) => {
         setSelectedOption(selected);
     };
 
@@ -177,40 +174,35 @@ export default function MyProgram() {
                     </button>
                 </motion.div>
 
-                <motion.div
-                    className='day-container'
+                <motion.ul
+                    className='day-ul'
+                    variants={menuAndDaySelectionVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    transition={layoutTransition}
                 >
                     <AnimatePresence>
                         {daysOfWeek.map(day => (
                             daysOfProgram[day] && (
-                                <motion.ul
-                                    className='day-ul'
-                                    layout
+                                <motion.li
+                                    className='day-card-container'
+                                    key={day}
+                                    variants={listItemVariants}
                                     initial="hidden"
                                     animate="visible"
                                     exit="exit"
                                     transition={layoutTransition}
-                                    key={day}
                                 >
-                                    <motion.li
-                                        className='day-li'
-                                        layout
-                                        variants={listItemVariants}
-                                        initial="hidden"
-                                        animate="visible"
-                                        exit="exit"
-                                        transition={layoutTransition}
-                                    >
-                                        <DayCard
-                                            dayOfWeek={day}
-                                            onDeleteDay={handleDeleteDay}
-                                        />
-                                    </motion.li>
-                                </motion.ul>
+                                    <DayCard
+                                        dayOfWeek={day}
+                                        onDeleteDay={handleDeleteDay}
+                                    />
+                                </motion.li>
                             )
                         ))}
                     </AnimatePresence>
-                </motion.div>
+                </motion.ul>
             </div>
         </SimpleBar>
     );
