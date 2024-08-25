@@ -1,7 +1,7 @@
 // External Libraries
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import '../styles/day.css';
@@ -36,6 +36,13 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
               onClick={handleDeleteDay}
             >
               <FontAwesomeIcon icon={faTrash} />
+            </button>
+
+            <button
+              className="button-base add-exercise-button"
+              onClick={handleDeleteDay}
+            >
+              <FontAwesomeIcon icon={faPlus} /> Add Exercise
             </button>
 
             <h2 className="day-header">{dayOfWeek}</h2>
