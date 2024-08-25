@@ -1,4 +1,3 @@
-/* dayheader.css */
 .day-header {
   font-family: Inter;
   color: #332727;
@@ -12,9 +11,12 @@
   padding: 0; /* Remove default padding */
   margin: 0; /* Remove default margin */
   text-align: center; /* Center align text inside the list items */
+  width: 100%;
 }
 
 .day-li {
   margin-bottom: 10px; /* Space between list items */
   display: block;
+  flex: 0 1 auto; /* Default */
+  margin-right: 43px;
 }

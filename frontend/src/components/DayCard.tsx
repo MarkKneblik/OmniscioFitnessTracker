@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +17,6 @@ interface DayCardProps {
 
 const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [isVisible, setIsVisible] = useState(true);
 
   const handleAddExercise = () => {
     const newExercise = { name: `Exercise ${exercises.length + 1}` };
