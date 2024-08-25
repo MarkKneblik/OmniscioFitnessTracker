@@ -4,7 +4,6 @@ import '../styles/button.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 export default function LogoutButton() {
 
   const handleLogout = async () => {

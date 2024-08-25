@@ -1,3 +1,4 @@
+// External Libraries
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select, { StylesConfig } from 'react-select';
@@ -14,9 +15,9 @@ import Header from '../components/Header';
 // Styles
 import '../styles/header.css';
 import '../styles/button.css';
-import '../styles/daycard.css';
+import '../styles/day.css';
 
-// Configuration for react-select dropdown
+// Options for react-select dropdown
 const options = [
     { value: '1', label: 'Monday' },
     { value: '2', label: 'Tuesday' },
@@ -72,18 +73,29 @@ const customStyles: StylesConfig<any, false> = {
 };
 
 // Variants for animations
-const itemVariants = {
+const listItemVariants = {
     hidden: { opacity: 0, height: 0, scaleY: 0 },
     visible: { opacity: 1, height: 'auto', scaleY: 1 },
     exit: { opacity: 0, height: 0, scaleY: 0 }
 };
 
-// Define the layout transition once
+const menuAndDaySelectionVariants = {
+    hidden: { opacity: 0, y: 20 }, // Start from below and hidden
+    visible: { opacity: 1, y: 0 }, // End at original position
+    exit: { opacity: 0, y: 20 } // Start from below and hidden
+};
+
+// Define the Framer Motion layout transition for the DayCard list items
 const layoutTransition = { type: 'spring', stiffness: 300, damping: 25 };
+
+// Define the Framer Motion transition for the menu Cheeseburger and Add Day button and dropdown
+const menuAndDaySelectionTransition = {
+ delay: 0.5, duration: 1, ease: 'easeInOut'
+} ;
 
 export default function MyProgram() {
     const [selectedOption, setSelectedOption] = useState<any>(null);
-    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({
+    const [daysOfProgram, setDaysOfProgram] = useState<{ [key: string]: boolean }>({ // State to track whether days of week exist in this program
         Monday: false,
         Tuesday: false,
         Wednesday: false,
@@ -95,7 +107,7 @@ export default function MyProgram() {
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-    const handleChange = (selected: any) => {
+    const handleChange = (selected: any) => {   // Handle change in selected option of dropdown
         setSelectedOption(selected);
     };
 
@@ -124,11 +136,11 @@ export default function MyProgram() {
                 <Header title='My Program' icon='dumbbell' />
 
                 <motion.div
-                    variants={itemVariants}
+                    variants={menuAndDaySelectionVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    transition={layoutTransition}
+                    transition={menuAndDaySelectionTransition}
                 >
                     <Menu />
                 </motion.div>
@@ -141,11 +153,11 @@ export default function MyProgram() {
                         gap: '30px',
                         marginTop: '100px'
                     }}
-                    variants={itemVariants}
+                    variants={menuAndDaySelectionVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    transition={layoutTransition}
+                    transition={menuAndDaySelectionTransition}
                 >
                     <Select
                         options={options}
@@ -169,7 +181,7 @@ export default function MyProgram() {
                     style={{
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        justifyContent: 'center'
                     }}
                 >
                     <AnimatePresence>
@@ -187,7 +199,7 @@ export default function MyProgram() {
                                     <motion.li
                                         className='day-li'
                                         layout
-                                        variants={itemVariants}
+                                        variants={listItemVariants}
                                         initial="hidden"
                                         animate="visible"
                                         exit="exit"

@@ -1,8 +1,13 @@
+// External Libraries
 import React, { useState, useCallback } from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
+
+// Internal Imports
 import Cheeseburger from './CheeseBurger';
 import NavBar from '../pages/NavBar';
+
+// Styles
 import '../styles/navbar.css';
 
 const Menu: React.FC = () => {
@@ -32,7 +37,6 @@ const Menu: React.FC = () => {
           isToggled={isOpen}      // This state will match that of the Drawer to ensure they are synchronized
           onClick={toggleDrawer}
         />
-
       </div>
 
       <Drawer
@@ -45,9 +49,7 @@ const Menu: React.FC = () => {
           backgroundColor: '#EBE2D4'
         }}
       >
-
           <NavBar onMeasureWidth={handleMeasureWidth} /> {/* Pass the callback to NavBar */}
-
       </Drawer>
     </div>
   );

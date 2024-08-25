@@ -1,3 +1,4 @@
+// External Libraries
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -26,8 +27,6 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   const handleDeleteDay = () => {
       onDeleteDay(dayOfWeek);
   };
-
-
 
   return ( 
         <div className="day-container">
