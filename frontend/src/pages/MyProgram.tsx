@@ -83,7 +83,7 @@ const menuAndDaySelectionVariants = {
 };
 
 // Define the Framer Motion layout transition for the DayCard list items
-const layoutTransition = { type: 'spring', stiffness: 300, damping: 25 };
+const layoutTransition = { type: 'spring', stiffness: 200, damping: 50, mass:2 };
 
 // Define the Framer Motion transition for the menu Cheeseburger and Add Day button and dropdown
 const menuAndDaySelectionTransition = {
