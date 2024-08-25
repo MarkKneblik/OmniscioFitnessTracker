@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
-import '../styles/daycard.css';
+import '../styles/day.css';
 
 // Types
 interface Exercise {

@@ -1,0 +1,15 @@
+.day-header {
+  font-family: Inter;
+  color: #332727;
+  font-size: x-large;
+  text-align: center;
+  margin: 20px 0; /* Add margin for spacing */
+}
+
+.day-ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; 
+  margin: 0; 
+  text-align: center;
+  width: 100%;
+}
