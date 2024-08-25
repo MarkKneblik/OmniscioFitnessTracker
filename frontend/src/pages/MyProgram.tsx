@@ -170,8 +170,6 @@ export default function MyProgram() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        overflowY: 'auto',
-                        maxHeight: 'calc(100vh - 200px)'
                     }}
                 >
                     <AnimatePresence>
