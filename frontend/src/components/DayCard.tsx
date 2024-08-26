@@ -18,15 +18,22 @@ interface DayCardProps {
 }
 
 const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [exercises, setExercises] = useState<Exercise[]>([]); // List of exercises
+
+  const [inputText, setInputText] = useState(''); // Input text for add exercise form
 
   const handleAddExercise = () => {
-    const newExercise = { name: `Exercise ${exercises.length + 1}` };
-    setExercises([...exercises, newExercise]);
+    const newExercise = { name: inputText };
+    setExercises([...exercises, newExercise]); // Add input text as new exercise to exercises array
+    setInputText(''); // Clear input text after adding exercise
   };
 
   const handleDeleteDay = () => {
       onDeleteDay(dayOfWeek);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
   };
 
   return (
@@ -56,7 +63,9 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
               <input 
                 id="exercise-name" 
                 type="text" 
+                value={inputText}
                 placeholder="Enter exercise name"
+                onChange={handleInputChange}
               />
             </label>
           </form>
@@ -65,6 +74,5 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
     </div>
   );
 };
-
 
 export default DayCard;
