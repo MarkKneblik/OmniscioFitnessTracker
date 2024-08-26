@@ -36,3 +36,7 @@
     border-color: #8A9C96; /* Slightly darker border color on hover */
     transform: scale(1.05); /* Slightly scale up the button */
 }
+
+.exercises-ul{
+    list-style-type: none;
+}

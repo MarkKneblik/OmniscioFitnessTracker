@@ -1,3 +1,4 @@
+// External Libraries
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select, { StylesConfig } from 'react-select';
@@ -6,10 +7,12 @@ import 'simplebar-react/dist/simplebar.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
+// Internal Imports
 import Menu from '../components/Menu'; 
 import DayCard from '../components/DayCard';
 import Header from '../components/Header';
 
+// Styles
 import '../styles/header.css';
 import '../styles/button.css';
 import '../styles/day.css';

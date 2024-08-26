@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {motion, AnimatePresence } from 'framer-motion'
+
+// Internal Imports
+import ExerciseCard from './ExerciseCard';
 
 // Styles
 import '../styles/day.css';
@@ -32,6 +36,10 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
       onDeleteDay(dayOfWeek);
   };
 
+  const handleDeleteExercise = (name: string) => {
+    setExercises(exercises.filter((exercise) => exercise.name !== name)); // Filter out exercise that matches the given name
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
@@ -49,6 +57,21 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
           
           <h2 className="day-header">{dayOfWeek}</h2>
         </div>
+
+        <motion.ul className='exercises-ul'>
+        {exercises.map((exercise, index) => (
+              <motion.li key={index} className='exercise-item'>
+                <button
+                  className="button-base delete-exercise-button"
+                  onClick={() => handleDeleteExercise(exercise.name)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+
+                {exercise.name}
+              </motion.li>
+            ))}
+        </motion.ul>
 
         <div className='add-exercise-container'>
           <button
