@@ -7,14 +7,14 @@
   background-color: #EBE2D4;
 }
 
-.header-and-button {
+.header-and-delete-button {
   display: flex;
-  align-items: flex-start; /* Align items vertically in the center */
-  margin-bottom: 10px; /* Space between the header and the Add Exercise button */
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: center;
   font-family: Inter;
+  font-size: 20px;
   color: #332727;
   text-align: center;
-  margin-left: 10px;
 }
 
 .day-ul {

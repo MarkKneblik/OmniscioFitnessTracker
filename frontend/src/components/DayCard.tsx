@@ -61,7 +61,7 @@ const DayCard: React.FC<DayCardProps> = ( { dayOfWeek, onDeleteDay } ) => {
   return (
     <div>
       <div className='day-container'>
-        <div className="header-and-button">
+        <div className="header-and-delete-button">
           <button
             className="button-base delete-day-button"
             onClick={handleDeleteDay}
