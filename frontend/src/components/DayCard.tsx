@@ -21,7 +21,7 @@ interface DayCardProps {
   onDeleteDay: (dayOfWeek: string) => void; // Callback to notify parent of state change
 }
 
-const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
+const DayCard: React.FC<DayCardProps> = ( { dayOfWeek, onDeleteDay } ) => {
   const [exercises, setExercises] = useState<Exercise[]>([]); // List of exercises
 
   const [inputText, setInputText] = useState(''); // Input text for add exercise form

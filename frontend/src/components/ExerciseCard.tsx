@@ -10,16 +10,23 @@ import '../styles/exercise.css';
 // Types
 interface ExerciseCardProps {
   name: string;
+  onDeleteExercise: (name: string) => void; // Callback to notify parent of state change
 }
 
-const ExerciseCard: React.FC<ExerciseCardProps> = ({ name }) => {
+const ExerciseCard: React.FC<ExerciseCardProps> = ( { name, onDeleteExercise } ) => {
+
+    const handleDeleteExercise = () => {
+        onDeleteExercise(name);
+    };
 
 
-  return (
+
+
+    return (
     <div>
 
     </div>
-  );
+    );
 };
 
 export default ExerciseCard;
