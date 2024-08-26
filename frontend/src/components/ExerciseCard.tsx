@@ -14,17 +14,20 @@ interface ExerciseCardProps {
 }
 
 const ExerciseCard: React.FC<ExerciseCardProps> = ( { name, onDeleteExercise } ) => {
-
     const handleDeleteExercise = () => {
         onDeleteExercise(name);
     };
 
-
-
-
     return (
     <div>
+      <button
+        className="button-base delete-exercise-button"
+        onClick={() => handleDeleteExercise()}
+      >
+        <FontAwesomeIcon icon={faTrash} />
+      </button>
 
+      {name}
     </div>
     );
 };
