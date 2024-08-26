@@ -5,6 +5,7 @@ import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // Styles
 import '../styles/day.css';
+import '../styles/exercise.css';
 
 // Types
 interface Exercise {
@@ -29,7 +30,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   };
 
   return (
-    <div className="list-of-days-container">
+    <div>
       <div className='day-container'>
         <div className="header-and-button">
           <button
@@ -42,14 +43,24 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
           <h2 className="day-header">{dayOfWeek}</h2>
         </div>
 
-        <button
-          className="button-base add-exercise-button"
-          onClick={handleAddExercise}
-        >
-          <FontAwesomeIcon icon={faPlus} /> Add Exercise
-        </button>
+        <div className='add-exercise-container'>
+          <button
+            className="button-base add-exercise-button"
+            onClick={handleAddExercise}
+          >
+            <FontAwesomeIcon icon={faPlus} /> Add Exercise
+          </button>
 
-
+          <form className='add-exercise-form'>
+            <label htmlFor="exercise-name">
+              <input 
+                id="exercise-name" 
+                type="text" 
+                placeholder="Enter exercise name"
+              />
+            </label>
+          </form>
+        </div>
       </div>
     </div>
   );

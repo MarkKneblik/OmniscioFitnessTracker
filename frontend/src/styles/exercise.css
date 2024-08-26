@@ -1,0 +1,38 @@
+.add-exercise-container {
+    display: flex;
+    align-items: center; /* Center align items vertically */
+}
+
+.add-exercise-form {
+    margin-left: 20px;
+    margin-top: 25px;
+    width: 160px; /* Width of the form */
+    border-color: #AFB9B5;
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    text-align: center;
+    box-shadow: none;
+    box-sizing: border-box; /* Include padding and border in width and height */
+    background-color: white; /* White background for the form */
+    margin-bottom: 18px;
+    color: #332727;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Add border-color transition */
+}
+
+.add-exercise-form input[type="text"] {
+    width: 100%; /* Make input take up the full width of the form */
+    padding: 5px; /* Add some padding inside the input field */
+    border: none; /* Remove default border of input field */
+    border-radius: 5px; 
+    box-sizing: border-box; /* Ensure padding is included in the input's width */
+    font-family: 'Inter';
+    text-align: center;
+    outline: none;
+    color: #332727;
+}
+
+.add-exercise-form:hover {
+    border-color: #8A9C96; /* Slightly darker border color on hover */
+    transform: scale(1.05); /* Slightly scale up the button */
+}

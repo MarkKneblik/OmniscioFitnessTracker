@@ -43,7 +43,7 @@ const customStyles: StylesConfig<any, false> = {
         boxShadow: 'none',
         '&:hover': {
             borderColor: '#8A9C96',
-        },
+        }
     }),
     menu: (provided) => ({
         ...provided,
