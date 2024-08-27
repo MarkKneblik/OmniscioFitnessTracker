@@ -6,7 +6,7 @@
   border-radius: 10px;
   background-color: #ebe2d4;
   margin-bottom: 20px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.18), 0 1px 30px rgba(0, 0, 0, 0.36);
+  box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.18);
   transition: background-color 0.3s ease, transform 0.2s ease; /* Add background color transition */
 }
 
