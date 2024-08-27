@@ -1,9 +1,9 @@
 .day-card-container {
+.day-card-container {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   background-color: #ebe2d4;
   margin-bottom: 20px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
