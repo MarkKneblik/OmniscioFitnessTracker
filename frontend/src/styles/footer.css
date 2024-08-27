@@ -1,0 +1,11 @@
+.footer {
+  position: fixed; /* Fixed position relative to the viewport */
+  bottom: 0; /* Align to the bottom of the viewport */
+  left: 0; /* Align to the left edge of the viewport */
+  width: 100%; /* Full width of the viewport */
+  background-color: #282c34; /* Background color */
+  color: white; /* Text color */
+  text-align: center; /* Center-align the text */
+  padding: 20px; /* Padding for spacing */
+  z-index: -1; /* Ensure the footer is above other content but not too high */
+}

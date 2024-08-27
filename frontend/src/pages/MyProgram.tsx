@@ -11,6 +11,10 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import Menu from "../components/Menu";
 import DayCard from "../components/DayCard";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+// Config
+import config from "../../config.json";
 
 // Styles
 import "../styles/header.css";
@@ -30,22 +34,21 @@ const options = [
 
 // Custom styles for react-select
 const customStyles: StylesConfig<any, false> = {
-  container: (provided, state) => ({
+  container: (provided) => ({
     ...provided,
     width: "160px",
-    borderColor: state.isFocused ? "#AFB9B5" : "#EBE2D4",
   }),
   control: (provided) => ({
     ...provided,
     width: "160px",
-    borderColor: "#AFB9B5",
+    borderColor: `${config.colorPalette.blueGrey}`,
     fontFamily: "Inter",
     borderRadius: "10px",
     borderWidth: "3px",
     textAlign: "center",
     boxShadow: "none",
     "&:hover": {
-      borderColor: "#8A9C96",
+      borderColor: `${config.colorPalette.darkBlueGrey}`,
     },
   }),
   menu: (provided) => ({
@@ -55,8 +58,10 @@ const customStyles: StylesConfig<any, false> = {
   option: (provided, state) => ({
     ...provided,
     fontFamily: "Inter",
-    backgroundColor: state.isFocused ? "#AFB9B5" : "white",
-    color: "#332727",
+    backgroundColor: state.isFocused
+      ? `${config.colorPalette.blueGrey}`
+      : "white",
+    color: `${config.colorPalette.navy}`,
     cursor: "pointer",
     textAlign: "center",
   }),
@@ -68,7 +73,7 @@ const customStyles: StylesConfig<any, false> = {
   singleValue: (provided) => ({
     ...provided,
     fontFamily: "Inter",
-    color: "#332727",
+    color: `${config.colorPalette.navy}`,
   }),
 };
 
@@ -221,6 +226,8 @@ export default function MyProgram() {
             )}
           </AnimatePresence>
         </motion.ul>
+
+        <Footer></Footer>
       </div>
     </SimpleBar>
   );
