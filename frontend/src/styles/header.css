@@ -10,5 +10,5 @@
 /* This class wraps the header so that we can keep the position of the header absolute */
 .header-wrapper {
   position: relative;
-  height: 1px; 
+  height: 1px;
 }

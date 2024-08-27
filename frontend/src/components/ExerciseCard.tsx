@@ -1,11 +1,11 @@
 // External Libraries
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // Styles
-import '../styles/day.css';
-import '../styles/exercise.css';
+import "../styles/day.css";
+import "../styles/exercise.css";
 
 // Types
 interface ExerciseCardProps {
@@ -13,12 +13,15 @@ interface ExerciseCardProps {
   onDeleteExercise: (name: string) => void; // Callback to notify parent of state change
 }
 
-const ExerciseCard: React.FC<ExerciseCardProps> = ( { name, onDeleteExercise } ) => {
-    const handleDeleteExercise = () => {
-        onDeleteExercise(name);
-    };
+const ExerciseCard: React.FC<ExerciseCardProps> = ({
+  name,
+  onDeleteExercise,
+}) => {
+  const handleDeleteExercise = () => {
+    onDeleteExercise(name);
+  };
 
-    return (
+  return (
     <div>
       <button
         className="button-base delete-exercise-button"
@@ -29,9 +32,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ( { name, onDeleteExercise } )
 
       {name}
     </div>
-    );
+  );
 };
 
 export default ExerciseCard;
-
-

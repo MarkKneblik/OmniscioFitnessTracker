@@ -1,41 +1,41 @@
- /* Formatting for the entire navbar */
+/* Formatting for the entire navbar */
 .navbar {
-    background-color: #EBE2D4;
-    padding-top: 20%;
-  }
-  
-  /* Formatting for the list of links */
-  .nav-list {
-    list-style: none;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0; 
-    margin: 0; 
-    padding-top: 5%;
-  }
-  
-  /* Formatting for list items */
-  .nav-list li {
-    flex: 1; /* each item takes up equal space */
-    text-align: left; 
-    padding: 6%;
-    white-space: nowrap;
-    padding-left: 20px;
-  }
-  
-  /* Style for Link components */
-  .nav-list a {
-    text-decoration: none; 
-    color: #332727; 
-    padding: 10px; 
-    transition: background-color 0.3s; 
-    border-radius: 4px; /* rounded corners */
-    font-family: Inter;
-    font-weight: bold;
-    font-size: x-large;
-  }
-  
-  /* Hover effect for the Link components */
-  .nav-list a:hover {
-    background-color: #AFB9B5; 
-  }
+  background-color: #ebe2d4;
+  padding-top: 20%;
+}
+
+/* Formatting for the list of links */
+.nav-list {
+  list-style: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  padding-top: 5%;
+}
+
+/* Formatting for list items */
+.nav-list li {
+  flex: 1; /* each item takes up equal space */
+  text-align: left;
+  padding: 6%;
+  white-space: nowrap;
+  padding-left: 20px;
+}
+
+/* Style for Link components */
+.nav-list a {
+  text-decoration: none;
+  color: #332727;
+  padding: 10px;
+  transition: background-color 0.3s;
+  border-radius: 4px; /* rounded corners */
+  font-family: Inter;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+/* Hover effect for the Link components */
+.nav-list a:hover {
+  background-color: #afb9b5;
+}

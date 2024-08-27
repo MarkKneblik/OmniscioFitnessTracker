@@ -1,44 +1,44 @@
 .button-base {
-    background-color: #CC9E8E; 
-    border: 3px solid #AFB9B5; 
-    color: #332727;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 10px;
-    font-family: 'Inter';
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Add border-color transition */
+  background-color: #cc9e8e;
+  border: 3px solid #afb9b5;
+  color: #332727;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  font-family: "Inter";
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    border-color 0.3s ease; /* Add border-color transition */
 }
 
 .button-base:hover {
-    background-color: #B87B6D; /* Change background color on hover */
-    border-color: #8A9C96; /* Slightly darker border color on hover */
-    transform: scale(1.05); /* Slightly scale up the button */
+  background-color: #b87b6d; /* Change background color on hover */
+  border-color: #8a9c96; /* Slightly darker border color on hover */
+  transform: scale(1.05); /* Slightly scale up the button */
 }
 
-.default-button{
-    font-size: 16px;
-    margin-top: 100px;
-    padding: 15px 32px;
+.default-button {
+  font-size: 16px;
+  margin-top: 100px;
+  padding: 15px 32px;
 }
 
 .default-button-icon {
-    margin-right: 8px;
-    color: #332727;
-    font-size: 16px;
+  margin-right: 8px;
+  color: #332727;
+  font-size: 16px;
 }
 
 .delete-day-button {
-    font-size: 14px;
-    padding: 6px 13px;
+  font-size: 14px;
+  padding: 6px 13px;
 }
 
 .add-exercise-button {
-    font-size: 14px;
-    margin-top: 17px;
-    margin-left: 10px;
-    padding: 6px 13px;
-    width: 138px;
+  font-size: 14px;
+  margin-top: 17px;
+  margin-left: 10px;
+  padding: 6px 13px;
+  width: 138px;
 }
-

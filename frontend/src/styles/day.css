@@ -4,7 +4,7 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  background-color: #EBE2D4;
+  background-color: #ebe2d4;
 }
 
 .header-and-delete-button {
@@ -19,8 +19,8 @@
 
 .day-ul {
   list-style-type: none; /* Remove bullet points */
-  padding: 0; 
-  margin: 0; 
+  padding: 0;
+  margin: 0;
   margin-left: 45px;
 }
 
@@ -31,5 +31,3 @@
 .add-exercise-button {
   margin-bottom: 10px; /* Space between the Add Exercise button and the list of exercises */
 }
-
-

@@ -1,8 +1,3 @@
-
-
 export default function MyTrends() {
-  return (
-    <>
-    </>
-  );
+  return <></>;
 }
