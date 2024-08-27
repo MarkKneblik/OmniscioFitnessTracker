@@ -207,7 +207,6 @@ export default function MyProgram() {
               (day) =>
                 daysOfProgram[day] && (
                   <motion.li
-                    className="day-card-container"
                     key={day}
                     variants={listItemVariants}
                     initial="hidden"
