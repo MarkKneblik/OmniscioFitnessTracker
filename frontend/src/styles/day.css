@@ -1,12 +1,18 @@
 .day-card-container {
-.day-card-container {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   padding: 10px;
   border: 1px solid #ddd;
+  border-radius: 10px;
   background-color: #ebe2d4;
   margin-bottom: 20px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.18), 0 1px 30px rgba(0, 0, 0, 0.36);
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add background color transition */
+}
+
+.day-card-container:hover {
+  background-color: #d6c2b8;
+  transform: scale(1.05);
 }
 
 .header-and-delete-button {
