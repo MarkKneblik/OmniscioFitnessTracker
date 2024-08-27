@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   padding: 10px;
-  border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #ebe2d4;
   margin-bottom: 20px;
