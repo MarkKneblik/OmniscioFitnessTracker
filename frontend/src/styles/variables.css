@@ -1,0 +1,11 @@
+/* This file holds the variables for the colors of the color palette so we can use them by name for readibility*/
+
+:root {
+  --color-navy: #282c34;
+  --color-beige: #ebe2d4;
+  --color-very-light-pink: #d6c2b8;
+  --color-light-pink: #cc9e8e;
+  --color-dark-pink: #b87b6d;
+  --color-blue-grey: #afb9b5;
+  --color-dark-blue-grey: #8a9c96;
+}

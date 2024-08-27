@@ -1,16 +1,19 @@
+/* Import variables for color names */
+@import "./variables.css";
+
 .day-card-container {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   padding: 10px;
   border-radius: 10px;
-  background-color: #ebe2d4;
+  background-color: var(--color-beige);
   margin-bottom: 20px;
   box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.18);
   transition: background-color 0.3s ease, transform 0.2s ease; /* Add background color transition */
 }
 
 .day-card-container:hover {
-  background-color: #d6c2b8;
+  background-color: var(--color-very-light-pink);
   transform: scale(1.05);
 }
 
@@ -20,7 +23,7 @@
   justify-content: center;
   font-family: Inter;
   font-size: 20px;
-  color: #332727;
+  color: var(--color-navy);
   text-align: center;
 }
 

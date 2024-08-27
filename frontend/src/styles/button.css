@@ -1,7 +1,10 @@
+/* Import variables for color names */
+@import "./variables.css";
+
 .button-base {
-  background-color: #cc9e8e;
-  border: 3px solid #afb9b5;
-  color: #332727;
+  background-color: var(--color-light-pink);
+  border: 3px solid var(--color-blue-grey);
+  color: var(--color-navy);
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -26,7 +29,7 @@
 
 .default-button-icon {
   margin-right: 8px;
-  color: #332727;
+  color: var(--color-navy);
   font-size: 16px;
 }
 

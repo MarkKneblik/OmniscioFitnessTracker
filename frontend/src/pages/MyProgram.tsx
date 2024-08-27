@@ -20,6 +20,7 @@ import config from "../../config.json";
 import "../styles/header.css";
 import "../styles/button.css";
 import "../styles/day.css";
+import "../styles/container.css";
 
 // Options for react-select dropdown
 const options = [
@@ -155,8 +156,6 @@ export default function MyProgram() {
   return (
     <SimpleBar style={{ height: "100vh", width: "100%" }}>
       <div>
-        <Header title="My Program" icon="dumbbell" />
-
         <motion.div
           variants={menuAndDaySelectionVariants}
           initial="hidden"
@@ -166,6 +165,10 @@ export default function MyProgram() {
         >
           <Menu />
         </motion.div>
+      </div>
+
+      <div className="page-container">
+        <Header title="My Program" icon="dumbbell" />
 
         <motion.div
           style={{
@@ -226,8 +229,6 @@ export default function MyProgram() {
             )}
           </AnimatePresence>
         </motion.ul>
-
-        <Footer></Footer>
       </div>
     </SimpleBar>
   );

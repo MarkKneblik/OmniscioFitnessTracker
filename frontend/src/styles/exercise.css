@@ -1,3 +1,6 @@
+/* Import variables for color names */
+@import "./variables.css";
+
 .add-exercise-container {
   display: flex;
   align-items: center; /* Center align items vertically */
@@ -7,7 +10,7 @@
   margin-left: 20px;
   margin-top: 25px;
   width: 160px; /* Width of the form */
-  border-color: #afb9b5;
+  border-color: var(--color-blue-grey);
   border-radius: 10px;
   border-width: 3px;
   border-style: solid;
@@ -16,7 +19,7 @@
   box-sizing: border-box; /* Include padding and border in width and height */
   background-color: white; /* White background for the form */
   margin-bottom: 18px;
-  color: #332727;
+  color: var(--color-navy);
   transition: background-color 0.3s ease, transform 0.2s ease,
     border-color 0.3s ease; /* Add border-color transition */
 }
@@ -30,11 +33,13 @@
   font-family: "Inter";
   text-align: center;
   outline: none;
-  color: #332727;
+  color: var(--color-navy);
 }
 
 .add-exercise-form:hover {
-  border-color: #8a9c96; /* Slightly darker border color on hover */
+  border-color: var(
+    --color-dark-blue-grey
+  ); /* Slightly darker border color on hover */
   transform: scale(1.05); /* Slightly scale up the button */
 }
 

@@ -1,0 +1,13 @@
+/* Import variables for color names */
+@import "./variables.css";
+
+.page-container {
+  background-color: var(--color-beige);
+  min-height: 100vh; /* Ensures container is at least as tall as the viewport */
+  width: 80vw;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}

@@ -1,6 +1,9 @@
+/* Import variables for color names */
+@import "./variables.css";
+
 .header {
   font-family: Inter;
-  color: #332727;
+  color: var(--color-navy);
   position: absolute;
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Center horizontally */

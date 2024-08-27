@@ -7,6 +7,9 @@ import "react-modern-drawer/dist/index.css";
 import Cheeseburger from "./CheeseBurger";
 import NavBar from "../pages/NavBar";
 
+// Configuration
+import config from "../../config.json";
+
 // Styles
 import "../styles/navbar.css";
 
@@ -29,10 +32,11 @@ const Menu: React.FC = () => {
         style={{
           position: "fixed",
           zIndex: 1000, // Z-index is larger than that of the Drawer so the Cheeseburger icon always overlays the Drawer
+          marginTop: 29,
         }}
       >
         <Cheeseburger
-          color={"#303030"}
+          color={config.colorPalette.beige}
           width={40}
           height={40}
           isToggled={isOpen} // This state will match that of the Drawer to ensure they are synchronized
@@ -47,7 +51,7 @@ const Menu: React.FC = () => {
         style={{
           width: drawerWidth,
           zIndex: 999, // Z-index is smaller than that of the Cheeseburger icon so the Drawer does not cover up the Cheeseburger icon
-          backgroundColor: "#EBE2D4",
+          backgroundColor: `${config.colorPalette.navy}`,
         }}
       >
         <NavBar onMeasureWidth={handleMeasureWidth} />{" "}

@@ -1,6 +1,8 @@
-/* Formatting for the entire navbar */
+/* Import variables for color names */
+@import "./variables.css";
+
 .navbar {
-  background-color: #ebe2d4;
+  background-color: var(--color-navy);
   padding-top: 20%;
 }
 
@@ -26,7 +28,7 @@
 /* Style for Link components */
 .nav-list a {
   text-decoration: none;
-  color: #332727;
+  color: var(--color-beige);
   padding: 10px;
   transition: background-color 0.3s;
   border-radius: 4px; /* rounded corners */
@@ -37,5 +39,5 @@
 
 /* Hover effect for the Link components */
 .nav-list a:hover {
-  background-color: #afb9b5;
+  background-color: var(--color-dark-pink);
 }

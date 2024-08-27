@@ -16,7 +16,7 @@ export default function Login() {
 
   const buttonStyle = {
     backgroundColor: isHovered ? "#B87B6D" : "#CC9E8E", // Change background color on hover
-    color: "#332727",
+    color: "#282c34",
     padding: "10px 20px",
     borderRadius: "10px",
     border: `3px solid ${isHovered ? "#9AA6A2" : "#AFB9B5"}`,
