@@ -21,6 +21,7 @@ import "../styles/header.css";
 import "../styles/button.css";
 import "../styles/day.css";
 import "../styles/container.css";
+import "../styles/simplebar.css";
 
 // Options for react-select dropdown
 const options = [
@@ -154,7 +155,13 @@ export default function MyProgram() {
   };
 
   return (
-    <SimpleBar style={{ height: "100vh", width: "100%" }}>
+    <SimpleBar
+      style={{
+        height: "100vh",
+        width: "100%",
+      }}
+      className="simplebar.css"
+    >
       <div>
         <motion.div
           variants={menuAndDaySelectionVariants}

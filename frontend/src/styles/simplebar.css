@@ -1,0 +1,18 @@
+/* Import variables for color names */
+@import "./variables.css";
+
+.simplebar-scrollbar::before {
+  background: var(--color-beige); /* Scrollbar color */
+}
+
+.simplebar-track {
+  background: var(--color-navy); /* Background color of the scrollbar track */
+}
+
+.simplebar-scrollbar {
+  border-radius: 10px; /* Round the scrollbar thumb */
+}
+
+.simplebar-track {
+  border-radius: 10px; /* Round the scrollbar track */
+}
