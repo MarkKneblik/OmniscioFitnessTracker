@@ -14,6 +14,7 @@ import "../styles/exercise.css";
 // Types
 interface Exercise {
   name: string;
+  index: number;
 }
 
 interface DayCardProps {
@@ -54,9 +55,9 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
     onDeleteDay(dayOfWeek);
   };
 
-  const handleDeleteExercise = (name: string) => {
+  const handleDeleteExercise = (index: number) => {
     const updatedExercises = exercises.filter(
-      (exercise) => exercise.name !== name
+      (exercise) => exercise.index !== index
     );
     setExercises(updatedExercises);
   };
