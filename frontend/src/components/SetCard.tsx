@@ -1,27 +1,33 @@
 //External Libraries
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-interface SetCardProps {
-  index: number;
-  onDeleteSet: (index: number) => void; // Callback to notify parent of state change
-  onAddSet: (index: number) => void; // Callback to notify parent of state change
-}
+// Styles
+import "../styles/set.css";
 
-const SetCard: React.FC<SetCardProps> = ({ index, onDeleteSet, onAddSet }) => {
-  const handleDeleteSet = () => {
-    onDeleteSet(index);
-  };
+interface SetCardProps {}
 
-  const handleAddSet = () => {
-    onAddSet(index);
+const SetCard: React.FC<SetCardProps> = () => {
+  const [inputText, setInputText] = useState("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
   };
-  const setNum = 0;
 
   return (
     <div>
-      <div>{setNum}</div>
+      <form className="set-form">
+        <label htmlFor="exercise-name">
+          <input
+            id="exercise-name"
+            type="text"
+            value={inputText}
+            placeholder="Enter weight/reps/sets"
+            onChange={handleInputChange}
+          />
+        </label>
+      </form>
     </div>
   );
 };

@@ -1,22 +1,4 @@
-/* Import variables for color names */
-@import "./variables.css";
-
-.exercise-card-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.add-exercise-container {
-  display: flex;
-  align-items: center; /* Center align items vertically */
-}
-
-.add-exercise-form {
-  margin-left: 20px;
-  margin-top: 25px;
-  width: 160px; /* Width of the form */
+.set-form {
   border-color: var(--color-blue-grey);
   border-radius: 10px;
   border-width: 3px;
@@ -25,13 +7,14 @@
   box-shadow: none;
   box-sizing: border-box; /* Include padding and border in width and height */
   background-color: white; /* White background for the form */
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   color: var(--color-navy);
   transition: background-color 0.3s ease, transform 0.2s ease,
     border-color 0.3s ease; /* Add border-color transition */
+  display: inline-block;
 }
 
-.add-exercise-form input[type="text"] {
+.set-form input[type="text"] {
   width: 100%; /* Make input take up the full width of the form */
   padding: 5px; /* Add some padding inside the input field */
   border: none; /* Remove default border of input field */
@@ -43,13 +26,9 @@
   color: var(--color-navy);
 }
 
-.add-exercise-form:hover {
+.set-form:hover {
   border-color: var(
     --color-dark-blue-grey
   ); /* Slightly darker border color on hover */
   transform: scale(1.05); /* Slightly scale up the button */
-}
-
-.exercises-ul {
-  list-style-type: none;
 }

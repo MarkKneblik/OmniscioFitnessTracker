@@ -1,7 +1,7 @@
 // External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
 // Internal Imports
@@ -44,26 +44,32 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   };
 
   return (
-    <div>
+    <div className="exercise-card-container">
       <button
         className="button-base delete-exercise-button"
         onClick={handleDeleteExercise}
       >
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon icon={faTrash} /> Delete Exercise
       </button>
 
       {name}
-      <button onClick={handleAddSet}>Add Set</button>
-      <button onClick={handleDeleteSet}>Delete Set</button>
 
-      {/* Render set components here if needed */}
-      {sets.map((set) => (
-        <SetCard
-          index={set.index} // Use ID
-          onDeleteSet={handleDeleteSet}
-          onAddSet={handleAddSet}
-        />
+      {/* Render set components here if there are any */}
+      {sets.map(() => (
+        <SetCard />
       ))}
+
+      <button className="button-base add-set-button" onClick={handleAddSet}>
+        {" "}
+        <FontAwesomeIcon icon={faPlus} /> Add Set
+      </button>
+
+      <button
+        className="button-base delete-set-button"
+        onClick={handleDeleteSet}
+      >
+        <FontAwesomeIcon icon={faTrash} /> Delete Set
+      </button>
     </div>
   );
 };
