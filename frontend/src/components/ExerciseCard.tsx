@@ -1,60 +1,63 @@
-// External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
-// Internal Imports
 import SetCard from "./SetCard";
-
-// Styles
 import "../styles/day.css";
 import "../styles/exercise.css";
 
-// Types
 interface Set {
-  index: number;
+  id: string; // Use unique ID for sets
 }
 
 interface ExerciseCardProps {
-  index: number;
+  id: string; // Use ID instead of index
   name: string;
-  onDeleteExercise: (index: number) => void; // Callback to notify parent of state change
+  onDeleteExercise: (id: string) => void; // Callback to notify parent of state change
 }
 
 const ExerciseCard: React.FC<ExerciseCardProps> = ({
-  index,
+  id,
   name,
   onDeleteExercise,
 }) => {
-  const [sets, setSets] = useState<Set[]>([]); // List of exercises
+  const [sets, setSets] = useState<Set[]>([]);
 
   const handleDeleteExercise = () => {
-    onDeleteExercise(index);
+    onDeleteExercise(id); // Pass ID for deletion
   };
 
-  const updateSets = sets.filter((set) => set.index !== index);
-  setSets(updateSets);
-
-  const handleAddSet = (index: number) => {
-    const newSet = { index: index };
+  const handleAddSet = () => {
+    const newSet = { id: uuidv4() }; // Use unique ID for sets
     setSets((prevSets) => [...prevSets, newSet]);
   };
 
-  const handleDeleteSet = (index: number) => {
-    const updatedSets = sets.filter((set) => set.index !== index);
-    setSets(updateSets);
+  const handleDeleteSet = (setId: string) => {
+    setSets((prevSets) => prevSets.filter((set) => set.id !== setId));
   };
 
   return (
     <div>
       <button
         className="button-base delete-exercise-button"
-        onClick={() => handleDeleteExercise()}
+        onClick={handleDeleteExercise}
       >
         <FontAwesomeIcon icon={faTrash} />
       </button>
 
       {name}
+
+      {/* Render set components here if needed */}
+      {sets.map((set) => (
+        <SetCard
+          key={set.id}
+          index={set.id} // Use ID
+          onDeleteSet={handleDeleteSet}
+          onAddSet={handleAddSet}
+        />
+      ))}
+      <button onClick={handleAddSet}>Add Set</button>
     </div>
   );
 };

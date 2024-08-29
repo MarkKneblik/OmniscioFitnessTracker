@@ -1,20 +1,16 @@
-// External Libraries
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
-// Internal Imports
 import ExerciseCard from "./ExerciseCard";
-
-// Styles
 import "../styles/day.css";
 import "../styles/exercise.css";
 
-// Types
 interface Exercise {
   name: string;
-  index: number;
+  id: string; // Use unique ID
 }
 
 interface DayCardProps {
@@ -22,14 +18,12 @@ interface DayCardProps {
   onDeleteDay: (dayOfWeek: string) => void; // Callback to notify parent of state change
 }
 
-// Variants for animations
 const listItemVariants = {
   hidden: { opacity: 0, height: 0, scaleY: 0 },
   visible: { opacity: 1, height: "auto", scaleY: 1 },
   exit: { opacity: 0, height: 0, scaleY: 0 },
 };
 
-// Define the Framer Motion layout transition for the DayCard list items
 const layoutTransition = {
   type: "spring",
   stiffness: 200,
@@ -38,28 +32,19 @@ const layoutTransition = {
 };
 
 const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
-  const [exercises, setExercises] = useState<Exercise[]>([]); // List of exercises
-  const [inputText, setInputText] = useState(""); // Input text for add exercise form
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [inputText, setInputText] = useState("");
 
   const handleAddExercise = () => {
-    const newExercise = { name: inputText };
+    const newExercise = { name: inputText, id: uuidv4() }; // Use unique ID
     setExercises((prevExercises) => [...prevExercises, newExercise]);
     setInputText("");
   };
 
-  useEffect(() => {
-    console.log(exercises); // Log the updated exercises list
-  }, [exercises]); // Run every time exercises array changes
-
-  const handleDeleteDay = () => {
-    onDeleteDay(dayOfWeek);
-  };
-
-  const handleDeleteExercise = (index: number) => {
-    const updatedExercises = exercises.filter(
-      (exercise) => exercise.index !== index
+  const handleDeleteExercise = (id: string) => {
+    setExercises((prevExercises) =>
+      prevExercises.filter((exercise) => exercise.id !== id)
     );
-    setExercises(updatedExercises);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +57,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
         <div className="header-and-delete-button">
           <button
             className="button-base delete-day-button"
-            onClick={handleDeleteDay}
+            onClick={() => onDeleteDay(dayOfWeek)}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
@@ -82,9 +67,9 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
 
         <motion.ul className="exercises-ul">
           <AnimatePresence>
-            {exercises.map((exercise, index) => (
+            {exercises.map((exercise) => (
               <motion.li
-                key={index}
+                key={exercise.id} // Use ID as key
                 className="exercise-item"
                 variants={listItemVariants}
                 initial="hidden"
@@ -93,9 +78,10 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
                 transition={layoutTransition}
               >
                 <ExerciseCard
+                  id={exercise.id} // Pass unique ID
                   name={exercise.name}
                   onDeleteExercise={handleDeleteExercise}
-                ></ExerciseCard>
+                />
               </motion.li>
             ))}
           </AnimatePresence>
