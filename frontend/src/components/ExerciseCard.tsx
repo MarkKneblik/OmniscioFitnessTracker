@@ -56,7 +56,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   };
 
   return (
-    <motion.div className="exercise-card-container" layout>
+    <motion.div layout>
       <div className="exercise-card-header">
         {name}
         <button
@@ -67,7 +67,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
         </button>
       </div>
 
-      <div className="exercise-card-content">
+      <div className="exercise-card-container">
         <button className="button-base add-set-button" onClick={handleAddSet}>
           <FontAwesomeIcon icon={faPlus} /> Add Set
         </button>
