@@ -237,8 +237,6 @@ export default function MyProgram() {
           </AnimatePresence>
         </motion.ul>
       </div>
-
-      <Footer />
     </SimpleBar>
   );
 }
