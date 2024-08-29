@@ -7,11 +7,10 @@
   box-shadow: none;
   box-sizing: border-box; /* Include padding and border in width and height */
   background-color: white; /* White background for the form */
-  margin-bottom: 20px;
+
   color: var(--color-navy);
   transition: background-color 0.3s ease, transform 0.2s ease,
     border-color 0.3s ease; /* Add border-color transition */
-  margin-right: 6px;
 }
 
 .set-form input[type="text"] {
@@ -31,4 +30,11 @@
     --color-dark-blue-grey
   ); /* Slightly darker border color on hover */
   transform: scale(1.05); /* Slightly scale up the button */
+}
+
+.set-ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }

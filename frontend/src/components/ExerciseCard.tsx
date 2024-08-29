@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
+import { motion, AnimatePresence } from "framer-motion";
 
 // Internal Imports
 import SetCard from "./SetCard";
@@ -20,6 +20,19 @@ interface ExerciseCardProps {
   name: string;
   onDeleteExercise: (id: string) => void; // Callback to notify parent of state change
 }
+
+const listItemVariants = {
+  hidden: { opacity: 0, height: 0, scaleY: 0 },
+  visible: { opacity: 1, height: "auto", scaleY: 1 },
+  exit: { opacity: 0, height: 0, scaleY: 0 },
+};
+
+const layoutTransition = {
+  type: "spring",
+  stiffness: 200,
+  damping: 50,
+  mass: 2,
+};
 
 const ExerciseCard: React.FC<ExerciseCardProps> = ({
   id,
@@ -57,11 +70,6 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
       </div>
 
       <div className="exercise-card-container">
-        {/* Render set components here if there are any */}
-        {sets.map(() => (
-          <SetCard />
-        ))}
-
         <button className="button-base add-set-button" onClick={handleAddSet}>
           {" "}
           <FontAwesomeIcon icon={faPlus} /> Add Set
@@ -73,6 +81,24 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
         >
           <FontAwesomeIcon icon={faTrash} /> Delete Set
         </button>
+
+        <motion.ul className="set-ul">
+          {/* Render set components here if there are any */}
+          <AnimatePresence>
+            {sets.map(() => (
+              <motion.li
+                variants={listItemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={layoutTransition}
+                layout
+              >
+                <SetCard />
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </motion.ul>
       </div>
     </div>
   );

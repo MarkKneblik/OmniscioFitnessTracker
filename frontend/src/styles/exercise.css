@@ -27,6 +27,7 @@
 .add-exercise-container {
   display: flex;
   align-items: center; /* Center align items vertically */
+  justify-content: center;
 }
 
 .add-exercise-form {

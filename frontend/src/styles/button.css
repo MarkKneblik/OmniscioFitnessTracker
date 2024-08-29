@@ -56,14 +56,14 @@
 }
 .add-set-button {
   font-size: 13px;
-  margin-left: 10px;
+  margin-left: 0px;
+  margin-right: 10px;
   padding: 6px 13px;
   display: inline-block;
   text-wrap: nowrap;
 }
 .delete-set-button {
   font-size: 13px;
-  margin-left: 10px;
   padding: 6px 13px;
   display: inline-block;
   text-wrap: nowrap;
