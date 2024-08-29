@@ -17,7 +17,6 @@ import Footer from "../components/Footer";
 import config from "../../config.json";
 
 // Styles
-import "../styles/header.css";
 import "../styles/button.css";
 import "../styles/day.css";
 import "../styles/container.css";

@@ -44,32 +44,34 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   };
 
   return (
-    <div className="exercise-card-container">
-      <button
-        className="button-base delete-exercise-button"
-        onClick={handleDeleteExercise}
-      >
-        <FontAwesomeIcon icon={faTrash} /> Delete Exercise
-      </button>
+    <div>
+      <div className="exercise-card-header"> {name} </div>
 
-      {name}
+      <div className="exercise-card-container">
+        <button
+          className="button-base delete-exercise-button"
+          onClick={handleDeleteExercise}
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete Exercise
+        </button>
 
-      {/* Render set components here if there are any */}
-      {sets.map(() => (
-        <SetCard />
-      ))}
+        {/* Render set components here if there are any */}
+        {sets.map(() => (
+          <SetCard />
+        ))}
 
-      <button className="button-base add-set-button" onClick={handleAddSet}>
-        {" "}
-        <FontAwesomeIcon icon={faPlus} /> Add Set
-      </button>
+        <button className="button-base add-set-button" onClick={handleAddSet}>
+          {" "}
+          <FontAwesomeIcon icon={faPlus} /> Add Set
+        </button>
 
-      <button
-        className="button-base delete-set-button"
-        onClick={handleDeleteSet}
-      >
-        <FontAwesomeIcon icon={faTrash} /> Delete Set
-      </button>
+        <button
+          className="button-base delete-set-button"
+          onClick={handleDeleteSet}
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete Set
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 /* Import variables for color names */
 @import "./variables.css";
 
-.header {
+.page-header {
   font-family: Inter;
   color: var(--color-navy);
   position: absolute;
@@ -11,7 +11,7 @@
 }
 
 /* This class wraps the header so that we can keep the position of the header absolute */
-.header-wrapper {
+.page-header-wrapper {
   position: relative;
   height: 1px;
 }

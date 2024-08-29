@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Styles
-import "../styles/header.css";
+import "../styles/pageheader.css";
 
 // Types
 interface HeaderProps {
@@ -36,9 +36,9 @@ const Header: React.FC<HeaderProps> = ({ title, icon }) => {
   const selectedIcon = iconMap[icon]; // Select appropriate icon
 
   return (
-    <div className="header-wrapper">
+    <div className="page-header-wrapper">
       <motion.h1
-        className="header"
+        className="page-header"
         variants={headerVariant}
         initial="hidden"
         animate="visible"
