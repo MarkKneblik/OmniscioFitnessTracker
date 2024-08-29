@@ -1,3 +1,4 @@
+// External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,7 @@ import "../styles/day.css";
 import "../styles/exercise.css";
 
 interface Set {
-  index: number; // Use index instead of id
+  index: number; // Use index for unique identification
 }
 
 interface ExerciseCardProps {
@@ -20,17 +21,18 @@ interface ExerciseCardProps {
   onDeleteExercise: (id: string) => void;
 }
 
+// Variants for animations
 const listItemVariants = {
   hidden: { opacity: 0, scaleX: 0, scaleY: 0 },
   visible: { opacity: 1, scaleX: 1, scaleY: 1 },
   exit: { opacity: 0, scaleX: 0, scaleY: 0 },
 };
 
+// Layout transition settings
 const layoutTransition = {
   type: "spring",
-  stiffness: 200,
-  damping: 50,
-  mass: 2,
+  stiffness: 300, // Adjust stiffness for smoother transitions
+  damping: 25, // Adjust damping for smoother transitions
 };
 
 const ExerciseCard: React.FC<ExerciseCardProps> = ({
@@ -54,7 +56,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   };
 
   return (
-    <div>
+    <motion.div className="exercise-card-container" layout>
       <div className="exercise-card-header">
         {name}
         <button
@@ -65,7 +67,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
         </button>
       </div>
 
-      <div className="exercise-card-container">
+      <div className="exercise-card-content">
         <button className="button-base add-set-button" onClick={handleAddSet}>
           <FontAwesomeIcon icon={faPlus} /> Add Set
         </button>
@@ -80,17 +82,16 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
         </button>
 
         <motion.ul className="set-ul" layout>
-          {/* Render set components here if there are any */}
           <AnimatePresence>
             {sets.map((set) => (
               <motion.li
-                key={set.index} // Use the random number as the key (index)
-                layout
+                key={set.index} // Use the random number as the key
                 variants={listItemVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 transition={layoutTransition}
+                layout
               >
                 <SetCard />
               </motion.li>
@@ -98,7 +99,7 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
           </AnimatePresence>
         </motion.ul>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

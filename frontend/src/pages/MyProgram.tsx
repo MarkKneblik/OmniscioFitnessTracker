@@ -94,9 +94,8 @@ const menuAndDaySelectionVariants = {
 // Define the Framer Motion layout transition for the DayCard list items
 const layoutTransition = {
   type: "spring",
-  stiffness: 200,
-  damping: 50,
-  mass: 2,
+  stiffness: 300, // Adjusted stiffness for smoother transitions
+  damping: 25, // Adjusted damping for smoother transitions
 };
 
 // Define the Framer Motion transition for the menu Cheeseburger and Add Day button and dropdown
@@ -215,6 +214,7 @@ export default function MyProgram() {
           initial="hidden"
           animate="visible"
           exit="exit"
+          layout
           transition={layoutTransition}
         >
           <AnimatePresence>
@@ -227,6 +227,7 @@ export default function MyProgram() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
+                    layout
                     transition={layoutTransition}
                   >
                     <DayCard dayOfWeek={day} onDeleteDay={handleDeleteDay} />
@@ -236,6 +237,8 @@ export default function MyProgram() {
           </AnimatePresence>
         </motion.ul>
       </div>
+
+      <Footer />
     </SimpleBar>
   );
 }

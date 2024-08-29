@@ -22,17 +22,18 @@ interface DayCardProps {
   onDeleteDay: (dayOfWeek: string) => void; // Callback to notify parent of state change
 }
 
+// Variants for animations
 const listItemVariants = {
   hidden: { opacity: 0, height: 0, scaleY: 0 },
   visible: { opacity: 1, height: "auto", scaleY: 1 },
   exit: { opacity: 0, height: 0, scaleY: 0 },
 };
 
+// Layout transition settings
 const layoutTransition = {
   type: "spring",
-  stiffness: 200,
-  damping: 50,
-  mass: 2,
+  stiffness: 300, // Adjust stiffness for smoother transitions
+  damping: 25, // Adjust damping for smoother transitions
 };
 
 const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
@@ -56,63 +57,68 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   };
 
   return (
-    <div>
-      <div className="day-card-container">
-        <div className="header-and-delete-button">
-          <button
-            className="button-base delete-day-button"
-            onClick={() => onDeleteDay(dayOfWeek)}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
+    <motion.div
+      className="day-card-container"
+      layout // Apply layout prop here for layout animations
+    >
+      <div className="header-and-delete-button">
+        <button
+          className="button-base delete-day-button"
+          onClick={() => onDeleteDay(dayOfWeek)}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
 
-          <h2 className="day-header">{dayOfWeek}</h2>
-        </div>
-
-        <motion.ul className="exercises-ul">
-          <AnimatePresence>
-            {exercises.map((exercise) => (
-              <motion.li
-                key={exercise.id} // Use ID as key
-                className="exercise-item"
-                variants={listItemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={layoutTransition}
-              >
-                <ExerciseCard
-                  id={exercise.id} // Pass unique ID
-                  name={exercise.name}
-                  onDeleteExercise={handleDeleteExercise}
-                />
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </motion.ul>
-
-        <div className="add-exercise-container">
-          <button
-            className="button-base add-exercise-button"
-            onClick={handleAddExercise}
-          >
-            <FontAwesomeIcon icon={faPlus} /> Add Exercise
-          </button>
-
-          <form className="add-exercise-form">
-            <label htmlFor="exercise-name">
-              <input
-                id="exercise-name"
-                type="text"
-                value={inputText}
-                placeholder="Enter exercise name"
-                onChange={handleInputChange}
-              />
-            </label>
-          </form>
-        </div>
+        <h2 className="day-header">{dayOfWeek}</h2>
       </div>
-    </div>
+
+      <motion.ul
+        className="exercises-ul"
+        layout // Apply layout prop here for layout animations
+      >
+        <AnimatePresence>
+          {exercises.map((exercise) => (
+            <motion.li
+              key={exercise.id} // Use ID as key
+              className="exercise-item"
+              variants={listItemVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={layoutTransition} // Ensure transition is set
+              layout // Apply layout prop here for layout animations
+            >
+              <ExerciseCard
+                id={exercise.id} // Pass unique ID
+                name={exercise.name}
+                onDeleteExercise={handleDeleteExercise}
+              />
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </motion.ul>
+
+      <div className="add-exercise-container">
+        <button
+          className="button-base add-exercise-button"
+          onClick={handleAddExercise}
+        >
+          <FontAwesomeIcon icon={faPlus} /> Add Exercise
+        </button>
+
+        <form className="add-exercise-form">
+          <label htmlFor="exercise-name">
+            <input
+              id="exercise-name"
+              type="text"
+              value={inputText}
+              placeholder="Enter exercise name"
+              onChange={handleInputChange}
+            />
+          </label>
+        </form>
+      </div>
+    </motion.div>
   );
 };
 
