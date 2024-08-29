@@ -1,14 +1,18 @@
+// External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
+// Internal Imports
 import SetCard from "./SetCard";
+
+// Styles
 import "../styles/day.css";
 import "../styles/exercise.css";
 
 interface Set {
-  id: string; // Use unique ID for sets
+  index: number;
 }
 
 interface ExerciseCardProps {
@@ -29,12 +33,14 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   };
 
   const handleAddSet = () => {
-    const newSet = { id: uuidv4() }; // Use unique ID for sets
+    const newSet = { index: sets.length }; // Use unique ID for sets
     setSets((prevSets) => [...prevSets, newSet]);
   };
 
-  const handleDeleteSet = (setId: string) => {
-    setSets((prevSets) => prevSets.filter((set) => set.id !== setId));
+  const handleDeleteSet = () => {
+    setSets((prevSets) =>
+      prevSets.filter((set) => set.index !== sets.length - 1)
+    );
   };
 
   return (
@@ -47,17 +53,17 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
       </button>
 
       {name}
+      <button onClick={handleAddSet}>Add Set</button>
+      <button onClick={handleDeleteSet}>Delete Set</button>
 
       {/* Render set components here if needed */}
       {sets.map((set) => (
         <SetCard
-          key={set.id}
-          index={set.id} // Use ID
+          index={set.index} // Use ID
           onDeleteSet={handleDeleteSet}
           onAddSet={handleAddSet}
         />
       ))}
-      <button onClick={handleAddSet}>Add Set</button>
     </div>
   );
 };

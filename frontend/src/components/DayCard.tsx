@@ -1,10 +1,14 @@
+// External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
+// Internal Imports
 import ExerciseCard from "./ExerciseCard";
+
+// Styles
 import "../styles/day.css";
 import "../styles/exercise.css";
 
