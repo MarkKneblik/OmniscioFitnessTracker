@@ -1,7 +1,5 @@
 //External Libraries
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // Styles
 import "../styles/set.css";

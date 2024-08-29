@@ -1,4 +1,3 @@
-// External Libraries
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -12,19 +11,19 @@ import "../styles/day.css";
 import "../styles/exercise.css";
 
 interface Set {
-  index: number;
+  index: number; // Use index instead of id
 }
 
 interface ExerciseCardProps {
-  id: string; // Use ID instead of index
+  id: string; // Use string ID for the exercise card itself
   name: string;
-  onDeleteExercise: (id: string) => void; // Callback to notify parent of state change
+  onDeleteExercise: (id: string) => void;
 }
 
 const listItemVariants = {
-  hidden: { opacity: 0, height: 0, scaleY: 0 },
-  visible: { opacity: 1, height: "auto", scaleY: 1 },
-  exit: { opacity: 0, height: 0, scaleY: 0 },
+  hidden: { opacity: 0, scaleX: 0, scaleY: 0 },
+  visible: { opacity: 1, scaleX: 1, scaleY: 1 },
+  exit: { opacity: 0, scaleX: 0, scaleY: 0 },
 };
 
 const layoutTransition = {
@@ -42,24 +41,21 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
   const [sets, setSets] = useState<Set[]>([]);
 
   const handleDeleteExercise = () => {
-    onDeleteExercise(id); // Pass ID for deletion
+    onDeleteExercise(id); // Pass the exercise ID for deletion
   };
 
   const handleAddSet = () => {
-    const newSet = { index: sets.length }; // Use unique ID for sets
+    const newSet = { index: Math.floor(Math.random() * 1000000) }; // Random number as index
     setSets((prevSets) => [...prevSets, newSet]);
   };
 
-  const handleDeleteSet = () => {
-    setSets((prevSets) =>
-      prevSets.filter((set) => set.index !== sets.length - 1)
-    );
+  const handleDeleteSet = (index: number) => {
+    setSets((prevSets) => prevSets.filter((set) => set.index !== index));
   };
 
   return (
     <div>
       <div className="exercise-card-header">
-        {" "}
         {name}
         <button
           className="button-base delete-exercise-button"
@@ -71,28 +67,30 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
       <div className="exercise-card-container">
         <button className="button-base add-set-button" onClick={handleAddSet}>
-          {" "}
           <FontAwesomeIcon icon={faPlus} /> Add Set
         </button>
 
         <button
           className="button-base delete-set-button"
-          onClick={handleDeleteSet}
+          onClick={() =>
+            sets.length > 0 && handleDeleteSet(sets[sets.length - 1].index)
+          }
         >
           <FontAwesomeIcon icon={faTrash} /> Delete Set
         </button>
 
-        <motion.ul className="set-ul">
+        <motion.ul className="set-ul" layout>
           {/* Render set components here if there are any */}
           <AnimatePresence>
-            {sets.map(() => (
+            {sets.map((set) => (
               <motion.li
+                key={set.index} // Use the random number as the key (index)
+                layout
                 variants={listItemVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 transition={layoutTransition}
-                layout
               >
                 <SetCard />
               </motion.li>
