@@ -4,18 +4,24 @@
 .exercise-card-container {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .exercise-card-header {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   color: var(--color-navy);
   font-family: "Inter";
-  font-size: 20px;
+  font-size: 22px;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    border-color 0.3s ease; /* Add border-color transition */
+}
+
+.exercise-card-header:hover {
+  transform: scale(1.05); /* Slightly scale up the header */
 }
 
 .add-exercise-container {

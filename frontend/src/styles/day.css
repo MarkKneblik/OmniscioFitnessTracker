@@ -22,9 +22,15 @@
   align-items: center; /* Aligns items vertically in the center */
   justify-content: center;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 22px;
   color: var(--color-navy);
   text-align: center;
+  width: auto;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add background color transition */
+}
+
+.header-and-delete-button:hover {
+  transform: scale(1.05);
 }
 
 .day-ul {

@@ -45,16 +45,18 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
 
   return (
     <div>
-      <div className="exercise-card-header"> {name} </div>
-
-      <div className="exercise-card-container">
+      <div className="exercise-card-header">
+        {" "}
+        {name}
         <button
           className="button-base delete-exercise-button"
           onClick={handleDeleteExercise}
         >
-          <FontAwesomeIcon icon={faTrash} /> Delete Exercise
+          <FontAwesomeIcon icon={faTrash} />
         </button>
+      </div>
 
+      <div className="exercise-card-container">
         {/* Render set components here if there are any */}
         {sets.map(() => (
           <SetCard />

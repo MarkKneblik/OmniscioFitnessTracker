@@ -8,6 +8,7 @@
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Center horizontally */
   margin-top: 30px;
+  font-size: 40px;
 }
 
 /* This class wraps the header so that we can keep the position of the header absolute */
