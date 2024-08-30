@@ -24,9 +24,9 @@ interface DayCardProps {
 
 // Variants for animations
 const listItemVariants = {
-  hidden: { opacity: 0, height: 0, scaleY: 0 },
-  visible: { opacity: 1, height: "auto", scaleY: 1 },
-  exit: { opacity: 0, height: 0, scaleY: 0 },
+  hidden: { opacity: 0, height: 0, scaleY: 0, marginBottom: 0 },
+  visible: { opacity: 1, height: "auto", scaleY: 1, marginBottom: 20 }, // Add margin bottom parameter to prevent margin collapse
+  exit: { opacity: 0, height: 0, scaleY: 0, marginBottom: 0 },
 };
 
 // Layout transition settings
@@ -34,6 +34,7 @@ const layoutTransition = {
   type: "spring",
   stiffness: 300, // Adjust stiffness for smoother transitions
   damping: 25, // Adjust damping for smoother transitions
+  mass: 2,
 };
 
 const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
@@ -98,7 +99,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
         </AnimatePresence>
       </motion.ul>
 
-      <div className="add-exercise-container">
+      <motion.div className="add-exercise-container" layout>
         <button
           className="button-base add-exercise-button"
           onClick={handleAddExercise}
@@ -117,7 +118,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
             />
           </label>
         </form>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

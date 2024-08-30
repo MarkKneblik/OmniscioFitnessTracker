@@ -7,7 +7,6 @@
   padding: 10px;
   border-radius: 10px;
   background-color: var(--color-beige);
-  margin-bottom: 20px;
   box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.18);
   transition: background-color 0.3s ease, transform 0.2s ease; /* Add background color transition */
 }

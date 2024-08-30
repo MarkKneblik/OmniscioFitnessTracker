@@ -96,6 +96,7 @@ const layoutTransition = {
   type: "spring",
   stiffness: 300, // Adjusted stiffness for smoother transitions
   damping: 25, // Adjusted damping for smoother transitions
+  mass: 2,
 };
 
 // Define the Framer Motion transition for the menu Cheeseburger and Add Day button and dropdown
