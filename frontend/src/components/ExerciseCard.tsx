@@ -33,6 +33,7 @@ const layoutTransition = {
   type: "spring",
   stiffness: 300, // Adjust stiffness for smoother transitions
   damping: 25, // Adjust damping for smoother transitions
+  mass: 2,
 };
 
 const ExerciseCard: React.FC<ExerciseCardProps> = ({
@@ -81,23 +82,25 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <FontAwesomeIcon icon={faTrash} /> Delete Set
         </button>
 
-        <motion.ul className="set-ul" layout>
-          <AnimatePresence>
-            {sets.map((set) => (
-              <motion.li
-                key={set.index} // Use the random number as the key
-                variants={listItemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={layoutTransition}
-                layout
-              >
-                <SetCard />
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </motion.ul>
+        <motion.div layout>
+          <motion.ul className="set-ul" layout>
+            <AnimatePresence>
+              {sets.map((set) => (
+                <motion.li
+                  key={set.index}
+                  variants={listItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  transition={layoutTransition}
+                  layout
+                >
+                  <SetCard />
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </motion.ul>
+        </motion.div>
       </div>
     </motion.div>
   );

@@ -73,6 +73,27 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
         <h2 className="day-header">{dayOfWeek}</h2>
       </div>
 
+      <motion.div className="add-exercise-container" layout>
+        <button
+          className="button-base add-exercise-button"
+          onClick={handleAddExercise}
+        >
+          <FontAwesomeIcon icon={faPlus} /> Add Exercise
+        </button>
+
+        <form className="add-exercise-form">
+          <label htmlFor="exercise-name">
+            <input
+              id="exercise-name"
+              type="text"
+              value={inputText}
+              placeholder="Enter exercise name"
+              onChange={handleInputChange}
+            />
+          </label>
+        </form>
+      </motion.div>
+
       <motion.ul
         className="exercises-ul"
         layout // Apply layout prop here for layout animations
@@ -98,27 +119,6 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
           ))}
         </AnimatePresence>
       </motion.ul>
-
-      <motion.div className="add-exercise-container" layout>
-        <button
-          className="button-base add-exercise-button"
-          onClick={handleAddExercise}
-        >
-          <FontAwesomeIcon icon={faPlus} /> Add Exercise
-        </button>
-
-        <form className="add-exercise-form">
-          <label htmlFor="exercise-name">
-            <input
-              id="exercise-name"
-              type="text"
-              value={inputText}
-              placeholder="Enter exercise name"
-              onChange={handleInputChange}
-            />
-          </label>
-        </form>
-      </motion.div>
     </motion.div>
   );
 };
