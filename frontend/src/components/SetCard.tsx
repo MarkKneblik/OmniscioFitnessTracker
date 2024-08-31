@@ -21,7 +21,7 @@ const SetCard: React.FC<SetCardProps> = () => {
             id="exercise-name"
             type="text"
             value={inputText}
-            placeholder="Enter weight/reps/sets"
+            placeholder="Enter weight and/or reps"
             onChange={handleInputChange}
           />
         </label>

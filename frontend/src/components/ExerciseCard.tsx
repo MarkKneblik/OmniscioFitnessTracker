@@ -23,9 +23,9 @@ interface ExerciseCardProps {
 
 // Variants for animations
 const listItemVariants = {
-  hidden: { opacity: 0, height: 0, scaleY: 0 },
-  visible: { opacity: 1, height: "auto", scaleY: 1 },
-  exit: { opacity: 0, height: 0, scaleY: 0 },
+  hidden: { opacity: 0, scaleY: 0 },
+  visible: { opacity: 1, scaleY: 1 },
+  exit: { opacity: 0, scaleY: 0 },
 };
 
 // Layout transition settings
