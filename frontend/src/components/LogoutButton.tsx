@@ -8,7 +8,7 @@ export default function LogoutButton() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        `${config.apiURL}/Accounts/Logout`,
+        `${config.apiURL}/Account/Logout`,
         null,
         {
           headers: {
