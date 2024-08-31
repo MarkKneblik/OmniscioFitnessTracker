@@ -94,15 +94,11 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
         </form>
       </motion.div>
 
-      <motion.ul
-        className="exercises-ul"
-        layout // Apply layout prop here for layout animations
-      >
+      <motion.ul className="exercises-ul">
         <AnimatePresence>
           {exercises.map((exercise) => (
             <motion.li
               key={exercise.id} // Use ID as key
-              className="exercise-item"
               variants={listItemVariants}
               initial="hidden"
               animate="visible"

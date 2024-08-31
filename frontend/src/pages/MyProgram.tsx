@@ -80,9 +80,9 @@ const customStyles: StylesConfig<any, false> = {
 
 // Variants for animations
 const listItemVariants = {
-  hidden: { opacity: 0, height: 0, scaleY: 0, marginBottom: 0 },
-  visible: { opacity: 1, height: "auto", scaleY: 1, marginBottom: 20 }, // Add margin bottom parameter to prevent margin collapse
-  exit: { opacity: 0, height: 0, scaleY: 0, marginBottom: 0 },
+  hidden: { opacity: 0, height: 0, scaleY: 0, marginTop: 0 },
+  visible: { opacity: 1, height: "auto", scaleY: 1, marginTop: 10 }, // Add margin bottom parameter to prevent margin collapse
+  exit: { opacity: 0, height: 0, scaleY: 0, marginTop: 0 },
 };
 
 const menuAndDaySelectionVariants = {
@@ -215,7 +215,6 @@ export default function MyProgram() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          layout
           transition={layoutTransition}
         >
           <AnimatePresence>
