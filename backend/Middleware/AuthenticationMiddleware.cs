@@ -2,8 +2,7 @@ public class AuthenticationMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IConfiguration _configuration;
-    private string frontendURL;
-
+  
     public AuthenticationMiddleware(RequestDelegate next, IConfiguration configuration)
     {
         _next = next;

@@ -1,14 +1,19 @@
-import axios from "axios";
-import config from "../../config.json";
-import "../styles/button.css";
+// External Libraries
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+
+// Configuration
+import config from "../../config.json";
+
+// Styles
+import "../styles/button.css";
 
 export default function LogoutButton() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        `${config.apiURL}/Account/Logout`,
+        `${config.apiURL}/Accounts/Logout`,
         null,
         {
           headers: {

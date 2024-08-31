@@ -126,8 +126,6 @@ app.UseCors(options => {
     options.WithOrigins(frontendURL).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
 });
 
-app.UseStaticFiles();
-
 
 app.UseHttpsRedirection();
 app.UseRouting();
