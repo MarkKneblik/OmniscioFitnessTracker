@@ -82,8 +82,8 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <FontAwesomeIcon icon={faTrash} /> Delete Set
         </button>
 
-        <motion.div layout>
-          <motion.ul className="set-ul" layout>
+        <motion.div>
+          <motion.ul className="set-ul">
             <AnimatePresence>
               {sets.map((set) => (
                 <motion.li
