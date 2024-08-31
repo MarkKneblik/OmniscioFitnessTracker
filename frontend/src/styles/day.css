@@ -13,7 +13,6 @@
 
 .day-card-container:hover {
   background-color: var(--color-very-light-pink);
-  transform: scale(1.05);
 }
 
 .header-and-delete-button {
