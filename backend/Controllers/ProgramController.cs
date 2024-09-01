@@ -15,24 +15,11 @@ public class MyProgramController : ControllerBase
 
     [HttpGet]
     [Route("GetNumOfDays")]
-    public async Task<IActionResult> GetNumOfDays()
+    public async Task<IActionResult> GetProgramData()
     {
         
 
 
         return Ok();
     }
-
-    [HttpGet]
-    [Route("GetNumOfExercises")]
-    public async Task<IActionResult> GetNumOfExercises()
-    {
-        
-
-
-        return Ok("Successfully accessed authorized resource");
-    }
-
-
-
 }

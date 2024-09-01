@@ -1,6 +1,6 @@
 public interface IUserDataAccess
 {
-    Task<string> GetUserDataAsync(string email);
+    Task<CombinedDataResponse> GetUserDataAsync();
 }
 
 

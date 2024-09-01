@@ -16,14 +16,14 @@ public class AuthenticationMiddleware
             // Handle unauthenticated requests to endpoints in /MyProgram
             context.Response.StatusCode = 401; // Unauthorized
             await context.Response.WriteAsync("Unauthorized access.");
-            return;       
+            return; // Terminate middleware pipeline prematurely       
         }
         else if (context.User?.Identity != null && !context.User.Identity.IsAuthenticated && context.Request.Path.StartsWithSegments("/Accounts/Logout"))
         {
             // Handle unauthenticated requests to endpoints in /MyAccount
             context.Response.StatusCode = 401; // Unauthorized
             await context.Response.WriteAsync("Unauthorized access.");
-            return; 
+            return; // Terminate middleware pipeline prematurely
         }
 
         await _next(context);
