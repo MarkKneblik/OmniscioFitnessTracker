@@ -12,9 +12,10 @@ public class AccountService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<AccountModel> FindOrCreateAccount() 
+    public async Task FindOrCreateAccount() 
     {
-        var userEmail = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value;
+        var userEmail = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value; // Get user's email from claims
+        var UserFullName = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value; // Get user's name from claims
         
         if (userEmail != null)
         {
@@ -25,18 +26,12 @@ public class AccountService
                 var newAccount = new AccountModel
                 {
                     Email = userEmail,
-                    NameOfUser = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value
+                    UserFullName = UserFullName
                 };
 
                 await _dbContext.Accounts.AddAsync(newAccount);
                 await _dbContext.SaveChangesAsync();
             }
-            else
-            {
-                return Task.CompletedTask;
-            }
         }
-        
     }
-
 }
