@@ -14,8 +14,12 @@ public class AccountService
 
     public async Task FindOrCreateAccount() 
     {
-        var userEmail = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value; // Get user's email from claims
-        var UserFullName = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value; // Get user's name from claims
+        var httpContext = _httpContextAccessor.HttpContext;
+        var user = httpContext?.User;
+        var identity = user?.Identity as ClaimsIdentity;
+        var userEmail = identity?.FindFirst(ClaimTypes.Email)?.Value;
+        var userFirstName = identity?.FindFirst(ClaimTypes.GivenName)?.Value;
+        var userLastName = identity?.FindFirst(ClaimTypes.Surname)?.Value;
         
         if (userEmail != null)
         {
@@ -26,7 +30,7 @@ public class AccountService
                 var newAccount = new AccountModel
                 {
                     Email = userEmail,
-                    UserFullName = UserFullName
+                    UserFullName = string.Format("{0} {1}", userFirstName, userLastName)
                 };
 
                 await _dbContext.Accounts.AddAsync(newAccount);

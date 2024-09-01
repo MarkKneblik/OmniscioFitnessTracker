@@ -105,11 +105,6 @@ builder.Services.AddAuthentication(options =>
                 SameSite = SameSiteMode.None,
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             });
-            
-            // Resolve AccountService
-            var accountService = context.HttpContext.RequestServices.GetRequiredService<AccountService>();
-            // Check if they have an account in the database, if not create one
-            await accountService.FindOrCreateAccount();
 
             await Task.CompletedTask;
         },

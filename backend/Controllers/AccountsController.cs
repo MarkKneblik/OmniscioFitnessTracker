@@ -9,15 +9,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 public class AccountsController : ControllerBase
 {
     private readonly APIDbContext _dbContext;
-    private readonly IConfiguration _configuration;
+    private readonly AccountService _accountService;
 
-    private string frontendURL;
-
-    public AccountsController(APIDbContext dbContext, IConfiguration configuration)
+    public AccountsController(APIDbContext dbContext, AccountService accountService)
     {
         _dbContext = dbContext;
-        _configuration = configuration;
-        frontendURL = configuration["frontend_url"];
+        _accountService = accountService;
+
     }
 
 
@@ -26,8 +24,17 @@ public class AccountsController : ControllerBase
     [Route("Login")]
     public IActionResult Login()
     {
-        return Challenge(new AuthenticationProperties { RedirectUri = $"{frontendURL}/MyProgram" }, OpenIdConnectDefaults.AuthenticationScheme);
+        return Challenge(new AuthenticationProperties { RedirectUri = "/Accounts/HandleLogin" }, OpenIdConnectDefaults.AuthenticationScheme);
     }
+
+    [HttpGet]
+    [Authorize]
+    [Route("HandleLogin")]
+    public async Task HandleLogin()
+    {
+        await _accountService.FindOrCreateAccount();
+    }
+
 
     [HttpPost]
     [Authorize]
