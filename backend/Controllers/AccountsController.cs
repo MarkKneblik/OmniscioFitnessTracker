@@ -35,6 +35,7 @@ public class AccountsController : ControllerBase
         await _accountService.FindOrCreateAccount();
 
         string frontendURL = _configuration["frontend_url"];
+        
         // Full page redirect to /MyProgram in frontend
         return Redirect($"{frontendURL}/MyProgram");
     }
