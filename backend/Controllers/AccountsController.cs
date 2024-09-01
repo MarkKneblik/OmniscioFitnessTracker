@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 [Route("[controller]")]
 public class AccountsController : ControllerBase
 {
-    private readonly APIDbContext _dbContext;
+    private readonly IConfiguration _configuration;
     private readonly AccountService _accountService;
 
-    public AccountsController(APIDbContext dbContext, AccountService accountService)
+    public AccountsController(IConfiguration configuration, AccountService accountService)
     {
-        _dbContext = dbContext;
+        _configuration = configuration;
         _accountService = accountService;
 
     }
@@ -30,9 +30,13 @@ public class AccountsController : ControllerBase
     [HttpGet]
     [Authorize]
     [Route("HandleLogin")]
-    public async Task HandleLogin()
+    public async Task<IActionResult> HandleLogin()
     {
         await _accountService.FindOrCreateAccount();
+
+        string frontendURL = _configuration["frontend_url"];
+        // Full page redirect to /MyProgram in frontend
+        return Redirect($"{frontendURL}/MyProgram");
     }
 
 
