@@ -18,14 +18,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Dependency injection of DbContext Class
+// Register DbContext and HttpContextAccessor in DI container
 builder.Services.AddDbContext<APIDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpContextAccessor();
+
+// Register AccountService
+builder.Services.AddScoped<AccountService>();
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 var frontendURL = configuration["frontend_url"];
-
-builder.Services.AddHttpContextAccessor();
 
 // Configure Authentication and Authorization
 builder.Services.AddAuthentication(options =>
@@ -94,7 +96,7 @@ builder.Services.AddAuthentication(options =>
 
             var accessToken = context.SecurityToken.RawData;
 
-            // Save access token for API calls
+            // Save access token in cookie for API calls
             context.HttpContext.Response.Cookies.Append("accessToken", accessToken, new CookieOptions
             {
                 Path ="/",
@@ -103,6 +105,11 @@ builder.Services.AddAuthentication(options =>
                 SameSite = SameSiteMode.None,
                 Expires = DateTimeOffset.UtcNow.AddDays(30)
             });
+            
+            // Resolve AccountService
+            var accountService = context.HttpContext.RequestServices.GetRequiredService<AccountService>();
+            // Check if they have an account in the database, if not create one
+            await accountService.FindOrCreateAccount();
 
             await Task.CompletedTask;
         },
