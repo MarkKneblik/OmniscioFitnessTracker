@@ -28,6 +28,7 @@ export default function LogoutButton() {
       }
     } catch (error: any) {
       console.error("Error logging out: ", error.message);
+
       if (error.response && error.response.status === 401) {
         window.location.href = `${config.frontendURL}/`; // If response is unauthorized, redirect to Login page
       }

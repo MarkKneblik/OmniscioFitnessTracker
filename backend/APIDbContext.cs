@@ -7,5 +7,8 @@ public class APIDbContext : DbContext
 
     }
 
-    public DbSet<UserModel> Users {get; set;}
+    public DbSet<AccountModel> Accounts {get; set;}
+    public DbSet<DayModel> Days {get; set;}
+    public DbSet<ExerciseModel> Exercises {get; set;}
+    public DbSet<SetModel> Sets {get; set;}
 }

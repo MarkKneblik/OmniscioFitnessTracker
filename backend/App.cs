@@ -25,8 +25,6 @@ var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 var frontendURL = configuration["frontend_url"];
 
-
-// Add HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
 
 // Configure Authentication and Authorization

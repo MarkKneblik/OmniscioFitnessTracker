@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-public class UserModel
+public class AccountModel
 {
     [Key]
-    public int UserId { get; set; }
+    public int AccountId { get; set; }
     
     [Required]
-    public string Name {get; set;} = string.Empty;
+    public string NameOfUser {get; set;} = string.Empty;
 
     [Required]
     public string Email {get; set;} = string.Empty;

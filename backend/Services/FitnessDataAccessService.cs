@@ -1,8 +1,8 @@
-// public class FitnessDataAccessService : IUserDataAccess
+// public class ProgramDataAccessService : IUserDataAccess
 // {
 //     private readonly APIDbContext _dbContext;
 
-//     public FitnessDataAccessService(APIDbContext dbContext)
+//     public ProgramDataAccessService(APIDbContext dbContext)
 //     {
 //         _dbContext = dbContext;
 //     }
