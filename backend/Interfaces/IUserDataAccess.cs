@@ -1,6 +1,6 @@
 public interface IUserDataAccess
 {
-    Task<CombinedDataResponse> GetUserDataAsync();
+    Task<MyProgramDataResponse> GetUserDataAsync();
 }
 
 

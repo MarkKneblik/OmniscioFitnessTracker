@@ -27,7 +27,7 @@ public class MyProgramDataAccessService : IUserDataAccess
         // Extract user's email and name from Claims Identity
         _userEmail = _identity?.FindFirst(ClaimTypes.Email)?.Value;
     }
-    public async Task<CombinedDataResponse> GetUserDataAsync()
+    public async Task<MyProgramDataResponse> GetUserDataAsync()
     {
         var account = _dbContext.Accounts.FirstOrDefault(account => account.Email == _userEmail);
 
@@ -65,7 +65,7 @@ public class MyProgramDataAccessService : IUserDataAccess
             Content = set.Content
         }).ToList();
 
-        return new CombinedDataResponse
+        return new MyProgramDataResponse
         {
             Days = daysDTO,
             Exercises = exercisesDTO,
