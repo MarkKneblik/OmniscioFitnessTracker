@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 public class MyProgramDataAccessService : IUserDataAccess
@@ -27,7 +26,7 @@ public class MyProgramDataAccessService : IUserDataAccess
         // Extract user's email and name from Claims Identity
         _userEmail = _identity?.FindFirst(ClaimTypes.Email)?.Value;
     }
-    public async Task<MyProgramDataResponse> GetUserDataAsync()
+    public async Task<T> GetUserDataAsync<T>() where T : class
     {
         var account = _dbContext.Accounts.FirstOrDefault(account => account.Email == _userEmail);
 
@@ -65,11 +64,53 @@ public class MyProgramDataAccessService : IUserDataAccess
             Content = set.Content
         }).ToList();
 
-        return new MyProgramDataResponse
+        var response = new MyProgramDataResponse
         {
             Days = daysDTO,
             Exercises = exercisesDTO,
             Sets = setsDTO
         };
+
+        return response as T; // Cast response to T
+    }
+
+    public async Task AddUserDataAsync<T>(T addDataRequestModel) where T : class
+    {
+        if (addDataRequestModel is AddMyProgramDataRequestModel addMyProgramDataRequestModel)
+        {
+            // If the only data passed in the request is the day of the week
+            if (addMyProgramDataRequestModel.DayOfWeek != null 
+            && addMyProgramDataRequestModel.Exercise == null 
+            && addMyProgramDataRequestModel.Set == null)
+            {
+                // Extract day of the week from the AddMyProgramDataRequestModel
+                var dayOfWeek = addMyProgramDataRequestModel.DayOfWeek;
+
+                // Find account linked to user's email
+                var account = _dbContext.Accounts.FirstOrDefault(account => account.Email == _userEmail);
+
+                // Find whether the day of the week already been added to their program
+                var dayQuery = await _dbContext.Days.FirstOrDefaultAsync(day => day.DayOfWeek == dayOfWeek && day.AccountId == account.AccountId);
+
+                // If they have not yet added this day to their program
+                if (dayQuery == null)
+                {
+                    var dayModel = new DayModel
+                    {
+                        DayOfWeek = dayOfWeek,
+                        AccountId = account.AccountId
+                    };
+
+                    await _dbContext.Days.AddAsync(dayModel);
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+
+
+
+
+            
+
+        }
     }
 }

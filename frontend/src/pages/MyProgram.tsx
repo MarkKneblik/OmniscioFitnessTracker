@@ -1,11 +1,12 @@
 // External Libraries
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Select, { StylesConfig } from "react-select";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 // Internal Imports
 import Menu from "../components/Menu";
@@ -134,13 +135,29 @@ export default function MyProgram() {
     setSelectedOption(selected);
   };
 
-  const handleAddDay = () => {
+  const handleAddDay = async () => {
     if (selectedOption && selectedOption.label) {
       const dayOfWeek = selectedOption.label;
+
       setDaysOfProgram((prevDaysOfProgram) => ({
         ...prevDaysOfProgram,
         [dayOfWeek]: true,
       }));
+
+      try {
+        await axios.post(
+          `${config.apiURL}/MyProgram/AddMyProgramDataAsync`,
+          dayOfWeek,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+      } catch (error: any) {
+        console.error("Error posting days of program: ", error.message);
+      }
     } else {
       console.log("No valid day selected");
     }

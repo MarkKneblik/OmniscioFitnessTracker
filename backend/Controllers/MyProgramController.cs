@@ -16,10 +16,17 @@ public class MyProgramController : ControllerBase
     }
 
     [HttpGet]
-    [Route("GetMyProgramData")]
-    public async Task<IActionResult> GetMyProgramData()
+    [Route("GetMyProgramDataAsync")]
+    public async Task<IActionResult> GetMyProgramDataAsync()
     {
-        var myProgramDataResponse = _myProgramDataAccessService.GetUserDataAsync();
-        return Ok();
+        var myProgramDataResponse = await _myProgramDataAccessService.GetUserDataAsync<MyProgramDataResponse>();
+        return Ok(myProgramDataResponse);
+    }
+
+    [HttpPost]
+    [Route("AddMyProgramDataAsync")]
+    public async Task AddMyProgramDataAsync([FromBody] AddMyProgramDataRequestModel addMyProgramDataRequestModel)
+    {
+        await _myProgramDataAccessService.AddUserDataAsync(addMyProgramDataRequestModel);    
     }
 }
