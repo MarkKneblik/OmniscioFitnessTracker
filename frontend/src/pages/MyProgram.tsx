@@ -144,14 +144,20 @@ export default function MyProgram() {
         [dayOfWeek]: true,
       }));
 
+      // Create the request body object matching the AddMyProgramDataRequestModel on the backend
+      const requestBody = {
+        type: "Day", // Specify the type of data being saved as "Day"
+        dayOfWeek: dayOfWeek, // The day of the week that the user just added to their program on the frontend
+        exercise: null,
+        set: null,
+      };
+
       try {
         await axios.post(
           `${config.apiURL}/MyProgram/AddMyProgramDataAsync`,
-          dayOfWeek,
+          requestBody, // Pass the request body
           {
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             withCredentials: true,
           }
         );
