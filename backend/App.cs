@@ -22,8 +22,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<APIDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddHttpContextAccessor();
 
-// Register AccountService
+// Register AccountService and MyProgramDataAccessService
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<MyProgramDataAccessService>();
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();

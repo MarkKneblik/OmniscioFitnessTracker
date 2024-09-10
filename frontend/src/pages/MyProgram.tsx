@@ -146,10 +146,10 @@ export default function MyProgram() {
 
       // Create the request body object matching the AddMyProgramDataRequestModel on the backend
       const requestBody = {
-        type: "Day", // Specify the type of data being saved as "Day"
-        dayOfWeek: dayOfWeek, // The day of the week that the user just added to their program on the frontend
-        exercise: null,
-        set: null,
+        Type: "Day", // Specify the type of data being saved as "Day"
+        DayOfWeek: dayOfWeek, // The day of the week that the user just added to their program on the frontend
+        Exercise: null,
+        Set: null,
       };
 
       try {
