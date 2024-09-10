@@ -14,7 +14,7 @@ import DayCard from "../components/DayCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-// Config
+// Configuration
 import config from "../../config.json";
 
 // Styles

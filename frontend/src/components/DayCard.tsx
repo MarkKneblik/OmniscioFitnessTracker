@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
 // Internal Imports
 import ExerciseCard from "./ExerciseCard";
+
+// Configuration
+import config from "../../config.json";
 
 // Styles
 import "../styles/day.css";
@@ -41,10 +45,31 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [inputText, setInputText] = useState("");
 
-  const handleAddExercise = () => {
+  const handleAddExercise = async () => {
     const newExercise = { name: inputText, id: uuidv4() }; // Use unique ID
     setExercises((prevExercises) => [...prevExercises, newExercise]);
     setInputText("");
+
+    // Create the request body object matching the AddMyProgramDataRequestModel on the backend
+    const requestBody = {
+      Type: "Exercise", // Specify the type of data being saved as "Exercise"
+      DayOfWeek: dayOfWeek,
+      Exercise: newExercise.name,
+      Set: null,
+    };
+
+    try {
+      await axios.post(
+        `${config.apiURL}/MyProgram/AddMyProgramDataAsync`,
+        requestBody, // Pass the request body
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+    } catch (error: any) {
+      console.error("Error posting days of program: ", error.message);
+    }
   };
 
   const handleDeleteExercise = (id: string) => {

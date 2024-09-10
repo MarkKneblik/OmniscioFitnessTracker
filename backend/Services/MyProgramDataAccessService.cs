@@ -89,10 +89,10 @@ public class MyProgramDataAccessService : IUserDataAccess
                     var dayOfWeek = addMyProgramDataRequestModel.DayOfWeek;
 
                     // Find whether the day of the week already been added to their program
-                    var dayQuery = await _dbContext.Days.FirstOrDefaultAsync(day => day.DayOfWeek == dayOfWeek && day.AccountId == account.AccountId);
+                    var dayQueryResult = await _dbContext.Days.FirstOrDefaultAsync(day => day.DayOfWeek == dayOfWeek && day.AccountId == account.AccountId);
 
                     // If they have not yet added this day to their program
-                    if (dayQuery == null)
+                    if (dayQueryResult == null)
                     {
                         var dayModel = new DayModel
                         {
@@ -107,7 +107,26 @@ public class MyProgramDataAccessService : IUserDataAccess
                 }
 
                 case "Exercise":
-                {
+                 {
+                    // Extract day of the week from the AddMyProgramDataRequestModel
+                    var dayOfWeek = addMyProgramDataRequestModel.DayOfWeek;
+
+                    // Find whether the day of the week already been added to their program
+                    var dayQueryResult = await _dbContext.Days.FirstOrDefaultAsync(day => day.DayOfWeek == dayOfWeek && day.AccountId == account.AccountId);
+
+                    // If this day exists in the user's program
+                    if (dayQueryResult != null)
+                    {
+                        // Create an ExerciseModel
+                        var exerciseModel = new ExerciseModel
+                        {
+                            ExerciseName = addMyProgramDataRequestModel.Exercise,
+                            DayId = dayQueryResult.DayId
+                        };
+
+                        await _dbContext.Exercises.AddAsync(exerciseModel);
+                        await _dbContext.SaveChangesAsync();
+                    }
                     break;
                 }
 
