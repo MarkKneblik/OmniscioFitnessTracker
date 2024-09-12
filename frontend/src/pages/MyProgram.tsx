@@ -150,6 +150,7 @@ export default function MyProgram() {
         DayOfWeek: dayOfWeek, // The day of the week that the user just added to their program on the frontend
         Exercise: null,
         Set: null,
+        UUID: null,
       };
 
       try {

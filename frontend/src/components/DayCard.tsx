@@ -56,6 +56,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
       DayOfWeek: dayOfWeek,
       Exercise: newExercise.name,
       Set: null,
+      UUID: newExercise.id,
     };
 
     try {
