@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 public class MyProgramDataAccessService : IUserDataAccess
 {
@@ -74,7 +75,7 @@ public class MyProgramDataAccessService : IUserDataAccess
         return response as T; // Cast response to T
     }
 
-    public async Task AddUserDataAsync<T>(T addDataRequestModel) where T : class
+    public async Task<IActionResult> AddUserDataAsync<T>(T addDataRequestModel) where T : class
     {
         // Find account linked to user's email
         var account = _dbContext.Accounts.FirstOrDefault(account => account.Email == _userEmail);
@@ -102,8 +103,9 @@ public class MyProgramDataAccessService : IUserDataAccess
 
                         await _dbContext.Days.AddAsync(dayModel);
                         await _dbContext.SaveChangesAsync();
+                        return new OkObjectResult(dayModel); // Return created day
                     }
-                    break;
+                    return new BadRequestObjectResult("Day already exists."); // Handle duplicate case
                 }
 
                 case "Exercise":
@@ -126,8 +128,9 @@ public class MyProgramDataAccessService : IUserDataAccess
 
                         await _dbContext.Exercises.AddAsync(exerciseModel);
                         await _dbContext.SaveChangesAsync();
+                        return new OkObjectResult(exerciseModel); // Return created exercise
                     }
-                    break;
+                    return new BadRequestObjectResult("Day not found."); // Handle case where day does not exist
                 }
 
                 case "Set":
@@ -136,5 +139,7 @@ public class MyProgramDataAccessService : IUserDataAccess
                 }
             }
         }
+
+        return null; // Return null if no data was added
     }
 }

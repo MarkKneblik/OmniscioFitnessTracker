@@ -16,9 +16,9 @@ interface Set {
 }
 
 interface ExerciseCardProps {
-  id: string; // Use string ID for the exercise card itself
+  id: number;
   name: string;
-  onDeleteExercise: (id: string) => void;
+  onDeleteExercise: (id: number) => void;
 }
 
 // Variants for animations

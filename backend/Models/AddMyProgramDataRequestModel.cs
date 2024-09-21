@@ -9,8 +9,4 @@ public class AddMyProgramDataRequestModel // Request model for adding MyProgram 
     public string? Exercise { get; set; }
 
     public string? Set { get; set; }
-
-    // Holds UUID if this model is used to add an Exercise to the DB. We want each exercise to be unique so two exercises
-    // of the same name don't get deleted together by name, rather by ID
-    public string? UUID { get; set; } 
 }

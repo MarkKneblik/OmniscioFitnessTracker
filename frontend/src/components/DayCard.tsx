@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { v4 as uuidv4 } from "uuid"; // Import UUID for unique IDs
 
 // Internal Imports
 import ExerciseCard from "./ExerciseCard";
@@ -18,7 +17,7 @@ import "../styles/exercise.css";
 
 interface Exercise {
   name: string;
-  id: string; // Use unique ID
+  id: number;
 }
 
 interface DayCardProps {
@@ -46,7 +45,7 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
   const [inputText, setInputText] = useState("");
 
   const handleAddExercise = async () => {
-    const newExercise = { name: inputText, id: uuidv4() }; // Use unique ID
+    let newExercise = { name: inputText, id: 0 }; // Use unique ID
     setExercises((prevExercises) => [...prevExercises, newExercise]);
     setInputText("");
 
@@ -56,11 +55,10 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
       DayOfWeek: dayOfWeek,
       Exercise: newExercise.name,
       Set: null,
-      UUID: newExercise.id,
     };
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${config.apiURL}/MyProgram/AddMyProgramDataAsync`,
         requestBody, // Pass the request body
         {
@@ -68,12 +66,23 @@ const DayCard: React.FC<DayCardProps> = ({ dayOfWeek, onDeleteDay }) => {
           withCredentials: true,
         }
       );
+
+      const exerciseId = response.data.exerciseId; // Get the exerciseId from the response
+
+      // Update the state by finding and updating the newly added exercise
+      setExercises((prevExercises) =>
+        prevExercises.map((exercise) =>
+          exercise.name === newExercise.name && exercise.id === 0
+            ? { ...exercise, id: exerciseId } // Update the id of the newly added exercise
+            : exercise
+        )
+      );
     } catch (error: any) {
       console.error("Error posting days of program: ", error.message);
     }
   };
 
-  const handleDeleteExercise = (id: string) => {
+  const handleDeleteExercise = (id: number) => {
     setExercises((prevExercises) =>
       prevExercises.filter((exercise) => exercise.id !== id)
     );

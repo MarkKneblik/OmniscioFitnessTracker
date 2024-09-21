@@ -7,7 +7,7 @@ public interface IUserDataAccess
     Task<T> GetUserDataAsync<T>() where T : class;
 
     // Generic type for adding user data
-    Task AddUserDataAsync<T>(T addDataRequestModel) where T : class;
+    Task<IActionResult> AddUserDataAsync<T>(T addDataRequestModel) where T : class;
 }
 
 

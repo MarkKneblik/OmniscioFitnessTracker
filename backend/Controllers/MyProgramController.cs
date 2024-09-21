@@ -25,8 +25,13 @@ public class MyProgramController : ControllerBase
 
     [HttpPost]
     [Route("AddMyProgramDataAsync")]
-    public async Task AddMyProgramDataAsync([FromBody] AddMyProgramDataRequestModel addMyProgramDataRequestModel)
+    public async Task<IActionResult> AddMyProgramDataAsync([FromBody] AddMyProgramDataRequestModel addMyProgramDataRequestModel)
     {
-        await _myProgramDataAccessService.AddUserDataAsync(addMyProgramDataRequestModel);    
+        var result = await _myProgramDataAccessService.AddUserDataAsync(addMyProgramDataRequestModel);
+        if (result == null)
+        {
+            return BadRequest("Failed to add data.");
+        }
+        return Ok(result);
     }
 }
